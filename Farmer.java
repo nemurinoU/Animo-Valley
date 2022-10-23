@@ -1,6 +1,7 @@
 
 public class Farmer {
-	private double xp, coins;
+	private double xp, 
+				   coins;
 	 
 	public Farmer () {
 		this.xp = 0;
