@@ -1,8 +1,8 @@
 
 public class Item {
 	private int itemType,
-				itemId,
-				qty;
+		    itemId,
+		    qty;
 
     private boolean isHolding;
 
