@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Inventory {
-	ArrayList<Item> itemSlots = new ArrayList<Item>();
+	private ArrayList<Item> itemSlots = new ArrayList<Item>();
 	
 	public void removeItem (int ind) {
 		
