@@ -1,18 +1,13 @@
 
 public class Farmer {
 	private String name;
-	
-	private double xp, 
-				   coins;
-	
+	private double xp, coins;
 	private int lvl;
-	private Inventory inv;
 	 
 	public Farmer () {
 		this.xp = 0;
 		this.coins = 100;
 		this.lvl = 0;
-		this.inv = new Inventory ();
 	}
 	
 	public double getXP () {
