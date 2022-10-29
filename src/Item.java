@@ -1,13 +1,14 @@
+import java.util.ArrayList;
 
 public class Item {
 	private int itemType; //tool or seed
-	private Seed seed;
-	private Tool tools;
+	private ArrayList<Seed> seeds;
+	private ArrayList<Tool> tools;
 
-	public Item(int itemType, Seed seed, Tool tools) {
+	public Item(int itemType, ArrayList<Seed> seeds, ArrayList<Tool> tools) {
 		this.itemType = itemType;
-		this.seed = new Seed();
-		this.tools = new Tool();
+		this.seeds = seeds;
+		this.tools = tools;
 	}
 
 	public int getItemType() {
@@ -18,20 +19,22 @@ public class Item {
 		this.itemType = itemType;
 	}
 
-	public Seed getSeed() {
-		return this.seed;
+	public ArrayList<Seed> getSeeds() {
+		return this.seeds;
 	}
 
-	public void setSeed(Seed seed) {
-		this.seed = seed;
+	public void setSeeds(ArrayList<Seed> seeds) {
+		this.seeds = seeds;
 	}
 
-	public Tool getTools() {
+	public ArrayList<Tool> getTools() {
 		return this.tools;
 	}
 
-	public void setTools(Tool tools) {
+	public void setTools(ArrayList<Tool> tools) {
 		this.tools = tools;
 	}
+
+	
 
 }
