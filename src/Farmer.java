@@ -4,10 +4,11 @@ public class Farmer {
 	private double xp, coins;
 	private int lvl;
 	 
-	public Farmer () {
+	public Farmer (String name) {
 		this.xp = 0;
 		this.coins = 100;
 		this.lvl = 0;
+		this.name = name;
 	}
 	
 	public double getXP () {

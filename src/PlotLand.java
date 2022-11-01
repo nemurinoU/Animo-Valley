@@ -1,40 +1,29 @@
 import java.util.ArrayList;
 
+/***
+ * <h1>PlotLand</h1>
+ * 
+ * <p>
+ * This class describes a singular plot of land and has various attributes depending
+ * on what the plot is being used for. Multiple instances of this class aggregate into
+ * the entire farm plot grid.
+ * </p>
+ * 
+ * @author icesw
+ *
+ */
 public class PlotLand {
-    private String name;
-    private int day;
+    private int daysElapsed, x, y;
     private boolean isPlowable = true, hasRock = false;
-    private int[] landSize; //0 is x and 1 is y
 
-    public PlotLand(String name, int day, boolean isPlowable, boolean hasRock, int[] landSize) {
-        this.name = name;
-        this.day = day;
+    public PlotLand(int daysElapsed, boolean isPlowable, boolean hasRock) {
+        this.daysElapsed = 0;
+        this.x = 0;
+        this.y = 0;
         this.isPlowable = isPlowable;
         this.hasRock = hasRock;
-        this.landSize[0] = 1;
-        this.landSize[1] = 1;
     }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getDay() {
-        return this.day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public boolean isIsPlowable() {
-        return this.isPlowable;
-    }
-
+    
     public boolean getIsPlowable() {
         return this.isPlowable;
     }
@@ -42,11 +31,7 @@ public class PlotLand {
     public void setIsPlowable(boolean isPlowable) {
         this.isPlowable = isPlowable;
     }
-
-    public boolean isHasRock() {
-        return this.hasRock;
-    }
-
+    
     public boolean getHasRock() {
         return this.hasRock;
     }
@@ -55,12 +40,5 @@ public class PlotLand {
         this.hasRock = hasRock;
     }
 
-    public int[] getLandSize() {
-        return this.landSize;
-    }
-
-    public void setLandSize(int[] landSize) {
-        this.landSize = landSize;
-    }
 
 }
