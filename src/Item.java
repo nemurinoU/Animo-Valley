@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Item {
-	private int itemType; //tool or seed
+	private int itemType; //0 for Seed, 1 for Tool
 	private ArrayList<Seed> seeds;
 	private ArrayList<Tool> tools;
 

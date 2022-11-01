@@ -13,22 +13,22 @@ public class Tool {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getCost() {
         return this.cost;
-    }
-
-    public void setCost(int cost) {
-        this.cost = cost;
     }
 
     public double getXp() {
         return this.xp;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+    
     public void setXp(double xp) {
         this.xp = xp;
     }

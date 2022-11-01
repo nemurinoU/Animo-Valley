@@ -13,32 +13,43 @@ import java.util.ArrayList;
  *
  */
 public class PlotLand {
-    private int daysElapsed, x, y;
-    private boolean isPlowable = true, hasRock = false;
+    private int x, y;
+    private boolean isOccupied = true, hasRock = false, isPlowed = false;
 
-    public PlotLand(int daysElapsed, boolean isPlowable, boolean hasRock) {
-        this.daysElapsed = 0;
-        this.x = 0;
+    public PlotLand(boolean isOccupied, boolean hasRock, boolean isPlowed) {
+        /*Let's be mathematically consistent with cartesian values and start with <0,0>*/
+        this.x = 0; 
         this.y = 0;
-        this.isPlowable = isPlowable;
+        this.isPlowed = false; 
+        this.isOccupied = isOccupied;
         this.hasRock = hasRock;
+        this.isPlowed = isPlowed;
     }
     
-    public boolean getIsPlowable() {
-        return this.isPlowable;
-    }
+    /* GETTERS */
 
-    public void setIsPlowable(boolean isPlowable) {
-        this.isPlowable = isPlowable;
+    public boolean getIsOccupied(){
+        return this.isOccupied;
     }
     
     public boolean getHasRock() {
         return this.hasRock;
     }
 
+    public boolean getIsPlowed(){
+        return this.isPlowed;
+    }
+    
+    /* SETTERS */
+    public void setIsOccupied(boolean isOccupied) {
+        this.isOccupied = isOccupied;
+    }
+
     public void setHasRock(boolean hasRock) {
         this.hasRock = hasRock;
     }
 
-
+    public void setIsPlowed(boolean isPlowed){
+        this.isPlowed = isPlowed;
+    }
 }
