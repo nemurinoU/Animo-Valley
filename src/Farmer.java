@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class Farmer {
 	private String name;
-	private double xp = 0, coins = 100;
+	private double xp = 0.0, coins = 100.0;
 	private int lvl = 0;
 	private Item items;
 

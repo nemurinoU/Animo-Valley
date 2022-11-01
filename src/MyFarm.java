@@ -37,7 +37,7 @@ public class MyFarm {
 		System.out.println("");
 	}
 
-	//basically shows commands and then asks for a command, returns it and does thingy
+	/* METHODS FOR DISPLAYING COMMANDS */
 	
 	public static void unplowedCommands(){
 		System.out.println("[1] Plow - plow land (0 coins)");
@@ -56,7 +56,7 @@ public class MyFarm {
 	public static void seedList(){
 		System.out.println("Select seed you want to plant: ");
 		System.out.println("[1] Turnip");
-		
+
 	}
 	/***
 	This code is responsible for displaying the PLOTGRID and their states.

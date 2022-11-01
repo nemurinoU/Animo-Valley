@@ -1,4 +1,4 @@
-public class Tool {
+public class Tool { //ok we might not need this na? i mean we can just setXP and coins-- kasi from main
     private String name;
     private int cost;
     private double xp;

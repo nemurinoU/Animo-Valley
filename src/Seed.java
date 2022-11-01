@@ -2,7 +2,7 @@ public class Seed {
     private String name;
     private int amount = 0;
     private double cost;
-    private int id;
+    private int id; //how do we do the identification?
     
     public Seed(String name, int amount, double cost, int id) {
         this.name = name;

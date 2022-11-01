@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Item {
-	private int itemType; //0 for Seed, 1 for Tool
+	private int itemType; //0 for Seed, 1 for Tool idk if we should remove this -rich
 	private ArrayList<Seed> seeds;
 	private ArrayList<Tool> tools;
 

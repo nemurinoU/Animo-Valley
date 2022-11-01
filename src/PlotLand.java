@@ -40,6 +40,7 @@ public class PlotLand {
     }
     
     /* SETTERS */
+    
     public void setIsOccupied(boolean isOccupied) {
         this.isOccupied = isOccupied;
     }
