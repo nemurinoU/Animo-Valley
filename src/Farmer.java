@@ -3,14 +3,14 @@ public class Farmer {
 	private String name;
 	private double xp = 0, coins = 100;
 	private int lvl = 0;
-	private ArrayList<Item> items;
+	private Item items;
 
-	public Farmer(String name, double xp, double coins, int lvl, ArrayList<Item> items) {
+	public Farmer(String name, double xp, double coins, int lvl, Item items) {
 		this.name = name;
 		this.xp = xp;
 		this.coins = coins;
 		this.lvl = lvl;
-		this.items = new ArrayList<Item>();
+		this.items = items;
 	}
 
 	public Farmer(String name){
@@ -49,11 +49,11 @@ public class Farmer {
 		this.lvl = (int)this.xp / 100;
 	}
 
-	public ArrayList<Item> getItems() {
+	public Item getItems() {
 		return this.items;
 	}
 
-	public void setItems(ArrayList<Item> items) {
+	public void setItems(Item items) {
 		this.items = items;
 	}
 	

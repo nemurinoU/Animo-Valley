@@ -7,8 +7,8 @@ public class Item {
 
 	public Item(int itemType, ArrayList<Seed> seeds, ArrayList<Tool> tools) {
 		this.itemType = itemType;
-		this.seeds = seeds;
-		this.tools = tools;
+		this.seeds = new ArrayList<Seed>();
+		this.tools = new ArrayList<Tool>();
 	}
 
 	public int getItemType() {

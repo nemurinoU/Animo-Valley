@@ -20,7 +20,6 @@ public class PlotLand {
         /*Let's be mathematically consistent with cartesian values and start with <0,0>*/
         this.x = 0; 
         this.y = 0;
-        this.isPlowed = false; 
         this.isOccupied = isOccupied;
         this.hasRock = hasRock;
         this.isPlowed = isPlowed;

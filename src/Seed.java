@@ -1,10 +1,10 @@
 public class Seed {
     private String name;
     private int amount = 0;
-    private int cost;
+    private double cost;
     private int id;
     
-    public Seed(String name, int amount, int cost, int id) {
+    public Seed(String name, int amount, double cost, int id) {
         this.name = name;
         this.amount = amount;
         this.cost = cost;
@@ -27,11 +27,11 @@ public class Seed {
         this.amount = amount;
     }
 
-    public int getCost() {
+    public double getCost() {
         return this.cost;
     }
 
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 

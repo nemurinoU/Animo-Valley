@@ -28,9 +28,8 @@ public class MyFarm {
 		
 		System.out.println (farmer.getName());
 		System.out.println("LVL: " + farmer.getLvl());
-		System.out.println("EXP: " + farmerXP);
-		System.out.println("BAL: " + farmerCoins);
-		
+		System.out.println("EXP: " + farmerXP + " / 100");
+		System.out.println("BAL: " + farmerCoins + " coins");
 		System.out.println("DAY " + currentDay);
 		
 		for (int i = 0; i < 10; i++) 
@@ -39,48 +38,52 @@ public class MyFarm {
 	}
 
 	//basically shows commands and then asks for a command, returns it and does thingy
-	public static void commandList(){
-		char ch;
-		Scanner sc = new Scanner(System.in);
-
-		System.out.println("[S] Select Seed");
-		System.out.println("[T] Select tool");
-
-		ch = sc.next().charAt(0);
-
-		if (ch == 'S')
-		{
-			//display seeds
-		}
-		else if (ch == 'T'){
-			//display tools
-		}
-	}
-	public static void toolList(){
-		char ch;
-		Scanner sc = new Scanner (System.in);
-
+	
+	public static void unplowedCommands(){
+		System.out.println("[1] Plow - plow land (0 coins)");
+		System.out.println("[2] Pickaxe - remove rock (50 coins)");
+		System.out.println("[3] Shovel - remove plant (7 coins)");
 		
 	}
 	
+	public static void plowedCommands(){
+		System.out.println("[1] Watering can - water plot (0 coins)");
+		System.out.println("[2] Fertilizer - fertilize plot (10 coins)");
+		System.out.println("[3] Shovel - remove plant (7 coins)");
+		System.out.println("[4] Seed - plant seed");
+	}
+
+	public static void seedList(){
+		System.out.println("Select seed you want to plant: ");
+		System.out.println("[1] Turnip");
+	}
 	/***
 	This code is responsible for displaying the PLOTGRID and their states.
 	
 	[t] has turnip crop
 	[T] fully grown harvestable turnip
-	[_] plowed and empty
+	[-] plowed and empty
 	[X] rocked
-	[NP] not plowed
+	[_] not plowed
 	***/
 	public static void displayGrid(ArrayList<PlotLand> plotGrid) {
 		for (int i = 0; i < plotGrid.size(); i++) {
 			System.out.print ("[ ");
-			if (plotGrid.get(i).getIsPlowed() == false)
-				System.out.print ("NP");
-			else if (plotGrid.get(i).getIsPlowed() && !plotGrid.get (i).getIsOccupied ())
+			if (plotGrid.get(i).getIsPlowed() == false){ //not plowed 
 				System.out.print ("_");
-			else if (plotGrid.get(i).getIsOccupied ()) //&& is not harvestable
-				System.out.print ("t");
+			} 
+			else{
+				if (plotGrid.get(i).getIsPlowed() == true){ //plowed
+					if (plotGrid.get(i).getIsOccupied() == false) //plowed & not occupied
+						System.out.print ("-");
+					else //plowed & occupied
+						System.out.print ("t");
+				} 
+				
+			}
+			
+			//else if (plotGrid.get(i).getIsOccupied() == true) 
+				
 			System.out.println (" ]");
 		}
 	}
@@ -114,34 +117,115 @@ public class MyFarm {
 		 */
 		plotGrid.add(new PlotLand(true, false, false));
 		/*** END OF PLOT GRID CODE */
-
-
+		
 		/*** 
 		================================
 		START OF DAILY LIFE UPDATES CODE 
 		================================
 		*/
 		while (!gameOver){
-			// display grid
-			displayGrid (plotGrid);
-			
+			//actually farmer should updateLvl everytime XP is gained...
 			farmer.updateLvl();
+			Crop crop;
 			displayStats(farmer, farmer.getXp(), farmer.getCoins());
 			
+		
 			System.out.println ("What would you like to do? ");
 			System.out.println ("1) Go to Tile 2) Shop 3) Sleep the Night ");
 			
 			switch (myObj.nextInt ()) {
 			case 1:
+				
 				System.out.println ("Goes to tile");
+				System.out.println("------------------------");
+				displayGrid (plotGrid);
+				System.out.println("------------------------");
+				if (plotGrid.get(0).getIsPlowed() == false){ //if plot is not plowed
+					unplowedCommands();
+					switch (myObj.nextInt()){
+						case 1:
+							//plow tool
+							System.out.println("Plot has been plowed!");
+							plotGrid.get(0).setIsPlowed(true);
+							plotGrid.get(0).setIsOccupied(false);
+							break;
+
+						case 2:
+							//use pickaxe
+							if (plotGrid.get(0).getHasRock() == false)
+								System.out.println("There is no rock here.");
+							else{
+								plotGrid.get(0).setHasRock(false);
+								System.out.println("Rock destroyed!");
+								farmer.setCoins(farmer.getCoins() - 50);
+							}
+							break;
+						case 3:
+							//use shovel
+							plotGrid.get(0).setIsOccupied(false);
+							plotGrid.get(0).setIsPlowed(false);
+							farmer.setCoins(farmer.getCoins() - 7);
+							break;
+						default:
+							System.out.println("Invalid command");
+							break;
+					}
+				
+				}
+				else if (plotGrid.get(0).getIsPlowed() == true){ //else if plot is plowed
+					plowedCommands();
+					switch (myObj.nextInt()){
+						case 1:
+							//watering can
+							break;
+
+						case 2:
+							//fertilizer
+							
+							break;
+
+						case 3:
+							//use shovel
+							plotGrid.get(0).setIsOccupied(false);
+							plotGrid.get(0).setIsPlowed(false);
+							crop = null; //delete crop object
+							farmer.setCoins(farmer.getCoins() - 7);
+							break;
+
+						case 4:
+							//use seed and create crop object
+							seedList();
+							switch (myObj.nextInt()){
+								case 1:
+									crop = new Crop("Turnip", "Root crop", 0, 2, 1, 2, 0, 1, 1, 2, 6, 5, 0); 
+									//IDK WHERE TO PUT THIS ^ TBH
+									plotGrid.get(0).setIsOccupied(true);
+									break;
+								default:
+									System.out.println("Not available");
+									break;
+							}
+							
+						default:
+							System.out.println("Invalid command");
+							break;
+					}
+				}
 				break;
+			/***
+			If you don't mind, ako bahala sa pag code ng logic sa case 2 and 3. maybe even case 1.
+			@richjpexfromtiktok
+			I really can't code at night... my head rlly fkin hurts...
+			Pa-update nalang what you've done and don't be afraid to assign tasks to me rich <3
+			mwa mwa you're doing great
+			 */
 			case 2:
-				System.out.println ("Open Shop");
+				System.out.println ("Welcome to the shop!");
 				break;
 			case 3:
 				System.out.println ("Sleeping...");
 				currentDay++;
-				//update crops and grids or whatever
+				//update crops and grids or whatever ikaw na dito ice
 				break;
 			default:
 				break;
@@ -153,6 +237,6 @@ public class MyFarm {
 			// if sleep the night, then update all the grids and crops
 		}
 		/*** END OF DAILY LIFE UPDATES CODE */
-		
+		myObj.close();
 	}
 }
