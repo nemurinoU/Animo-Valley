@@ -56,6 +56,7 @@ public class MyFarm {
 	public static void seedList(){
 		System.out.println("Select seed you want to plant: ");
 		System.out.println("[1] Turnip");
+		
 	}
 	/***
 	This code is responsible for displaying the PLOTGRID and their states.
