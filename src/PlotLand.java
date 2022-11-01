@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class PlotLand {
     private int x, y;
-    private boolean isOccupied = true, hasRock = false, isPlowed = false;
+    private boolean isOccupied = false, hasRock = false, isPlowed = false;
 
     public PlotLand(boolean isOccupied, boolean hasRock, boolean isPlowed) {
         /*Let's be mathematically consistent with cartesian values and start with <0,0>*/

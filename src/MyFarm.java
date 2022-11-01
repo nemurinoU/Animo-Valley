@@ -22,10 +22,20 @@ public class MyFarm {
 	private static ArrayList<PlotLand> plotGrid = new ArrayList<PlotLand>();
 	
 	public static void displayStats(Farmer farmer, double farmerXP, double farmerCoins){
-		System.out.println("Current day: " + currentDay);
-		System.out.println("Level: " + farmer.getLvl());
-		System.out.println("EXP: " + farmerXP + "/ 100");
-		System.out.println("Balance: " + farmerCoins);
+		for (int i = 0; i < 10; i++) 
+			System.out.print ("=");
+		System.out.println("");
+		
+		System.out.println (farmer.getName());
+		System.out.println("LVL: " + farmer.getLvl());
+		System.out.println("EXP: " + farmerXP);
+		System.out.println("BAL: " + farmerCoins);
+		
+		System.out.println("DAY " + currentDay);
+		
+		for (int i = 0; i < 10; i++) 
+			System.out.print ("=");
+		System.out.println("");
 	}
 
 	//basically shows commands and then asks for a command, returns it and does thingy
@@ -53,6 +63,28 @@ public class MyFarm {
 		
 	}
 	
+	/***
+	This code is responsible for displaying the PLOTGRID and their states.
+	
+	[t] has turnip crop
+	[T] fully grown harvestable turnip
+	[_] plowed and empty
+	[X] rocked
+	[NP] not plowed
+	***/
+	public static void displayGrid(ArrayList<PlotLand> plotGrid) {
+		for (int i = 0; i < plotGrid.size(); i++) {
+			System.out.print ("[ ");
+			if (plotGrid.get(i).getIsPlowed() == false)
+				System.out.print ("NP");
+			else if (plotGrid.get(i).getIsPlowed() && !plotGrid.get (i).getIsOccupied ())
+				System.out.print ("_");
+			else if (plotGrid.get(i).getIsOccupied ()) //&& is not harvestable
+				System.out.print ("t");
+			System.out.println (" ]");
+		}
+	}
+	
 	public static void main (String[] args) {
 		Scanner myObj = new Scanner(System.in);
 		String farmerName;
@@ -61,7 +93,7 @@ public class MyFarm {
 		System.out.print ("What is your name? :  ");
 		Farmer farmer = new Farmer (myObj.nextLine());
 		
-		System.out.println ("Welcome to Animo Valley, " + farmer.getName() + ".");
+		System.out.println ("Welcome to Animo Valley, " + farmer.getName() + ".\n");
 		/***
 		DEV NOTES: This should honestly be in a class of methods OR just subroutines in this file that manages what is displayed on the screen.
 		But this is okay for now. 
@@ -71,7 +103,7 @@ public class MyFarm {
 		System.out.print("Input farm name: ");
 		String farmName = myObj.nextLine();
 
-		System.out.println("Your farm name is : " + farmName);
+		System.out.println("\nYour farm name is : " + farmName + "\n");
 		
 		/***
 		================================
@@ -83,32 +115,42 @@ public class MyFarm {
 		plotGrid.add(new PlotLand(true, false, false));
 		/*** END OF PLOT GRID CODE */
 
-		
 
 		/*** 
 		================================
 		START OF DAILY LIFE UPDATES CODE 
 		================================
 		*/
-		while (gameOver){
-			
-			System.out.println("Input command: ");
-			//pre should we make a commandList() method? just display all commands
-			//definitely. cant keep on copypasting "println(1.2.3.)"
-
-
-			/***
-			I imagine the system to look like this.
-			Select an action: ()
-			 */
-			if (plotGrid.get(0).getIsOccupied()){
-				//ask if use seed or tool
-			}
+		while (!gameOver){
+			// display grid
+			displayGrid (plotGrid);
 			
 			farmer.updateLvl();
 			displayStats(farmer, farmer.getXp(), farmer.getCoins());
 			
+			System.out.println ("What would you like to do? ");
+			System.out.println ("1) Go to Tile 2) Shop 3) Sleep the Night ");
 			
+			switch (myObj.nextInt ()) {
+			case 1:
+				System.out.println ("Goes to tile");
+				break;
+			case 2:
+				System.out.println ("Open Shop");
+				break;
+			case 3:
+				System.out.println ("Sleeping...");
+				currentDay++;
+				//update crops and grids or whatever
+				break;
+			default:
+				break;
+			}
+			// if go to tile, choose (x, y)
+			//		if not plowed, then choose to plow
+			//		if plowed, then water or fertilizer
+			// if shop, then buy whatever
+			// if sleep the night, then update all the grids and crops
 		}
 		/*** END OF DAILY LIFE UPDATES CODE */
 		
