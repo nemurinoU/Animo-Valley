@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Farmer {
-	private String name;
+	private String name, farmerTitle;
 	private double xp, coins;
 	private int lvl,
 				farmerType;
@@ -16,10 +16,11 @@ public class Farmer {
 
 	public Farmer(String name){
 		this.name = name;
-		this.coins = 100.0;
+		this.coins = 1000.0;
 		this.xp = 0.0;
 		this.farmerType = 0;
-		this.lvl = 0;
+		this.farmerTitle = "<Farmer>";
+		this.lvl = 6;
 	}
 	
 	
@@ -33,6 +34,7 @@ public class Farmer {
 		
 		// farmer earns 2xp from shoveling
 		this.setXp (this.getXp() + 2);
+		System.out.println("~~~ Shovel used! ~~~\n");
 	}
 	
 	public void mineRock (PlotLand plot) {
@@ -52,6 +54,7 @@ public class Farmer {
 		
 		// farmer earns 0.5 xp from plowing
 		this.setXp(this.getXp () + 0.5);
+		System.out.println("~~~ Plot has been plowed! ~~~\n");
 	}
 	
 	public void fertilizePlant (PlotLand plot) {
@@ -64,6 +67,7 @@ public class Farmer {
 		
 		// farmer loses 10 coins per fertilize
 		this.setCoins (this.getCoins () - 10);
+		System.out.println("~~~ Fertilizer used! ~~~\n");
 	}
 	
 	public void waterPlant (PlotLand plot) {
@@ -72,7 +76,8 @@ public class Farmer {
 		plot.getCrop ().waterSelf ();
 		
 		// farmer earns 0.5 xp from watering
-		this.setXp(this.getXp () + 0.5);
+		this.setXp(this.getXp () + 100);
+		System.out.println("~~~ Watering can used! ~~~\n");
 	}
 	
 	public void harvestCrop (PlotLand plot) {
@@ -182,6 +187,32 @@ public class Farmer {
 			this.coins = 0;
 	}
 
+	public void setFarmerType(int farmerType){
+		this.farmerType = farmerType;
+	}
+	public String getFarmerTitle(){
+		return this.farmerTitle;
+	}
+	
+	public void setFarmerTitle(int farmerType){
+		switch (farmerType){
+			case 0:
+				this.farmerTitle = "<Farmer>";
+				break;
+			case 1:
+				this.farmerTitle = "<Registered Farmer>";
+				break;
+			case 2:
+				this.farmerTitle = "<Distinguished Farmer>";
+				break;
+			case 3:
+				this.farmerTitle = "<Legendary Farmer>";
+				break;
+			default:
+				break;
+		}
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -199,6 +230,6 @@ public class Farmer {
 	public int getLvl() {
 		return this.lvl;
 	}
-
+	
 	
 }

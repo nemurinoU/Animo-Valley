@@ -221,4 +221,7 @@ public class Crop {
     	return this.seedCost;
     }
 
+    public void setSeedCost(int seedCost){
+        this.seedCost = seedCost;
+    }
 }
