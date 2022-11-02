@@ -451,9 +451,10 @@ public class MyFarm {
 				break;
 			case 2:
 				/*this really needs subroutines for checking 
-				ice can u do that nalang -rich*/
+				ice can u do that nalang or idk if i did it right-rich*/
 				
 				registerFarmer(farmer);
+				
 				
 				break;
 			case 3:
