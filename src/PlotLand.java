@@ -15,7 +15,9 @@ import java.util.ArrayList;
 public class PlotLand {
     private int x, y;
     private boolean isOccupied = false, hasRock = false, isPlowed = false;
+    private Crop plantedCrop;
 
+    //Basic __INIT with NO crop yet
     public PlotLand(boolean isOccupied, boolean hasRock, boolean isPlowed) {
         /*Let's be mathematically consistent with cartesian values and start with <0,0>*/
         this.x = 0; 
@@ -23,8 +25,20 @@ public class PlotLand {
         this.isOccupied = isOccupied;
         this.hasRock = hasRock;
         this.isPlowed = isPlowed;
+        this.plantedCrop = null;
     }
     
+    public Crop getCrop () {
+    	return this.plantedCrop;
+    }
+    
+    public void setCrop (Crop crop) {
+    	plantedCrop = crop;
+    }
+    
+    public void delCrop () {
+    	plantedCrop = null;
+    }
     /* GETTERS */
 
     public boolean getIsOccupied(){
