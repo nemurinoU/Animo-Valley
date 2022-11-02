@@ -16,11 +16,11 @@ public class Farmer {
 
 	public Farmer(String name){
 		this.name = name;
-		this.coins = 1000.0;
+		this.coins = 100.0;
 		this.xp = 0.0;
 		this.farmerType = 0;
 		this.farmerTitle = "<Farmer>";
-		this.lvl = 6;
+		this.lvl = 0;
 	}
 	
 	
@@ -76,7 +76,7 @@ public class Farmer {
 		plot.getCrop ().waterSelf ();
 		
 		// farmer earns 0.5 xp from watering
-		this.setXp(this.getXp () + 100);
+		this.setXp(this.getXp () + 0.5);
 		System.out.println("~~~ Watering can used! ~~~\n");
 	}
 	
