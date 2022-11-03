@@ -62,14 +62,14 @@ public class Crop {
     	this.timesFertilized = 0;
     }
     
-    public void fertilizeSelf () {
-    	if (this.getTimesFertilized() < this.getFertilizerBonus())
-    		this.timesFertilized++;
+    public void fertilizeSelf (int fertBonusLimitIncrease) {
+    	if (this.getTimesFertilized() < this.getFertilizerBonus() + fertBonusLimitIncrease)
+    		    this.timesFertilized++;
     }
     
-    public void waterSelf () {
-    	if (this.getTimesWatered () < this.getWaterBonus ())
-    		this.timesWatered++;
+    public void waterSelf (int waterBonusLimitIncrease) {
+    	if (this.getTimesWatered () < this.getWaterBonus () + waterBonusLimitIncrease)
+    		    this.timesWatered++;
     }
     
     
@@ -93,6 +93,7 @@ public class Crop {
     		
     }
     
+    /* GETTERS */
     public int getTimesWatered () {
     	return this.timesWatered;
     }
@@ -113,10 +114,7 @@ public class Crop {
         return this.cropName;
     }
 
-    public void setCropName(String cropName) {
-        this.cropName = cropName;
-    }
-
+    
     public int getCropTypeID() {
         return this.cropTypeID;
     }

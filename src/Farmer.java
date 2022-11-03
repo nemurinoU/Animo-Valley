@@ -6,13 +6,7 @@ public class Farmer {
 	private int lvl,
 				farmerType;
 
-	public Farmer(String name, double xp, double coins, int lvl) {
-		this.name = name;
-		this.xp = xp;
-		this.coins = coins;
-		this.lvl = lvl;
-	}
-
+	/* CONSTRUCTOR */
 	public Farmer(String name){
 		this.name = name;
 		this.coins = 100.0;
@@ -22,7 +16,7 @@ public class Farmer {
 		this.lvl = 0;
 	}
 	
-	
+	/* FARMER ACTIONS */
 	public void digOut (PlotLand plot) {
 		plot.setIsOccupied (false);
 		plot.setIsPlowed ((false));
@@ -59,7 +53,7 @@ public class Farmer {
 	public void fertilizePlant (PlotLand plot) {
 		// increment the amt of times fertilized a crop
 		// inside a plot
-		plot.getCrop ().fertilizeSelf ();		
+		plot.getCrop ().fertilizeSelf ( this.getFertilizerBonusLimitIncrease ( this.getFarmerType ()));		
 		
 		// farmer earns 4 xp from fertilizing
 		this.setXp(this.getXp () + 4);
@@ -72,11 +66,56 @@ public class Farmer {
 	public void waterPlant (PlotLand plot) {
 		// increment the amount of times watered of the crop
 		// inside the plot
-		plot.getCrop ().waterSelf ();
+		plot.getCrop ().waterSelf ( this.getWaterBonusLimitIncrease ( this.getFarmerType ()));
 		
 		// farmer earns 0.5 xp from watering
 		this.setXp(this.getXp () + 0.5);
 		System.out.println("~~~ Watering can used! ~~~\n");
+	}
+	
+	public int getSeedCostReduction (int farmerType) {
+			return farmerType;
+	}
+
+	public int getWaterBonusLimitIncrease (int farmerType) {
+			int rCode = 0;
+
+			switch (farmerType) {
+			case 0:
+			case 1:
+					break;
+			case 2:
+					rCode = 1;
+					break;
+			case 3:
+					rCode = 2;
+					break;
+			default:
+					break;
+			}
+
+			return rCode;
+	}
+
+	public int getFertilizerBonusLimitIncrease (int farmerType) {
+			int rCode = 0;
+
+			if (farmerType == 3)
+					rCode = 1;
+
+			return rCode;
+	}
+
+	public void plantCrop (PlotLand plot, Crop seedling, int currentDay) {
+		//activate the crop so that it's not a dictionary type anymore
+		seedling.activateCrop (currentDay);
+
+		//subtract seed cost from wallet w/ seed cost reduction
+		this.setCoins (this.getCoins() - (seedling.getSeedCost () - this.getSeedCostReduction ( this.getFarmerType ()) ) );
+		
+		//put seedling inside plot, occupied is now true
+		plot.setCrop((seedling));
+		plot.setIsOccupied (true);
 	}
 	
 	public void harvestCrop (PlotLand plot) {
@@ -128,22 +167,33 @@ public class Farmer {
 		return FinalHarvestPrice; 
 	}
 	
-	public void plantCrop (PlotLand plot, Crop seedling, int currentDay) {
-		//activate the crop so that it's not a dictionary type anymore
-		seedling.activateCrop (currentDay);
-		//subtract seed cost from wallet
-		this.setCoins (this.getCoins() - seedling.getSeedCost());
-		
-		//put seedling inside plot, occupied is now true
-		plot.setCrop((seedling));
-		plot.setIsOccupied (true);
-	}
-	
 	public void updateLvl() {
 		this.lvl = (int)this.xp / 100;
 	}
 
 	
+
+	/* GETTERS */
+	public String getName() {
+		return this.name;
+	}
+
+	public double getXp() {
+		return this.xp;
+	}
+
+	public double getCoins() {
+		return this.coins;
+	}
+	
+	public int getLvl() {
+		return this.lvl;
+	}
+	
+	public int getFarmerType () {
+		return this.farmerType;
+	}
+
 	public int getFTBEarning (int farmerType) {
 		int bonus = 0;
 		
@@ -166,9 +216,12 @@ public class Farmer {
 		return bonus;
 	}
 	
-	public int getFarmerType () {
-		return this.farmerType;
+	public String getFarmerTitle(){
+		return this.farmerTitle;
 	}
+	
+
+	/* SETTERS */
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -188,9 +241,6 @@ public class Farmer {
 
 	public void setFarmerType(int farmerType){
 		this.farmerType = farmerType;
-	}
-	public String getFarmerTitle(){
-		return this.farmerTitle;
 	}
 	
 	public void setFarmerTitle(int farmerType){
@@ -212,23 +262,5 @@ public class Farmer {
 		}
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
-	public double getXp() {
-		return this.xp;
-	}
-
-	
-	public double getCoins() {
-		return this.coins;
-	}
-	
-
-	public int getLvl() {
-		return this.lvl;
-	}
-	
 	
 }
