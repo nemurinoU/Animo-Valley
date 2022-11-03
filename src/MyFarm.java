@@ -1,5 +1,3 @@
-//package src;
-
 import java.awt.datatransfer.SystemFlavorMap;
 import java.io.*;
 
