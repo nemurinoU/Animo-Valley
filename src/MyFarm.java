@@ -1,9 +1,10 @@
-import java.awt.datatransfer.SystemFlavorMap;
-import java.io.*;
+package src;
 
-import java.lang.*;
+//import java.awt.datatransfer.SystemFlavorMap;
+//import java.io.*;
+
+//import java.lang.*;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Scanner;
 
 /***

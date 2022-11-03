@@ -1,3 +1,4 @@
+package src;
 public class Seed {
     private String name;
     private int amount = 0;
