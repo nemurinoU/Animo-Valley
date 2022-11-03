@@ -1,9 +1,9 @@
-package src;
+//package src;
 
-//import java.awt.datatransfer.SystemFlavorMap;
-//import java.io.*;
+import java.awt.datatransfer.SystemFlavorMap;
+import java.io.*;
 
-//import java.lang.*;
+import java.lang.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
