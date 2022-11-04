@@ -80,4 +80,13 @@ public class Display {
 			System.out.println (" ]");
 		}
 	}
+
+	public void seedList(){
+		System.out.println("Select seed you want to plant: ");
+		System.out.println("[1] Turnip");
+		System.out.println("[0] Go back");
+		System.out.println("------------------------");
+		System.out.print("> ");
+
+	}
 }

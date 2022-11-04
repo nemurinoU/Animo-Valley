@@ -6,15 +6,6 @@ public class ActionHandler {
 
     }
 
-    public void seedList(){
-		System.out.println("Select seed you want to plant: ");
-		System.out.println("[1] Turnip");
-		System.out.println("[0] Go back");
-		System.out.println("------------------------");
-		System.out.print("> ");
-
-	}
-
     public void plotIsRawLogic (int nCode, PlotLand tempPlot, Farmer farmer) {
         
         switch (nCode){
@@ -46,6 +37,7 @@ public class ActionHandler {
     public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
         int nSeedCode;
         Scanner sc = new Scanner (System.in);
+        Display dp = new Display ();
         // THIS IS A VERY DANGEROUS THING TO DO yung not closing the sc?
         // IM DOING THIS BECAUSE I CANT BE ASSED TO MOVE THE COMMANDLISTS TO A PROPER DISPLAY CLASS YET AHAHAHAH
 
@@ -55,7 +47,7 @@ public class ActionHandler {
                 break;
         case 1: // when farmer chooses to plant a seed
                 //display list of seeds and ask user which seed to plant
-                seedList(); 
+                dp.seedList(); 
                 //yeah, tbh we should move these displays to a display.java pero tmrw na siguro mhmm 
                 //so yung display.java will be just the commandslist and stuff? bc this is like the seedlogic class
                 

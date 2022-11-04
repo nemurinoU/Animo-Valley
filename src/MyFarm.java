@@ -107,13 +107,14 @@ public class MyFarm {
 
 						if (rCode == -1) // if not Y/N
 								ah.errorMessage ("Invalid input.");
-						else if (rCode != -1) // when N
+						else if (rCode == 0) // when N
 								System.out.println ("Registration cancelled.");
 						else // when Y
 								if (farmer.getCoins () - tierFees[farmerType] >= 5) {
+										farmer.setCoins(farmer.getCoins() - tierFees[farmerType]);
 										farmer.setFarmerType(farmer.getFarmerType() + 1);
 										farmer.setFarmerTitle(farmer.getFarmerType());
-										farmer.setCoins(farmer.getCoins() - 200);
+										ah.alertMessage("Farmer Status Upgraded!");
 								}
 								else {
 										ah.errorMessage ("Insufficient coins.");
