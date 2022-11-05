@@ -73,39 +73,6 @@ public class Farmer {
 		System.out.println("~~~ Watering can used! ~~~\n");
 	}
 	
-	public int getSeedCostReduction (int farmerType) {
-			return farmerType;
-	}
-
-	public int getWaterBonusLimitIncrease (int farmerType) {
-			int rCode = 0;
-
-			switch (farmerType) {
-			case 0:
-			case 1:
-					break;
-			case 2:
-					rCode = 1;
-					break;
-			case 3:
-					rCode = 2;
-					break;
-			default:
-					break;
-			}
-
-			return rCode;
-	}
-
-	public int getFertilizerBonusLimitIncrease (int farmerType) {
-			int rCode = 0;
-
-			if (farmerType == 3)
-					rCode = 1;
-
-			return rCode;
-	}
-
 	public void plantCrop (PlotLand plot, Crop seedling, int currentDay) {
 		//activate the crop so that it's not a dictionary type anymore
 		seedling.activateCrop (currentDay);
@@ -170,6 +137,39 @@ public class Farmer {
 	public void updateLvl() {
 		this.lvl = (int)this.xp / 100;
 	}
+	
+	public int getSeedCostReduction (int farmerType) {
+		return farmerType;
+}
+
+public int getWaterBonusLimitIncrease (int farmerType) {
+		int rCode = 0;
+
+		switch (farmerType) {
+		case 0:
+		case 1:
+				break;
+		case 2:
+				rCode = 1;
+				break;
+		case 3:
+				rCode = 2;
+				break;
+		default:
+				break;
+		}
+
+		return rCode;
+}
+
+public int getFertilizerBonusLimitIncrease (int farmerType) {
+		int rCode = 0;
+
+		if (farmerType == 3)
+				rCode = 1;
+
+		return rCode;
+}
 
 	
 
