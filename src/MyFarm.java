@@ -1,6 +1,3 @@
-//import java.io.*;
-
-//import java.lang.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,10 +19,6 @@ public class MyFarm {
 	private static ArrayList<PlotLand> plotGrid = new ArrayList<PlotLand>();
 	private static ArrayList<Crop> cropBook = new ArrayList<Crop>();
 	
-	
-	//hi
-	//hello srry HAHHAHA
-	//it would be funny if we leave all these comments behind and sir would read them LMAO HAHAHAHA HI SIR ED WE ARE CRA- i mean making last minute changes
 
 	/*in the future, the game will load plant data from a json file
 	 * 
@@ -48,7 +41,8 @@ public class MyFarm {
 	
 	/* METHODS FOR MAIN MENU OPTIONS (1, 2, 3) 
 	 * goToTile accepts a Farmer and PlotLand parameter
-	 * It makes use of the tools and seeds to be planted based on the commands show
+	 * It makes use of the tools and seeds to be planted based on the commands shown.
+	 * It also uses an ActionHandler object to verify the logic of the tiles shown on the CLI.
 	*/
 	public static void goToTile (Farmer farmer, PlotLand tempPlot) {
 		int nCode;
@@ -86,7 +80,12 @@ public class MyFarm {
 		
 	}
 	
-	/* This could definitely be better but I got the logic down for basis */
+	/* registerFarmer() takes in a Farmer object as a parameter and uses
+	 * getters and setters to modify the farmer types.
+	 * The farmer must have at least 5 coins to register each time (minimum cost of a seed) to upgrade
+	 * their farmer type and receive bonuses.
+	 * An ActionHandler object is used to display the messages given certain conditions.
+	 */
 	public static void registerFarmer (Farmer farmer) {
 		Scanner sc = new Scanner (System.in);
 		ActionHandler ah = new ActionHandler ();
@@ -129,6 +128,9 @@ public class MyFarm {
 		
 	}
 	
+	/* sleepTheNight() method is used to proceed to the next day, and
+	 * increase the growth rate of all the crops on the plot land.
+	 */
 	public static void sleepTheNight (ArrayList<PlotLand> plotGrid) {
 		System.out.println ("Sleeping...");
 		currentDay++;
@@ -200,16 +202,19 @@ public class MyFarm {
 			case 3:
 				sleepTheNight(plotGrid);
 				break;
-			case 0:
-				System.out.println();
 			default:
 				break;
+			}
+			if (farmer.getCoins() <= 0){
+				System.out.println("Game over! You ran out of money.");
+				gameOver = true;
 			}
 		}
 		/*** END OF DAILY LIFE UPDATES CODE */
 		myObj.close();
 	}
 
+	/* GETTERS FOR VARIABLES TO BE USED IN DISPLAY.JAVA */
 	public static int getCurrentDay(){
 		return currentDay;
 	}

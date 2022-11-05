@@ -8,7 +8,7 @@
  * </p>
  * 
  * @author icesw
- *
+ * @author richjpex
  */
 public class PlotLand {
     private int x, y;
