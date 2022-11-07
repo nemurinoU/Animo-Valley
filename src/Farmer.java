@@ -1,5 +1,16 @@
 import java.util.Random;
 
+/***
+ * <h1>Farmer</h1>
+ * <p>
+ * This class emulates the player, its attributes, and responsibilities.
+ * It interacts with classes such as MyFarm, Crop, PlotLand.
+ * It describes the player such as their stats and actions.
+ *
+ * </p>
+ * @author icesw
+ * @author richjpex
+ */
 public class Farmer {
 	private String name, farmerTitle;
 	private double xp, coins;
