@@ -1,0 +1,9 @@
+/***************************************************************************  
+This is to certify that this project is our own work, based on our personal efforts in studying and 
+applying the concepts learned.  We have constructed the functions and their respective algorithms 
+and corresponding code by ourselves.  The program was run, tested, and debugged by our own 
+efforts.  I further certify that we have not  copied in part or  whole or otherwise plagiarized  the 
+work of other students and/or persons. 
+                                                        FRANCIS BENEDICT V. MARTINEZ, DLSU ID# 12171905 
+														RICHARD JOHN Q. PECSON JR, DLSU ID# 12186449
+***************************************************************************/
