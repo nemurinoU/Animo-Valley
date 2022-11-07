@@ -8,16 +8,33 @@ import java.util.Random;
  * It describes the player such as their stats and actions.
  *
  * </p>
- * @author icesw
- * @author richjpex
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-07 
  */
 public class Farmer {
+	/**
+	* Private Variable Instantiation
+	* > name is the name of the farmer/player
+	* > farmerTitle is the title of the player (i.e., farmer, registered, distinguished...)
+	* > xp is the xp amount in double
+	* > coins is the wallet
+	* > lvl is current player level, dependent on the xp attributes
+	* > farmerType is connected to farmerTitle, except this time in a integer code
+	*/
 	private String name, farmerTitle;
 	private double xp, coins;
 	private int lvl,
 				farmerType;
 
 	/* CONSTRUCTOR */
+	/***
+	 * This constructors makes a new Farmer/player object. It starts off
+	 * with the default values for a new player.
+	 *
+	 * @param name		what the player should be called
+	 *
+	 */
 	public Farmer(String name){
 		this.name = name;
 		this.coins = 100.0;
@@ -28,6 +45,11 @@ public class Farmer {
 	}
 	
 	/* FARMER ACTIONS */
+	/**
+    * This method is what the player does when shoveling up a tile.
+    * 
+    * @param plot		the tile in question to be interacted with
+    */
 	public void digOut (PlotLand plot) {
 		plot.setIsOccupied (false);
 		plot.setIsPlowed ((false));
@@ -41,6 +63,11 @@ public class Farmer {
 		System.out.println("~~~ Shovel used! ~~~\n");
 	}
 	
+	/**
+    * This method is what the player does when mining a rock on a tile.
+    * 
+    * @param plot		the tile in question to be interacted with
+    */
 	public void mineRock (PlotLand plot) {
 		plot.setIsOccupied (false);
 		plot.setHasRock (false);
@@ -52,6 +79,11 @@ public class Farmer {
 		this.setXp (this.getXp() + 15);
 	}
 	
+	/**
+    * This method is what the player does when plowing a tile.
+    * 
+    * @param plot		the tile in question to be interacted with
+    */
 	public void plowLand (PlotLand plot) {
 		plot.setIsPlowed (true);
 		plot.setIsOccupied (false);
@@ -61,6 +93,11 @@ public class Farmer {
 		System.out.println("~~~ Plot has been plowed! ~~~\n");
 	}
 	
+	/**
+    * This method is what the player does when fertilizing a plant on a tile.
+    * 
+    * @param plot		the tile in question to be interacted with
+    */
 	public void fertilizePlant (PlotLand plot) {
 		// increment the amt of times fertilized a crop
 		// inside a plot
@@ -74,6 +111,11 @@ public class Farmer {
 		System.out.println("~~~ Fertilizer used! ~~~\n");
 	}
 	
+	/**
+    * This method is what the player does when watering a crop on a tile.
+    * 
+    * @param plot		the tile in question to be interacted with
+    */
 	public void waterPlant (PlotLand plot) {
 		// increment the amount of times watered of the crop
 		// inside the plot
@@ -84,6 +126,13 @@ public class Farmer {
 		System.out.println("~~~ Watering can used! ~~~\n");
 	}
 	
+	/**
+    * This method is what the player does when planting a NEW crop on a tile.
+    * 
+    * @param plot		the tile in question to be interacted with
+	* @param seedling	the Crop object to be put inside plot
+	* @param currentDay	what the current game day is for growing reference
+    */
 	public void plantCrop (PlotLand plot, Crop seedling, int currentDay) {
 		//activate the crop so that it's not a dictionary type anymore
 		seedling.activateCrop (currentDay);
@@ -96,6 +145,12 @@ public class Farmer {
 		plot.setIsOccupied (true);
 	}
 	
+	/**
+    * This method is what the player does when harvesting a crop inside a tile. This includes
+	* the calculations in income from harvesting a crop.
+    * 
+    * @param plot		the tile in question to be interacted with
+    */
 	public void harvestCrop (PlotLand plot) {
 		Random random = new Random ();
 		int nYield, min, max;
@@ -124,6 +179,16 @@ public class Farmer {
 		plot.delCrop ();
 	}
 	
+	/**
+    * This method is a subroutine to calculate the final income of a player when harvesting a single crop.
+    * 
+    * @param plot				the tile in question to be interacted with
+	* @param yield				the pieces of plant received in harvesting
+	* @param basePrice			the price per piece of plant
+	* @param farmerTypeBonus	extra cash from being a registered farmer
+	*
+	* @return double			the final calculated income for one crop harvest
+    */
 	public double calculateFinalHarvestPrice (PlotLand plot, int yield, double basePrice, int farmerTypeBonus) {
 		double  HarvestTotal,
 				WaterBonus,
@@ -145,66 +210,121 @@ public class Farmer {
 		return FinalHarvestPrice; 
 	}
 	
+	/**
+    * This method updates the current lvl of a player with respect to XP.
+	*
+    */
 	public void updateLvl() {
 		this.lvl = (int)this.xp / 100;
 	}
 	
+	/**
+    * This method returns the amount of coinage reduced from being a certain farmer type.
+	*
+	* @param farmerType		the code of farmer you are
+	* 
+	* @return int			the amount deducted from a seed cost
+    */
 	public int getSeedCostReduction (int farmerType) {
 		return farmerType;
-}
+	}
 
-public int getWaterBonusLimitIncrease (int farmerType) {
-		int rCode = 0;
+	/**
+    * This method returns the bonus water limit increase depending on the farmer type you are
+	*
+	* @param farmerType		the code of farmer you are
+	* 
+	* @return int			the amount increased from the water limit of a crop
+    */
+	public int getWaterBonusLimitIncrease (int farmerType) {
+			int rCode = 0;
 
-		switch (farmerType) {
-		case 0:
-		case 1:
-				break;
-		case 2:
-				rCode = 1;
-				break;
-		case 3:
-				rCode = 2;
-				break;
-		default:
-				break;
-		}
+			switch (farmerType) {
+			case 0:
+			case 1:
+					break;
+			case 2:
+					rCode = 1;
+					break;
+			case 3:
+					rCode = 2;
+					break;
+			default:
+					break;
+			}
 
-		return rCode;
-}
+			return rCode;
+	}
 
-public int getFertilizerBonusLimitIncrease (int farmerType) {
-		int rCode = 0;
+	/**
+    * This method returns the bonus fertilizer limit increase depending on the farmer type you are
+	*
+	* @param farmerType		the code of farmer you are
+	* 
+	* @return int			the amount increased from the fertilizer limit of a crop
+    */
+	public int getFertilizerBonusLimitIncrease (int farmerType) {
+			int rCode = 0;
 
-		if (farmerType == 3)
-				rCode = 1;
+			if (farmerType == 3)
+					rCode = 1;
 
-		return rCode;
-}
+			return rCode;
+	}
 
 	
 
 	/* GETTERS */
+	/**
+    * This method gets the player name
+    * 
+    * @return String		player name
+    */
 	public String getName() {
 		return this.name;
 	}
 
+	/**
+    * This method gets the player xp in total
+    * 
+    * @return double		total player xp
+    */
 	public double getXp() {
 		return this.xp;
 	}
-
+	
+	/**
+    * This method gets the amount in the player's wallet
+    * 
+    * @return double		player coin balance
+    */
 	public double getCoins() {
 		return this.coins;
 	}
 	
+	/**
+    * This method gets the player level
+    * 
+    * @return int		player level
+    */
 	public int getLvl() {
 		return this.lvl;
 	}
 	
+	/**
+    * This method gets the farmer type code
+    * 
+    * @return int		farmer type code
+    */
 	public int getFarmerType () {
 		return this.farmerType;
 	}
 
+/**
+    * This method gets the bonus earnings you get from being a certain farmer type
+    * 
+    * @return int		bonus earnings
+    */
 	public int getFTBEarning (int farmerType) {
 		int bonus = 0;
 		
@@ -227,21 +347,38 @@ public int getFertilizerBonusLimitIncrease (int farmerType) {
 		return bonus;
 	}
 	
+	/**
+    * This method gets the farmer title of the player in words
+    * 
+    * @return String	farmer title in words
+    */
 	public String getFarmerTitle(){
 		return this.farmerTitle;
 	}
 	
 
 	/* SETTERS */
+	/**
+    * This method sets the player name
+    * 
+    */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+    * This method sets the player xp/updates lvl visually too
+    * 
+    */
 	public void setXp(double xp) {
 		this.xp = xp;
 		this.updateLvl();
 	}
 	
+	/**
+    * This method sets/updates the amount of coins a player has
+    * 
+    */
 	public void setCoins(double coins) {
 		// there can be no negative currency
 		if (coins >= 0)
@@ -250,10 +387,18 @@ public int getFertilizerBonusLimitIncrease (int farmerType) {
 			this.coins = 0;
 	}
 
+	/**
+    * This method sets the farmer type code
+    * 
+    */
 	public void setFarmerType(int farmerType){
 		this.farmerType = farmerType;
 	}
 	
+	/**
+    * This method sets the farmer type of the player in words
+    * 
+    */
 	public void setFarmerTitle(int farmerType){
 		switch (farmerType){
 			case 0:

@@ -8,11 +8,21 @@ import java.util.Scanner;
  * But for simplicity's sake in PHASE 1, this shall be the controller class.
  * It displays all the information on the farmer and farm status such as the days
  * </p>
- * @author icesw
- * @author richjpex
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-07 
  */
 
 public class MyFarm {
+	/**
+	* Private Variable Instantiation
+	* > farmName is the farm's entire name
+	* > currentDay is the current day in the game
+	* > gameOver tells us if the game is over
+	* > plotGrid is the entirety of the plots to be tilled and planted on
+	* > cropBook is a "database" of existing crops in the game
+	*/
 	private static String farmName;
 	private static int currentDay = 0;
 	private static boolean gameOver = false;
@@ -27,6 +37,9 @@ public class MyFarm {
     			int waterNeed, int waterBonus, int fertilizerNeed, 
     			int fertilizerBonus, int minProduce, int maxProduce, 
     			double basePrice, double xpYield, int cropID) 
+	 *
+	 *	
+	 *
 	 * */
 	public static void generateCropBook () {
 		
@@ -43,6 +56,9 @@ public class MyFarm {
 	 * goToTile accepts a Farmer and PlotLand parameter
 	 * It makes use of the tools and seeds to be planted based on the commands shown.
 	 * It also uses an ActionHandler object to verify the logic of the tiles shown on the CLI.
+	 *
+	 * @param farmer		player object to move to tile
+	 * @param tempPlot		plot object to be interacted with
 	*/
 	public static void goToTile (Farmer farmer, PlotLand tempPlot) {
 		int nCode;
@@ -85,6 +101,9 @@ public class MyFarm {
 	 * The farmer must have at least 5 coins to register each time (minimum cost of a seed) to upgrade
 	 * their farmer type and receive bonuses.
 	 * An ActionHandler object is used to display the messages given certain conditions.
+	 *
+	 * @param farmer	player object to register
+	 *
 	 */
 	public static void registerFarmer (Farmer farmer) {
 		Scanner sc = new Scanner (System.in);
@@ -130,6 +149,8 @@ public class MyFarm {
 	
 	/* sleepTheNight() method is used to proceed to the next day, and
 	 * increase the growth rate of all the crops on the plot land.
+	 *
+	 * @param plotGrid		the entire farm plant grid to go through for plants to grow
 	 */
 	public static void sleepTheNight (ArrayList<PlotLand> plotGrid) {
 		System.out.println ("Sleeping...");
@@ -141,6 +162,10 @@ public class MyFarm {
 		}
 	}
 	
+	/***
+		Main function, where the program flow happens.
+		ANIMO VALLEY MAIN FUNCTION
+	*/
 	public static void main (String[] args) {
 		Scanner myObj = new Scanner(System.in);
 		//String farmerName; do we need this? if yes, keep; else delete
@@ -215,14 +240,30 @@ public class MyFarm {
 	}
 
 	/* GETTERS FOR VARIABLES TO BE USED IN DISPLAY.JAVA */
+	
+	/**
+    * This method gets the current game day
+    * 
+    * @return int		the current game day
+    */
 	public static int getCurrentDay(){
 		return currentDay;
 	}
 
+	/**
+    * This method gets the farm name
+    * 
+    * @return String		the farm name
+    */
 	public static String getFarmName(){
 		return farmName;
 	}
-
+	
+	/**
+    * This method gets the farm plot grid
+    * 
+    * @return ArrayList<PlotLand>		the entire grid object in the farm
+    */
 	public static ArrayList<PlotLand> getPlotGrid(){
 		return plotGrid;
 	}

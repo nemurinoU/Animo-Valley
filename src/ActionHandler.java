@@ -1,11 +1,34 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+* <h2> ActionHandler </h2>
+* This class stores a variety of methods to process various actions in the program flow.
+* Less of an object for a concept, more of a class for logic subroutines.
+* Used to process actions done by a farmer object.
+* Also used for error messages, and choice logic.
+*
+* @author  Francis Martinez, Richard Pecson Jr.
+* @version a0.0.8
+* @since   2022-11-07 
+*/
 public class ActionHandler {
+	/**
+    * This constructor method creates a new instance of ActionHandler
+	*
+    */
     public ActionHandler () {
 
     }
 
+	/**
+    * This method handles the logic when a farmer interacts with an unplowed plot
+	*
+    * @param nCode		user selection code
+	* @param tempPlot	the plot being interacted with
+	* @param farmer		the player object interacting
+	*
+    */
     public void plotIsRawLogic (int nCode, PlotLand tempPlot, Farmer farmer) {
         
         switch (nCode){
@@ -33,7 +56,16 @@ public class ActionHandler {
         }
     }
 
-
+	/**
+    * This method handles the logic when a farmer interacts with a plowed plot
+	*
+    * @param nCode			user selection code
+	* @param tempPlot		the plot being interacted with
+	* @param farmer			the player object interacting
+	* @param currentDay		the current day in the game world
+	* @param cropBook		holds a "database" of crops programmed in the game
+	*
+    */
     public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
         int nSeedCode;
         Scanner sc = new Scanner (System.in);
@@ -63,7 +95,16 @@ public class ActionHandler {
         }
     }
 
-
+	/**
+    * This method handles the logic when a farmer plants a seed into a plot
+	*
+    * @param nCode			user selection code
+	* @param tempPlot		the plot being interacted with
+	* @param farmer			the player object interacting
+	* @param currentDay		the current day in the game world
+	* @param cropBook		holds a "database" of crops programmed in the game
+	*
+    */
     public void seedChoiceLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
             switch (nCode){
             case 1:
@@ -84,7 +125,16 @@ public class ActionHandler {
                     break;
             }
     }
-
+	
+	/**
+    * This method handles the logic when a farmer interacts with a plot with a plant
+	*
+    * @param nCode			user selection code
+	* @param tempPlot		the plot being interacted with
+	* @param farmer			the player object interacting
+	* @param currentDay		the current day in the game world
+	*
+    */
     public void plotIsCroppedLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay) {
         Crop tempCrop;
         int readyInDays;
@@ -127,6 +177,13 @@ public class ActionHandler {
         }
     }
 
+	/**
+    * This method handles the logic when a user is prompted with Y/N questions
+	*
+    * @param cCode			user selection code
+	* @return int			if yes 1, no 0, else -1
+	*
+    */
     public int isValidYN (char cCode) {
             int rCode = -1;
 
@@ -146,10 +203,22 @@ public class ActionHandler {
             return rCode;
     }
 
+	/**
+    * This method shows an error message for readability and uniformity
+	*
+    * @param e		error message to show
+	*
+    */
     public void errorMessage (String e) {
             System.out.println (e + "\n");
     }
 
+	/**
+    * This method shows an alert message for readability and uniformity
+	*
+    * @param a		alert message to show
+	*
+    */
     public void alertMessage (String a) {
             System.out.println ("!!*** " + a + " ***!!\n");
     }
