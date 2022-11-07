@@ -12,9 +12,9 @@ public class Crop {
     private double basePrice;
     private double xpYield;
     
-    //0 - root crop, 1 - flower, 2 - fruit tree for cropTypeID
-    private int cropID,
-    			cropTypeID,
+    
+    private int cropID, 
+    			cropTypeID, //0 - root crop, 1 - flower, 2 - fruit tree for cropTypeID
     			harvestTime,
     			waterNeed,
     			waterBonus,
@@ -31,7 +31,7 @@ public class Crop {
     private boolean isHarvestable,
     				isWithered;
     			
-    
+    /* CONSTRUCTOR */
     public Crop(String cropName, int cropTypeID, int harvestTime, 
     			int waterNeed, int waterBonus, int fertilizerNeed, 
     			int fertilizerBonus, int minProduce, int maxProduce, 
@@ -53,7 +53,7 @@ public class Crop {
         this.seedCost = seedCost;
     }
 
-    
+    /* This method is called when the user plants a seed, thus activating the crop with default parameters */
     public void activateCrop (int currentDay) {
     	this.dayPlanted = currentDay;
     	this.isHarvestable = false;
@@ -62,33 +62,42 @@ public class Crop {
     	this.timesFertilized = 0;
     }
     
+    /* This method is called when the user uses fertilizer on the crop.
+     * It is limited by the fertilizerBonus variable & the limit is increased when the farmer status is upgraded.
+     */
     public void fertilizeSelf (int fertBonusLimitIncrease) {
     	if (this.getTimesFertilized() < this.getFertilizerBonus() + fertBonusLimitIncrease)
     		    this.timesFertilized++;
     }
     
+    /* This method is called when the user waters the crop.
+     * It is limited by the waterBonus variable & the limit is increased when the farmer status is upgraded.
+     */
     public void waterSelf (int waterBonusLimitIncrease) {
     	if (this.getTimesWatered () < this.getWaterBonus () + waterBonusLimitIncrease)
     		    this.timesWatered++;
     }
     
-    
+    /* This is the method used in the growth of the plant.
+     * It uses a variable daysElapsed, which is calculated by the currentDay - dayPlanted of the crop to determine the status of the
+     * plant, whether or not it is ready for harvest, withered, or still growing.
+     */
     public void grow (int currentDay) {
     	int daysElapsed;
     	
     	daysElapsed = currentDay - this.getDayPlanted();
     	
-    	if (daysElapsed < this.getHarvestTime ())
+    	if (daysElapsed < this.getHarvestTime ()) //If the plant does not yet reach the harvestTime
     		System.out.println ("Plants growing...");
-    	else if (daysElapsed == this.getHarvestTime ()) {
-    		if (this.getTimesWatered () >= this.getWaterNeed () && this.getTimesFertilized () >= this.getFertilizerNeed())
-    			this.setIsHarvestable (true);
-    		else
-    			this.setIsWithered (true);
+    	else if (daysElapsed == this.getHarvestTime ()) { //Else if the daysElapsed has finally reached the harevstTime
+    		if (this.getTimesWatered () >= this.getWaterNeed () && this.getTimesFertilized () >= this.getFertilizerNeed()) //If it is watered enough and fertilizer enough
+    			this.setIsHarvestable (true); //The crop becomes harevstable
+    		else //Else if not enough water or fertilizer
+    			this.setIsWithered (true); //The crop withers
     	}
-    	else if (daysElapsed > this.getHarvestTime () && !this.getIsWithered()) {
-    		this.setIsHarvestable(false);
-    		this.setIsWithered (true);
+    	else if (daysElapsed > this.getHarvestTime () && !this.getIsWithered()) { //Else if daysElapsed > harvestTime and plant is not yet withered
+    		this.setIsHarvestable(false); //Not harvestable
+    		this.setIsWithered (true); //Becomes withered
     	}
     		
     }
@@ -113,112 +122,111 @@ public class Crop {
     public String getCropName() {
         return this.cropName;
     }
-
     
     public int getCropTypeID() {
         return this.cropTypeID;
-    }
-
-    public void setCropTypeID(int cropTypeID) {
-        this.cropTypeID = cropTypeID;
     }
 
     public int getHarvestTime() {
         return this.harvestTime;
     }
 
-    public void setHarvestTime(int harvestTime) {
-        this.harvestTime = harvestTime;
-    }
-
     public int getWaterNeed() {
         return this.waterNeed;
-    }
-
-    public void setWaterNeed(int waterNeed) {
-        this.waterNeed = waterNeed;
     }
 
     public int getWaterBonus() {
         return this.waterBonus;
     }
 
-    public void setWaterBonus(int waterBonus) {
-        this.waterBonus = waterBonus;
-    }
-
     public int getFertilizerNeed() {
         return this.fertilizerNeed;
-    }
-
-    public void setFertilizerNeed(int fertilizerNeed) {
-        this.fertilizerNeed = fertilizerNeed;
     }
 
     public int getFertilizerBonus() {
         return this.fertilizerBonus;
     }
 
-    public void setFertilizerBonus(int fertilizerBonus) {
-        this.fertilizerBonus = fertilizerBonus;
-    }
-
     public int getMinProduce() {
         return this.minProduce;
-    }
-
-    public void setMinProduce(int minProduce) {
-        this.minProduce = minProduce;
     }
 
     public int getMaxProduce() {
         return this.maxProduce;
     }
 
-    public void setMaxProduce(int maxProduce) {
-        this.maxProduce = maxProduce;
-    }
-
     public double getBasePrice() {
         return this.basePrice;
-    }
-
-    public void setBasePrice(double basePrice) {
-        this.basePrice = basePrice;
     }
 
     public double getXpYield() {
         return this.xpYield;
     }
 
-    public void setXpYield(double xpYield) {
-        this.xpYield = xpYield;
-    }
-
     public int getCropID() {
         return this.cropID;
-    }
-
-    public void setCropID(int cropID) {
-        this.cropID = cropID;
     }
     
     public int getDayPlanted () {
     	return this.dayPlanted;
     }
     
-    public void setIsHarvestable (boolean isHarvestable) {
-    	this.isHarvestable = isHarvestable;
-    }
-    
-    public void setIsWithered (boolean isWithered) {
-    	this.isWithered = isWithered;
-    }
-    
     public int getSeedCost () {
     	return this.seedCost;
     }
+    /* SETTERS */
+    public void setCropTypeID(int cropTypeID) {
+        this.cropTypeID = cropTypeID;
+    }
 
+    public void setHarvestTime(int harvestTime) {
+        this.harvestTime = harvestTime;
+    }
+
+    public void setWaterNeed(int waterNeed) {
+        this.waterNeed = waterNeed;
+    }
+
+    public void setWaterBonus(int waterBonus) {
+        this.waterBonus = waterBonus;
+    }
+
+    public void setFertilizerNeed(int fertilizerNeed) {
+        this.fertilizerNeed = fertilizerNeed;
+    }
+
+    public void setFertilizerBonus(int fertilizerBonus) {
+        this.fertilizerBonus = fertilizerBonus;
+    }
+
+    public void setMinProduce(int minProduce) {
+        this.minProduce = minProduce;
+    }
+
+    public void setMaxProduce(int maxProduce) {
+        this.maxProduce = maxProduce;
+    }
+
+    public void setBasePrice(double basePrice) {
+        this.basePrice = basePrice;
+    }
+
+    public void setXpYield(double xpYield) {
+        this.xpYield = xpYield;
+    }
+
+    public void setCropID(int cropID) {
+        this.cropID = cropID;
+    }
+
+    public void setIsHarvestable (boolean isHarvestable) {
+        this.isHarvestable = isHarvestable;
+    }
+
+    public void setIsWithered (boolean isWithered) {
+        this.isWithered = isWithered;
+    }
+        
     public void setSeedCost(int seedCost){
         this.seedCost = seedCost;
     }
