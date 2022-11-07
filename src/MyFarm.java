@@ -181,6 +181,7 @@ public class MyFarm {
 		/***
 		DEV NOTES: This should honestly be in a class of methods OR just subroutines in this file that manages what is displayed on the screen.
 		But this is okay for now. 
+		We were a *little bit* lazy to put those in a subroutine but at least it works.
 		 */
 
 		/* ASK USER FOR FARM NAME */

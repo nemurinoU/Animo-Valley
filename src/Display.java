@@ -1,6 +1,23 @@
 import java.util.ArrayList;
+/***
+ * <h1>Display</h1>
+ * <p>
+ * This class is used to display the statistics of the farmer.
+ * It also displays the main menu options that the user can select from.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-07 
+ */
 public class Display {
-    public static void displayStats(Farmer farmer, double farmerXP, double farmerCoins){
+	
+	/** This method displays the statistics of the farmer, which is called as a subroutine in the MyFarm class.
+	 * @param farmer The Farmer object
+	 * @param farmerXP The amount of XP the farmer has
+	 * @param farmerCoins The coins balance of the farmer
+	 */
+	public static void displayStats(Farmer farmer, double farmerXP, double farmerCoins){
 		for (int i = 0; i < 17; i++) 
 			System.out.print ("=");
 
@@ -19,7 +36,9 @@ public class Display {
 	}
 
 	/* METHODS FOR DISPLAYING COMMANDS */
-	
+	/**
+	 * This method simply displays the command list when a plot of land is unplowed.
+	 */
 	public static void unplowedCommands(){
 		System.out.println("[1] Plow - plow land (0 coins)");
 		System.out.println("[2] Pickaxe - remove rock (50 coins)");
@@ -29,7 +48,10 @@ public class Display {
 		System.out.print("> ");
 		
 	}
-	
+
+	/**
+	 * This method simply displays the command list when a plot of land is plowed but has no crop planted on it.
+	 */
 	public static void plowedNoCropCommands(){
 		System.out.println("[1] Seed - plant seed");
 		System.out.println("[2] Shovel - dig plot (7 coins)");
@@ -48,16 +70,16 @@ public class Display {
 		System.out.print("> ");
 	}
 
-    /***
-        This code is responsible for displaying the PLOTGRID and their states.
-        
-        [t] has turnip crop
-        [T] fully grown harvestable turnip
-        [-] plowed and empty
-        [R] rocked
-        [_] not plowed
-        [X] withered
-        ***/
+	/**
+	 * This method is responsible for displaying the plot grid and their respective states. 
+	 * Legend:
+	 * [t] has turnip crop
+	 * [T] fully grown harvestabel turnip
+	 * [-] plowed and empty
+	 * [_] not plowed
+	 * [R] rocked
+	 * [X] withered
+	 */
     public static void displayGrid(ArrayList<PlotLand> plotGrid) {
 		for (int i = 0; i < plotGrid.size(); i++) {
 
@@ -80,7 +102,10 @@ public class Display {
 			System.out.println (" ]");
 		}
 	}
-
+	
+	/**
+	 * This method simply displays the seeds available for planting.
+	 */
 	public void seedList(){
 		System.out.println("Select seed you want to plant: ");
 		System.out.println("[1] Turnip");

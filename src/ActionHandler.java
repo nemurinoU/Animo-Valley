@@ -2,33 +2,35 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
-* <h2> ActionHandler </h2>
-* This class stores a variety of methods to process various actions in the program flow.
-* Less of an object for a concept, more of a class for logic subroutines.
-* Used to process actions done by a farmer object.
-* Also used for error messages, and choice logic.
-*
-* @author  Francis Martinez, Richard Pecson Jr.
-* @version a0.0.8
-* @since   2022-11-07 
-*/
+ * <h1> ActionHandler </h1>
+ * <p>
+ * This class stores a variety of methods to process various actions in the program flow.
+ * Less of an object for a concept, more of a class for logic subroutines.
+ * Used to process actions done by a farmer object.
+ * Also used for error messages, and choice logic.
+ * </p>
+
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-07 
+ */
 public class ActionHandler {
 	/**
-    * This constructor method creates a new instance of ActionHandler
-	*
-    */
+     * This constructor method creates a new instance of ActionHandler
+	 *
+     */
     public ActionHandler () {
 
     }
 
-	/**
-    * This method handles the logic when a farmer interacts with an unplowed plot
-	*
-    * @param nCode		user selection code
-	* @param tempPlot	the plot being interacted with
-	* @param farmer		the player object interacting
-	*
-    */
+    /**
+     * This method handles the logic when a farmer interacts with an unplowed plot
+	 *
+     * @param nCode		user selection code
+	 * @param tempPlot	the plot being interacted with
+	 * @param farmer		the player object interacting
+	 *
+     */
     public void plotIsRawLogic (int nCode, PlotLand tempPlot, Farmer farmer) {
         
         switch (nCode){
@@ -57,21 +59,21 @@ public class ActionHandler {
     }
 
 	/**
-    * This method handles the logic when a farmer interacts with a plowed plot
-	*
-    * @param nCode			user selection code
-	* @param tempPlot		the plot being interacted with
-	* @param farmer			the player object interacting
-	* @param currentDay		the current day in the game world
-	* @param cropBook		holds a "database" of crops programmed in the game
-	*
-    */
+     * This method handles the logic when a farmer interacts with a plowed plot
+	 *
+     * @param nCode			user selection code
+	 * @param tempPlot		the plot being interacted with
+	 * @param farmer			the player object interacting
+	 * @param currentDay		the current day in the game world
+	 * @param cropBook		holds a "database" of crops programmed in the game
+	 *
+     */
     public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
         int nSeedCode;
         Scanner sc = new Scanner (System.in);
-        Display dp = new Display ();
         // THIS IS A VERY DANGEROUS THING TO DO yung not closing the sc?
         // IM DOING THIS BECAUSE I CANT BE ASSED TO MOVE THE COMMANDLISTS TO A PROPER DISPLAY CLASS YET AHAHAHAH
+        Display dp = new Display ();
 
         switch (nCode){
         case 2: // farmer uses shovel @ plotGrid (0,0)
@@ -80,11 +82,7 @@ public class ActionHandler {
         case 1: // when farmer chooses to plant a seed
                 //display list of seeds and ask user which seed to plant
                 dp.seedList(); 
-                //yeah, tbh we should move these displays to a display.java pero tmrw na siguro mhmm 
-                //so yung display.java will be just the commandslist and stuff? bc this is like the seedlogic class
                 
-                //what does this do ba (pls)
-                //it stores integer input for the type of seed to plant
                 nSeedCode = sc.nextInt();
                 seedChoiceLogic (nSeedCode, tempPlot, farmer, currentDay, cropBook);
 
@@ -96,15 +94,15 @@ public class ActionHandler {
     }
 
 	/**
-    * This method handles the logic when a farmer plants a seed into a plot
-	*
-    * @param nCode			user selection code
-	* @param tempPlot		the plot being interacted with
-	* @param farmer			the player object interacting
-	* @param currentDay		the current day in the game world
-	* @param cropBook		holds a "database" of crops programmed in the game
-	*
-    */
+     * This method handles the logic when a farmer plants a seed into a plot
+	 *
+     * @param nCode		    user selection code
+	 * @param tempPlot		the plot being interacted with
+	 * @param farmer			the player object interacting
+	 * @param currentDay		the current day in the game world
+	 * @param cropBook		holds a "database" of crops programmed in the game
+	 *
+     */
     public void seedChoiceLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
             switch (nCode){
             case 1:
@@ -163,7 +161,6 @@ public class ActionHandler {
                         readyInDays = tempCrop.getHarvestTime() - (currentDay  - tempCrop.getDayPlanted());
                         alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");
                         
-                        //alertMessage("Crop not ready yet... Ready in " + tempCrop.getHarvestTime() - (currentDay - tempCrop.getDayPlanted()) + "\n");
                     }
                         
                 }       

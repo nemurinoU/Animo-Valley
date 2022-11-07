@@ -173,9 +173,11 @@ public class Farmer {
 		earnings = calculateFinalHarvestPrice (plot, nYield, plot.getCrop().getBasePrice(), 
 												this.getFTBEarning( this.getFarmerType()));
 		
+		//show earnings from harvest
 		System.out.println ("You earned " + earnings + " coins!");
 		this.setCoins (this.getCoins () + earnings);
 		
+		//remove crop from plot land
 		plot.delCrop ();
 	}
 	
@@ -320,13 +322,14 @@ public class Farmer {
 		return this.farmerType;
 	}
 
-/**
+	/**
     * This method gets the bonus earnings you get from being a certain farmer type
-    * 
+    * @param farmerType farmer type code of player
+	*
     * @return int		bonus earnings
     */
 	public int getFTBEarning (int farmerType) {
-		int bonus = 0;
+		int bonus = 0; //bonus earnings
 		
 		switch (farmerType) {
 
@@ -360,7 +363,7 @@ public class Farmer {
 	/* SETTERS */
 	/**
     * This method sets the player name
-    * 
+    * @param name		name of the farmer
     */
 	public void setName(String name) {
 		this.name = name;
@@ -368,7 +371,7 @@ public class Farmer {
 	
 	/**
     * This method sets the player xp/updates lvl visually too
-    * 
+    * @param xp			XP of the player
     */
 	public void setXp(double xp) {
 		this.xp = xp;
@@ -377,7 +380,7 @@ public class Farmer {
 	
 	/**
     * This method sets/updates the amount of coins a player has
-    * 
+    * @param coins		coins of the player
     */
 	public void setCoins(double coins) {
 		// there can be no negative currency
@@ -389,7 +392,7 @@ public class Farmer {
 
 	/**
     * This method sets the farmer type code
-    * 
+    * @param farmerType		farmer type code of player
     */
 	public void setFarmerType(int farmerType){
 		this.farmerType = farmerType;
@@ -397,7 +400,7 @@ public class Farmer {
 	
 	/**
     * This method sets the farmer type of the player in words
-    * 
+    * @param farmerType 	farmer type code of player
     */
 	public void setFarmerTitle(int farmerType){
 		switch (farmerType){
@@ -417,6 +420,4 @@ public class Farmer {
 				break;
 		}
 	}
-
-	
 }
