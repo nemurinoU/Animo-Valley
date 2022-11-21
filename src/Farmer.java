@@ -22,7 +22,7 @@ public class Farmer {
 	* > lvl is current player level, dependent on the xp attributes
 	* > farmerType is connected to farmerTitle, except this time in a integer code
 	*/
-	private String name, farmerTitle;
+	private String name, farmerTitle, farmName;
 	private double xp, coins;
 	private int lvl,
 				farmerType;
@@ -35,6 +35,14 @@ public class Farmer {
 	 * @param name		what the player should be called
 	 *
 	 */
+	public Farmer(){
+		this.coins = 100.0;
+		this.xp = 0.0;
+		this.farmerType = 0;
+		this.farmerTitle = "<Farmer>";
+		this.lvl = 0;
+	}
+	
 	public Farmer(String name){
 		this.name = name;
 		this.coins = 100.0;
@@ -43,7 +51,6 @@ public class Farmer {
 		this.farmerTitle = "<Farmer>";
 		this.lvl = 0;
 	}
-	
 	/* FARMER ACTIONS */
 	/**
     * This method is what the player does when shoveling up a tile.
@@ -419,5 +426,13 @@ public class Farmer {
 			default:
 				break;
 		}
+	}
+
+	public void setFarmName (String farmName) {
+			this.farmName = farmName;
+	}
+
+	public String getFarmName () {
+			return this.farmName;
 	}
 }

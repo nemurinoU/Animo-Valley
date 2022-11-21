@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import java.awt.FlowLayout;
 
 /***
  * <h1>MyFarm</h1>
@@ -112,6 +114,7 @@ public class MyFarm {
 		int[] tierFees = {200, 300, 400}, tierLvl = {0, 5, 10, 15};
 		int farmerType, rCode;
 
+
 		farmerType = farmer.getFarmerType ();
 		if (farmerType < 3) { // make sure no out of bounds stuff happens
 				if (farmer.getLvl () >= tierLvl[farmerType + 1]) {  // check if lvl is sufficient
@@ -167,28 +170,24 @@ public class MyFarm {
 		ANIMO VALLEY MAIN FUNCTION
 	*/
 	public static void main (String[] args) {
+		GUI mainGUI = new GUI ();
 		Scanner myObj = new Scanner(System.in);
+		boolean startUp = true;
 		//String farmerName; do we need this? if yes, keep; else delete
 		PlotLand tempPlot;
 		//generate crop list dictionary (contains only Turnip for MCO1)
-		generateCropBook ();
+		generateCropBook ();	
+
 		
-		/* ASK USER FOR THEIR FARMER NAME */
-		System.out.print ("\nEnter name: ");
-		Farmer farmer = new Farmer (myObj.nextLine());
+		/* ASK USER FOR THEIR FARMER NAME AND FARM NAME*/
+		Farmer farmer = new Farmer ();
+		mainGUI.initializeNamePrompt(farmer);
 		
-		System.out.println ("\nWelcome to Animo Valley, " + farmer.getName() + ".\n");
 		/***
 		DEV NOTES: This should honestly be in a class of methods OR just subroutines in this file that manages what is displayed on the screen.
 		But this is okay for now. 
 		We were a *little bit* lazy to put those in a subroutine but at least it works.
 		 */
-
-		/* ASK USER FOR FARM NAME */
-		System.out.print("Enter farm name: ");
-		farmName = myObj.nextLine();
-
-		System.out.println("\nYour farm name is: " + farmName + "\n");
 		
 		/***
 		================================
@@ -198,43 +197,53 @@ public class MyFarm {
 		generating the rocks randomly in the grid.
 		 */
 		plotGrid.add(new PlotLand(true, false, false));
+
+		// Connecting the plot grid object to the GUI
+		// should probably add a thing where the GUI gets updated every action on the plotGrid
 		/*** END OF PLOT GRID CODE */
-		
+
 		/*** 
 		================================
 		START OF DAILY LIFE UPDATES CODE 
 		================================
 		*/
-		while (!gameOver){
-			//actually farmer should updateLvl everytime XP is gained...
-			farmer.updateLvl();
-			Display.displayStats(farmer, farmer.getXp(), farmer.getCoins());
-			
 		
-			System.out.println ("What would you like to do? ");
-			System.out.println ("1) Go to Tile 2) Register 3) Sleep the Night Away");
-			System.out.print("> ");
-			
-			switch (myObj.nextInt ()) {
-			case 1:
-				tempPlot = plotGrid.get(0);
+		while (!gameOver){
+				if (farmer.getName () != null && startUp) {
+					mainGUI.initializeDisplayStats (farmer, MyFarm.getCurrentDay ());
+					mainGUI.initializePlotTiles ();
+					mainGUI.reloadFrame ();
+					startUp = false;
+				}
 				
-				goToTile(farmer, tempPlot);
+				if (!startUp) {
+					mainGUI.updateDisplayStats (farmer, MyFarm.getCurrentDay ());
+				}
+
+				System.out.println ("What would you like to do? ");
+				System.out.println ("1) Go to Tile 2) Register 3) Sleep the Night Away");
+				System.out.print("> ");
 				
-				break;
-			case 2:
-				registerFarmer(farmer);
-				break;
-			case 3:
-				sleepTheNight(plotGrid);
-				break;
-			default:
-				break;
-			}
-			if (farmer.getCoins() <= 0){
-				System.out.println("Game over! You ran out of money.");
-				gameOver = true;
-			}
+				switch (myObj.nextInt ()) {
+				case 1:
+					tempPlot = plotGrid.get(0);
+					
+					goToTile(farmer, tempPlot);
+					
+					break;
+				case 2:
+					registerFarmer(farmer);
+					break;
+				case 3:
+					sleepTheNight(plotGrid);
+					break;
+				default:
+					break;
+				}
+				if (farmer.getCoins() <= 0){
+					System.out.println("Game over! You ran out of money.");
+					gameOver = true;
+				}
 		}
 		/*** END OF DAILY LIFE UPDATES CODE */
 		myObj.close();

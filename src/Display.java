@@ -28,8 +28,7 @@ public class Display {
 		System.out.println ("LVL: " + farmer.getLvl());
 		System.out.println ("EXP: " + farmerXP + " / " + (farmer.getLvl() + 1) * 100);
 		System.out.printf ("BAL: %.2f%s%n", farmerCoins, " coins");
-		
-		
+
 		for (int i = 0; i < 17; i++) 
 			System.out.print ("=");
 		System.out.println("\n");
