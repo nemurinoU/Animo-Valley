@@ -1,3 +1,5 @@
+package mco1;
+
 import java.util.Random;
 
 /***

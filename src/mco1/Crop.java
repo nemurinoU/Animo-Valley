@@ -1,3 +1,5 @@
+package mco1;
+
 /***
  * <h1>MyFarm</h1>
  * <p>
