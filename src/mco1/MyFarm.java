@@ -170,8 +170,8 @@ public class MyFarm {
 		ANIMO VALLEY MAIN FUNCTION
 	*/
 	public static void main (String[] args) {
-		GUI promptGUI = new GUI ();
-		GUI mainGUI = new GUI ();
+		Board promptGUI = new Board ();
+		Board mainGUI = new Board ();
 		Scanner myObj = new Scanner(System.in);
 		boolean startUp = true;
 		//String farmerName; do we need this? if yes, keep; else delete

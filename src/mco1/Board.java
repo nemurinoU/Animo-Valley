@@ -14,12 +14,12 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 
 
-public class GUI {
+public class Board {
     private JFrame mainFrame;
     private JPanel tile;
     private JPanel stats;
 
-    public GUI () {
+    public Board () {
             this.mainFrame = new JFrame("Animo Valley");
 
             this.mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
