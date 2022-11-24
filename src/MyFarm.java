@@ -170,6 +170,7 @@ public class MyFarm {
 		ANIMO VALLEY MAIN FUNCTION
 	*/
 	public static void main (String[] args) {
+		GUI promptGUI = new GUI ();
 		GUI mainGUI = new GUI ();
 		Scanner myObj = new Scanner(System.in);
 		boolean startUp = true;
@@ -209,14 +210,14 @@ public class MyFarm {
 		*/
 		
 		while (!gameOver){
-				if (farmer.getName () != null && startUp) {
+				if (farmer.getName () != null && startUp) { // this is for first time start up
 					mainGUI.initializeDisplayStats (farmer, MyFarm.getCurrentDay ());
 					mainGUI.initializePlotTiles ();
 					mainGUI.reloadFrame ();
 					startUp = false;
 				}
 				
-				if (!startUp) {
+				if (!startUp) { // this is for when the day cycle, the gui updates
 					mainGUI.updateDisplayStats (farmer, MyFarm.getCurrentDay ());
 				}
 
@@ -224,6 +225,7 @@ public class MyFarm {
 				System.out.println ("1) Go to Tile 2) Register 3) Sleep the Night Away");
 				System.out.print("> ");
 				
+				/** 
 				switch (myObj.nextInt ()) {
 				case 1:
 					tempPlot = plotGrid.get(0);
@@ -239,7 +241,7 @@ public class MyFarm {
 					break;
 				default:
 					break;
-				}
+				}***/
 				if (farmer.getCoins() <= 0){
 					System.out.println("Game over! You ran out of money.");
 					gameOver = true;

@@ -94,7 +94,7 @@ public class GUI {
     }
 
     public void initializeDisplayStats (Farmer farmer, int currentDay) {
-        GridLayout layout = new GridLayout(5, 1);
+        GridLayout layout = new GridLayout(6, 1);
         Border border = BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.black), new EmptyBorder(10, 10, 10, 10));
         this.stats = new JPanel ();
 
@@ -103,6 +103,7 @@ public class GUI {
 
         this.stats.add(new JLabel ("[ " + farmer.getFarmName() + "]"));
         this.stats.add(new JLabel (farmer.getName() + " - DAY " + currentDay));
+         this.stats.add(new JLabel (farmer.getFarmerTitle()));
         this.stats.add(new JLabel ("LVL: " + farmer.getLvl()));
         this.stats.add(new JLabel ("EXP: " + farmer.getXp() + " / " + (farmer.getLvl() + 1) * 100));
         this.stats.add(new JLabel (String.format("BAL: %.2f%s%n", farmer.getCoins() , " coins")));
@@ -116,6 +117,7 @@ public class GUI {
 
         this.stats.add(new JLabel ("[ " + farmer.getFarmName() + "]"));
         this.stats.add(new JLabel (farmer.getName() + " - DAY " + currentDay));
+        this.stats.add(new JLabel (farmer.getFarmerTitle()));
         this.stats.add(new JLabel ("LVL: " + farmer.getLvl()));
         this.stats.add(new JLabel ("EXP: " + farmer.getXp() + " / " + (farmer.getLvl() + 1) * 100));
         this.stats.add(new JLabel (String.format("BAL: %.2f%s%n", farmer.getCoins() , " coins")));
