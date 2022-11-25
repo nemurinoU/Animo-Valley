@@ -12,8 +12,8 @@ public class Board extends JPanel implements Runnable{
     final int scaleSize = 3;
 
     public final int tileSize = originalTileSize * scaleSize;
-    public final int maxScreenRow = 12;
-    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 6;
+    public final int maxScreenCol = 12;
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
 
