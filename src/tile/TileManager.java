@@ -10,8 +10,8 @@ import main.Board;
 
 public class TileManager {
     Board board;
-    Tile[] tile;
-    int tileMapID[][];
+    public Tile[] tile;
+    public int tileMapID[][];
 
     public TileManager(Board board){
         this.board = board;
@@ -29,12 +29,14 @@ public class TileManager {
         try {
             tile[0] = new Tile(); //unplowed
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/002.png"));
+            
 
             tile[1] = new Tile(); //plowed
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/003.png"));
 
             tile[2] = new Tile(); //tree
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/016.png"));
+            tile[2].hasCollision = true;
 
             tile[3] = new Tile(); //rock
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/032.png"));

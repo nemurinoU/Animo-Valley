@@ -1,6 +1,7 @@
 package player;
 
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 public class Sprite {
 
@@ -10,5 +11,9 @@ public class Sprite {
     
     public int counter = 0;
     public int spriteID = 1;
+
+    public Rectangle spriteArea;
+    public boolean collisionOn = false;
+    
 
 }

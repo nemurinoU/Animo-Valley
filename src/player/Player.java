@@ -18,8 +18,16 @@ public class Player extends Sprite{
         this.board = board;
         this.keyH = keyH;
 
+        spriteArea = new Rectangle(8, 16, 32, 32);
+
+        /*spriteArea.x = 8;
+        spriteArea.y = 16;
+        spriteArea.width = 48;
+        spriteArea.width = 48;*/
+
         setValues();
         getPlayerSprite();
+
     }
 
     public void getPlayerSprite(){
@@ -58,21 +66,41 @@ public class Player extends Sprite{
             
             if (keyH.upPressed == true){
                 direction = "up";
-                y -= speed;
+                //y -= speed;
             }
             else if (keyH.downPressed == true){
                 direction = "down";
-                y += speed;
+                //y += speed;
             }
             else if (keyH.leftPressed == true){
                 direction = "left";
-                x -= speed;
+                //x -= speed;
             }
             else if (keyH.rightPressed == true){
                 direction = "right";
-                x += speed;
+                //x += speed;
             }
     
+            collisionOn = false;
+            board.collision.checkTile(this);
+
+            if (collisionOn == false){
+                switch (direction){
+                    case "up":
+                        y -= speed;
+                        break;
+                    case "down":
+                        y += speed;
+                        break;
+                    case "left":
+                        x -= speed;
+                        break;
+                    case "right":
+                        x += speed;
+                        break;
+                }
+            }
+
             counter++;
             if (counter > 10){
                 if (spriteID == 0){

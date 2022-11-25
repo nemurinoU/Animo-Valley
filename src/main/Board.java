@@ -21,6 +21,7 @@ public class Board extends JPanel implements Runnable{
     Thread gameThread;
     Player player = new Player(this, keyH);
     TileManager tileMan = new TileManager(this);
+    public Collision collision = new Collision(this);
 
     //Player settings
     int playerX = 200;
@@ -84,7 +85,7 @@ public class Board extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g;
 
         tileMan.draw(g2);
-        
+
         player.draw(g2);
 
         g2.dispose();
