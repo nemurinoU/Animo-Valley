@@ -1,14 +1,17 @@
 package main;
 
+import logic.ActionHandler;
 import player.Sprite;
 
 public class Collision {
     Board board;
+    
     public Collision(Board board){
         this.board = board;
     }
 
     public void checkTile(Sprite s){
+        logic.ActionHandler acts = new ActionHandler();
         int leftX = s.x + s.spriteArea.x;
         int rightX = s.x + s.spriteArea.x + s.spriteArea.width;
         int topY = s.y + s.spriteArea.y;
@@ -31,6 +34,7 @@ public class Collision {
                     s.collisionOn = true;
                 }
                 System.out.println("Tile " + leftCol + ", " + topRow);
+                acts.displayOptions(leftCol, topRow);
                 break;
             case "down":
                 botRow = ((s.y + s.speed) / board.tileSize) + 1;
@@ -41,6 +45,7 @@ public class Collision {
                     s.collisionOn = true;
                 }
                 System.out.println("Tile " + leftCol + ", " + botRow);
+                acts.displayOptions(leftCol, botRow);
                 break;
             case "left":
                 leftCol = (s.x - s.speed) / board.tileSize;
@@ -51,6 +56,7 @@ public class Collision {
                     s.collisionOn = true;
                 }
                 System.out.println("Tile " + leftCol + ", " + botRow);
+                acts.displayOptions(leftCol, botRow);
                 break;
             case "right":
                 rightCol = ((s.x + s.speed) / board.tileSize) + 1;
@@ -61,6 +67,7 @@ public class Collision {
                     s.collisionOn = true;
                 }
                 System.out.println("Tile " + rightCol + ", " + botRow);
+                acts.displayOptions(rightCol, botRow);
                 break;
         }
 

@@ -1,4 +1,4 @@
-package mco1;
+package logic;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -223,6 +223,5 @@ public class ActionHandler {
     }
 
     public void displayOptions (int x, int y) {
-        System.out.println ("");
     }
 }

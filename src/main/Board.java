@@ -35,6 +35,7 @@ public class Board extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        this.setLayout(new GridLayout (2, 1));
     }
 
     public void startGameThread(){
