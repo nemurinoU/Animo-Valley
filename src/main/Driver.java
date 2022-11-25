@@ -1,11 +1,7 @@
 package main;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
-import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.Dimension;
 
 public class Driver {
     
