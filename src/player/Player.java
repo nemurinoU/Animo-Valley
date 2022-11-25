@@ -53,8 +53,8 @@ public class Player extends Sprite{
     }
 
     public void setValues(){
-        x = 200;
-        y = 200;
+        x = 250;
+        y = 100;
         speed = 4;
         direction = "down";
     }
