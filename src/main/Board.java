@@ -84,6 +84,8 @@ public class Board extends JPanel implements Runnable{
     public void update(){
         this.menu.update();
         player.update();
+
+        this.requestFocus();
     }
 
     public void paintComponent(Graphics g){
