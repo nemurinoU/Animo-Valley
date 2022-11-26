@@ -22,4 +22,8 @@ public class MyFarm {
     public mco1.Farmer getFarmer () {
         return this.farmer;
     }
+
+    public void incrementCurrentDay () {
+        this.currentDay ++;
+    }
 }
