@@ -11,6 +11,10 @@ public class MyFarm {
         this.farmer = new mco1.Farmer();
     }
     
+    public void incrementCurrentDay () {
+        this.currentDay++;
+    }
+
     public int getCurrentDay () {
         return this.currentDay;
     }
