@@ -119,12 +119,16 @@ class RegisterFarmer extends JDialog {
                                     "You are now a " + farmerTier[farmer.getFarmerType()],
                                     "Register Successful!",
                                     JOptionPane.WARNING_MESSAGE);
+
                         } else {
                             JOptionPane.showMessageDialog(dummy,
                             "Insufficient Coins!",
                             "Register Unsuccessful...",
                             JOptionPane.WARNING_MESSAGE);
                         }
+
+                        dummy.dispose();
+                        dispose();
                     }
                 });
 
@@ -161,4 +165,5 @@ class RegisterFarmer extends JDialog {
                     "Register Unsuccessful...",
                     JOptionPane.WARNING_MESSAGE);
     }
+    
 }
