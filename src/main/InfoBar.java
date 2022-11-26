@@ -37,4 +37,8 @@ public class InfoBar extends JPanel {
         this.add (tempPan);
 
     }
+
+    public void update () {
+        
+    }
 }

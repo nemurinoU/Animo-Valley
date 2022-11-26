@@ -21,6 +21,7 @@ public class Board extends JPanel implements Runnable{
     Thread gameThread;
     Player player = new Player(this, keyH);
     TileManager tileMan = new TileManager(this);
+    InfoBar menu = new InfoBar();
     public Collision collision = new Collision(this);
 
     //Player settings
@@ -36,6 +37,10 @@ public class Board extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
         this.setLayout(new GridLayout (2, 1));
+    }
+
+    public InfoBar getMenu () {
+        return this.menu;
     }
 
     public void startGameThread(){
@@ -77,6 +82,7 @@ public class Board extends JPanel implements Runnable{
     }
 
     public void update(){
+        this.menu.update();
         player.update();
     }
 

@@ -15,7 +15,6 @@ public class Driver {
         window.setTitle("Animo Valley");
 
         Board board = new Board();
-        InfoBar menu = new InfoBar();
         /***
          * 
          * Note: What this does is turn the window into a GridBag layout, which is like a grid layout but the cells
@@ -26,7 +25,7 @@ public class Driver {
         gbc.gridy = 0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        window.add (menu, gbc);
+        window.add (board.getMenu (), gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
