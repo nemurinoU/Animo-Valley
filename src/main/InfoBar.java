@@ -35,10 +35,12 @@ public class InfoBar extends JPanel {
         tempPan.add (new JLabel ("BAL: " + tempFarmer.getCoins () + " coins"));
 
         this.add (tempPan);
-
+        this.setVisible(true);
     }
 
     public void update () {
-        
+        showStats ();
+        revalidate ();
+        repaint ();
     }
 }
