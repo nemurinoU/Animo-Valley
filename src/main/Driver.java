@@ -9,11 +9,10 @@ public class Driver {
         JFrame window = new JFrame();
         GridBagConstraints gbc = new GridBagConstraints();
 
-
         window.pack();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLayout(new GridBagLayout());
-        window.setResizable(true);
+        window.setResizable(false);
         window.setTitle("Animo Valley");
         
         Board board = new Board();

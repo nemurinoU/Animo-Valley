@@ -38,7 +38,7 @@ public class Farmer {
 	 *
 	 */
 	public Farmer(){
-		this.coins = 300.0;
+		this.coins = 10000.0;
 		this.xp = 10000.0;
 		this.farmerType = 0;
 		this.farmerTitle = "<Farmer>";

@@ -21,7 +21,8 @@ public class Board extends JPanel implements Runnable{
     Thread gameThread;
     Player player = new Player(this, keyH);
     TileManager tileMan = new TileManager(this);
-    InfoBar menu = new InfoBar();
+    logic.NamePrompt namePrompt = new logic.NamePrompt ();
+    InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
     public Collision collision = new Collision(this);
 
     //Player settings

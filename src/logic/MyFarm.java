@@ -3,12 +3,20 @@ package logic;
 public class MyFarm {
     private mco1.Farmer farmer;
     
-    private String farmName = "Ram Ranch";
+    private String farmName;
     private int currentDay = 0;
+    private PlotGrid farmField;
 
 
-    public MyFarm (){
-        this.farmer = new mco1.Farmer();
+    public MyFarm (String farmName, String farmerName){
+        this.farmName = farmName;
+        this.farmer = new mco1.Farmer(farmerName);
+
+        this.farmField = new PlotGrid ();
+    }
+
+    public PlotGrid getFarmField() {
+        return this.farmField;
     }
     
     public void incrementCurrentDay () {
