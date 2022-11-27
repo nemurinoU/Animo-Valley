@@ -35,7 +35,4 @@ public class MyFarm {
         return this.farmer;
     }
 
-    public void incrementCurrentDay () {
-        this.currentDay ++;
-    }
 }
