@@ -6,7 +6,28 @@ import tile.TileManager;
 import java.awt.*;
 import javax.swing.*;
 
+/***
+ * <h1>Board</h1>
+ * <p>
+ * This class is used to emulate the entire game screen.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-28
+ */
 public class Board extends JPanel implements Runnable{
+    /**
+	* Private Variable Instantiation
+	* > FPS is the frames per section, how many times are stuff rendered
+    * > originalTileSize is the base size of individual tile graphics
+    * > scaleSize scales up the base tiles
+    * > tileSize is the new scaled up tile size
+    * > maxScreenRow tells us how many rows of tiles are there in the window maximum
+    * > maxScreenCol tells us how many columns of tiles are there in the window
+    * > screenWidth is defined by the tileSize times the number of columns
+    * > screenHeight is tileSize times the number of rows
+	*/
     int FPS = 60;
     final int originalTileSize = 16;
     final int scaleSize = 3;
