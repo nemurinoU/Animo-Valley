@@ -41,10 +41,10 @@ public class Board extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
-    TileManager tileMan = new TileManager(this);
     logic.NamePrompt namePrompt = new logic.NamePrompt ();
     InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
     public Collision collision = new Collision(this);
+    TileManager tileMan = new TileManager(this, keyH, collision);
 
     //Player settings
     int playerX = 200;

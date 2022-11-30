@@ -5,7 +5,7 @@ import player.Sprite;
 
 public class Collision {
     Board board;
-    private int x, y;
+    public int x, y;
     
     public Collision(Board board){
         this.board = board;

@@ -7,21 +7,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import main.Board;
-
+import main.KeyHandler;
+import main.Collision;
 public class TileManager {
     Board board;
+    KeyHandler kh;
+    Collision colz;
     public Tile[] tile;
     public int tileMapID[][];
 
-    public TileManager(Board board){
+    public TileManager(Board board, KeyHandler kh, Collision colz){
         this.board = board;
-
+        this.kh = kh;
+        this.colz = colz;
         tile = new Tile[6]; //number of kinds of tiles
         tileMapID = new int [board.maxScreenCol][board.maxScreenRow];
 
 
         getTileImage();
-        loadMap("farm_map.txt");
+        loadMap("farm_map.txt", kh);
 
     }
 
@@ -29,7 +33,7 @@ public class TileManager {
         try {
             tile[0] = new Tile(); //unplowed
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/002.png"));
-            
+            tile[0].isPlowable = true;
 
             tile[1] = new Tile(); //plowed
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/003.png"));
@@ -39,20 +43,23 @@ public class TileManager {
             tile[2].hasCollision = true;
 
             tile[3] = new Tile(); //rock
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/032.png"));
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/rock.png"));
             
+
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void loadMap(String fileName){
+    public void loadMap(String fileName, KeyHandler kh){
         try {
             InputStream is = getClass().getResourceAsStream(fileName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             
             int col = 0;
             int row = 0;
+
+            
 
             while (col < board.maxScreenCol && row < board.maxScreenRow){
                 String line = br.readLine();
@@ -66,6 +73,11 @@ public class TileManager {
                     col = 0;
                     row++;
                 }
+
+                int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
+                int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
+
+                tileMapID[randX][randY] = 3;
             }
             br.close();
         } catch (Exception e) {
@@ -93,6 +105,15 @@ public class TileManager {
                 row++;
                 y += board.tileSize;
             }
+        }
+
+        //Plow tile
+        if (tile[tileMapID[colz.x][colz.y]].isPlowable && colz.x > 0 && colz.y > 0 && colz.x < 11 && colz.y < 5){
+            if (kh.spacePressed == true){
+                tileMapID[colz.x][colz.y] = 1;
+            }
+            
+            
         }
         
     }
