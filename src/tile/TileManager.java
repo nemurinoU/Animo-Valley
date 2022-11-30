@@ -25,7 +25,7 @@ public class TileManager {
 
 
         getTileImage();
-        loadMap("farm_map.txt", kh);
+        loadMap("farm_map.txt");
 
     }
 
@@ -51,7 +51,7 @@ public class TileManager {
         }
     }
 
-    public void loadMap(String fileName, KeyHandler kh){
+    public void loadMap(String fileName){
         try {
             InputStream is = getClass().getResourceAsStream(fileName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
