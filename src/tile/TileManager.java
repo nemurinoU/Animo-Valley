@@ -23,7 +23,6 @@ public class TileManager {
         tile = new Tile[6]; //number of kinds of tiles
         tileMapID = new int [board.maxScreenCol][board.maxScreenRow];
 
-
         getTileImage();
         loadMap("farm_map.txt");
 
@@ -59,8 +58,6 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            
-
             while (col < board.maxScreenCol && row < board.maxScreenRow){
                 String line = br.readLine();
                 while (col < board.maxScreenCol){
@@ -74,21 +71,23 @@ public class TileManager {
                     row++;
                 }
 
-                int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
-                int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
-
-                tileMapID[randX][randY] = 3;
+                //rock generator
+                for (int i = 10; i < 15; i++){
+                    int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
+                    int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
+                    tileMapID[randX][randY] = 3;
+                }
+                
             }
             br.close();
         } catch (Exception e) {
-            System.out.println("krazy");
+            System.out.println(e);
         }
     }
     
     public void draw(Graphics2D g2){
         //g2.drawImage(tile[0].image, 0, 0, board.tileSize, board.tileSize, null);
 
-        
         int col = 0;
         int row = 0;
         int x = 0;
@@ -108,13 +107,10 @@ public class TileManager {
         }
 
         //Plow tile
-        if (tile[tileMapID[colz.x][colz.y]].isPlowable && colz.x > 0 && colz.y > 0 && colz.x < 11 && colz.y < 5){
+        if (tile[tileMapID[colz.x][colz.y]].isPlowable){
             if (kh.spacePressed == true){
                 tileMapID[colz.x][colz.y] = 1;
             }
-            
-            
         }
-        
     }
 }
