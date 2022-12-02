@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class RegisterFarmer extends JDialog {
     final int tileSize = 96;
 
-    public RegisterFarmer(mco1.Farmer farmer) {
+    public RegisterFarmer(logic.Farmer farmer) {
         this.pack();
         this.setModal(true);
         this.setAlwaysOnTop(true);
@@ -19,7 +19,7 @@ public class RegisterFarmer extends JDialog {
         this.registerFarmer(farmer);
     }
 
-    public void registerFarmer(mco1.Farmer farmer) {
+    public void registerFarmer(logic.Farmer farmer) {
         String[] farmerTier = { "Farmer", "Registered Farmer", "Distinguished Farmer", "Legendary Farmer" };
         int[] tierFees = { 200, 300, 400 }, tierLvl = { 0, 5, 10, 15 };
         int farmerType;

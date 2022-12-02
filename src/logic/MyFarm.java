@@ -11,17 +11,15 @@ package logic;
  * @since   2022-11-07 
  */
 public class MyFarm {
-    private mco1.Farmer farmer;
+    private logic.Farmer farmer;
     
     private String farmName;
     private int currentDay = 0;
     private PlotGrid farmField;
 
-
     public MyFarm (String farmName, String farmerName){
         this.farmName = farmName;
-        this.farmer = new mco1.Farmer(farmerName);
-
+        this.farmer = new logic.Farmer(farmerName);
         this.farmField = new PlotGrid ();
     }
 
@@ -41,7 +39,7 @@ public class MyFarm {
         return this.farmName;
     }
 
-    public mco1.Farmer getFarmer () {
+    public logic.Farmer getFarmer () {
         return this.farmer;
     }
 
