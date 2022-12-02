@@ -1,119 +1,62 @@
 package logic;
 
-/***
- * <h1>MyFarm</h1>
- * <p>
- * This class describes a single crop, including all the attributes needed for a Crop object.
- * It also checks whether or not the crop is harvestable or has withered.
- * It also indirectly updates the farmer's coins and XP
- * </p>
- *
- * @author  Francis Martinez, Richard Pecson Jr.
- * @version a0.0.8
- * @since   2022-11-07 
- */
-public class Crop {
-    /**
-     * Private Variable Instantiation
-     * > cropName is the crop's name
-     * > cropTypeID is the crop type's ID (0 - Root crop, 1 - Flower, 2 - Fruit tree)
-     * > harvestTime is the time it takes until it is harvestable
-     * > waterNeed is the amount of water needed for the crop to grow
-     * > waterBonus is the bonus limit when adding water
-     * > fertilizerNeed is the amount of fertilizer needed for the crop to grow
-     * > fertilizerBonus is the bonus limit when adding fertilizer
-     * > minProduce is the minimum number of crops produced when harvested
-     * > maxProduce is the maximum number of crops produced when harvested
-     * > basePrice is the base price of the crop when harvested
-     * > xpYield is the XP yield of the crop when harvested
-     * > cropID is the individual crop ID
-     * > seedCost is the cost of the seed to plant on the plot land
-     * > day planted is the day of when the crop was planted
-     * > timesWatered is the amount of times the crop was watered
-     * > timesFertilized is the amount of times the crop was fertilized
-     * > isHarvestable is the state of the crop, whether it is harvestable or not
-     * > isWithered is the state of the crop, whether it is withered or not
-	 */
-    private String cropName;
-    private double basePrice;
-    private double xpYield;
-    
-    
-    private int cropID, 
-    			cropTypeID,
-    			harvestTime,
-    			waterNeed,
-    			waterBonus,
-    			fertilizerNeed,
-    			fertilizerBonus,
-    			minProduce,
-    			maxProduce,
-    			seedCost;
-    
-    private int dayPlanted,
-    			timesWatered,
-    			timesFertilized;
-    
+abstract class Crop {
+    private String  cropName;
+
+    private double  basePrice,
+                    xpYield;
+
     private boolean isHarvestable,
-    				isWithered;
-    			
-    /**
-     * This constructor is used to instantiate a Crop object when it is planted on the plot land.
-     * @param cropName The crop's name
-     * @param cropTypeID The crop type's ID (0 - Root crop, 1 - Flower, 2 - Fruit tree)
-     * @param harvestTime The time it takes until it is harvestable
-     * @param waterNeed The amount of water needed for the crop to grow
-     * @param waterBonus The bonus limit when adding water
-     * @param fertilizerNeed The amount of fertilizer needed for the crop to grow
-     * @param fertilizerBonus The bonus limit when adding fertilizer
-     * @param minProduce The minimum number of crops produced when harvested
-     * @param maxProduce The maximum number of crops produced when harvested
-     * @param basePrice The base price of the crop when harvested
-     * @param xpYield The XP yield of the crop when harvested
-     * @param cropID The individual crop ID
-     * @param seedCost The cost of the seed to plant on the plot land
-     */
-    public Crop(String cropName, int cropTypeID, int harvestTime, 
-    			int waterNeed, int waterBonus, int fertilizerNeed, 
-    			int fertilizerBonus, int minProduce, int maxProduce, 
-    			double basePrice, double xpYield, int cropID,
-    			int seedCost) {
-    	this.cropID = cropID;
+                    isWithered;
+
+    private int     harvestTime,
+                    seedCost,
+                    waterNeeds,
+                    waterBonus,
+                    fertNeeds,
+                    fertBonus,
+                    minProduce,
+                    maxProduce,
+                    cropType, // 1 - root, 2 - flower, 3 - fruit tree
+                    cropID,
+                    timesWatered,
+                    timesFertilized,
+                    dayPlanted;
+
+    public Crop (String cropName, double basePrice, double xpYield, 
+                int harvestTime, int seedCost, int waterNeeds,
+                int waterBonus, int fertNeeds, int fertBonus,
+                int minProduce, int maxProduce, int cropType, int cropID) {
         this.cropName = cropName;
-        this.cropTypeID = cropTypeID;
-        this.harvestTime = harvestTime;
-        this.waterNeed = waterNeed;
-        this.waterBonus = waterBonus;
-        this.fertilizerNeed = fertilizerNeed;
-        this.fertilizerBonus = fertilizerBonus;
-        this.minProduce = minProduce;
-        this.maxProduce = maxProduce;
         this.basePrice = basePrice;
         this.xpYield = xpYield;
-        this.cropID = cropID;
-        this.seedCost = seedCost;
-    }
 
-    
-    /** 
-     * This method is called when the user plants a seed, thus activating the crop with default values.
-     * @param currentDay The current day of the game.
-     */
-    public void activateCrop (int currentDay) {
-    	this.dayPlanted = currentDay;
+        this.harvestTime = harvestTime;
+        this.seedCost = seedCost;
+        this.waterNeeds = waterNeeds;
+
+        this.waterBonus = waterBonus;
+        this.fertNeeds = fertNeeds;
+        this.fertBonus = fertBonus;
+
+        this.minProduce = minProduce;
+        this.maxProduce = maxProduce;
+        this.cropType = cropType;
+        this.cropID = cropID;
+
+        this.timesFertilized = 0;
+        this.timesWatered = 0;
     	this.isHarvestable = false;
     	this.isWithered = false;
-    	this.timesWatered = 0;
-    	this.timesFertilized = 0;
     }
-    
+
     /** 
      * This method is called when the user uses fertilizer on the crop.
      * It is limited by the fertilizerBonus variable & the limit is increased when the farmer status is upgraded.
-     * @param fertBonusLimitIncrease The value of the increase in the fertilizer bonus limit.
+     * @param fertBonusIncrease The value of the increase in the fertilizer bonus limit.
      */
-    public void fertilizeSelf (int fertBonusLimitIncrease) {
-    	if (this.getTimesFertilized() < this.getFertilizerBonus() + fertBonusLimitIncrease)
+    public void fertilizeSelf (int fertBonusIncrease) {
+    	if (this.getTimesFertilized() < this.getFertilizerBonus() + fertBonusIncrease)
     		    this.timesFertilized++;
     }
     
@@ -121,11 +64,11 @@ public class Crop {
     /** 
      * This method is called when the user waters the crop.
      * It is limited by the waterBonus variable & the limit is increased when the farmer status is upgraded.
-     * @param waterBonusLimitIncrease The value of the increase in the water bonus limit.
+     * @param waterBonusIncrease The value of the increase in the water bonus limit.
      */
 
-    public void waterSelf (int waterBonusLimitIncrease) {
-    	if (this.getTimesWatered () < this.getWaterBonus () + waterBonusLimitIncrease)
+    public void waterSelf (int waterBonusIncrease) {
+    	if (this.getTimesWatered () < this.getWaterBonus () + waterBonusIncrease)
     		    this.timesWatered++;
     }
     
@@ -204,15 +147,6 @@ public class Crop {
     
     
     /** 
-     * This method gets the crop type's ID.
-     * @return int      the crop type's IDs
-     */
-    public int getCropTypeID() {
-        return this.cropTypeID;
-    }
-
-    
-    /** 
      * This method gets the time it takes until the crop is harvestable.
      * @return int      harvest time of crop
      */
@@ -226,7 +160,7 @@ public class Crop {
      * @return int      water needed for crop
      */
     public int getWaterNeed() {
-        return this.waterNeed;
+        return this.waterNeeds;
     }
 
     
@@ -244,7 +178,7 @@ public class Crop {
      * @return int      fertilizer needed for crop
      */
     public int getFertilizerNeed() {
-        return this.fertilizerNeed;
+        return this.fertNeeds;
     }
 
     
@@ -253,7 +187,7 @@ public class Crop {
      * @return int      fertilizer bonus of crop
      */
     public int getFertilizerBonus() {
-        return this.fertilizerBonus;
+        return this.fertBonus;
     }
 
     
@@ -321,15 +255,6 @@ public class Crop {
     
 
     // SETTERS
-    /** 
-     * This method updates the crop type's ID.
-     * @param cropTypeID        the crop type's IDs   
-     */
-    
-    public void setCropTypeID(int cropTypeID) {
-        this.cropTypeID = cropTypeID;
-    }
-
     
     /** 
      * This method updates the time it takes until the crop is harvestable.
@@ -344,8 +269,8 @@ public class Crop {
      * This method updates the amount of water needed for the crop.
      * @param waterNeed         water needed for crop
      */
-    public void setWaterNeed(int waterNeed) {
-        this.waterNeed = waterNeed;
+    public void setWaterNeed(int waterNeeds) {
+        this.waterNeeds = waterNeeds;
     }
 
     
@@ -363,7 +288,7 @@ public class Crop {
      * @param fertilizerNeed    fertilizer needed for crop
      */
     public void setFertilizerNeed(int fertilizerNeed) {
-        this.fertilizerNeed = fertilizerNeed;
+        this.fertNeeds = fertilizerNeed;
     }
 
     
@@ -372,7 +297,7 @@ public class Crop {
      * @param fertilizerBonus   fertilizer bonus of crop
      */
     public void setFertilizerBonus(int fertilizerBonus) {
-        this.fertilizerBonus = fertilizerBonus;
+        this.fertBonus = fertilizerBonus;
     }
 
     
@@ -445,5 +370,77 @@ public class Crop {
      */
     public void setSeedCost(int seedCost){
         this.seedCost = seedCost;
+    }
+}
+
+class Turnip extends Crop {
+    public Turnip () {
+        super ("Turnip", 6.0, 5.0,
+              2, 5, 1,
+              2, 0, 1,
+              1, 2, 1, 5);
+    }
+}
+
+class Carrot extends Crop {
+    public Carrot () {
+        super ("Carrot", 9.0, 7.5,
+              3, 10, 1,
+              2, 0, 1,
+              1, 2, 1, 6);
+    }
+}
+
+class Potato extends Crop {
+    public Potato () {
+        super ("Carrot", 3.0, 12.5,
+              5, 20, 3,
+              4, 1, 2,
+              1, 10, 1, 7);
+    }
+}
+
+class Rose extends Crop {
+    public Rose () {
+        super ("Rose", 5, 2.5,
+            1, 5, 1,
+            2, 0, 1,
+            1, 1, 2, 8);
+    }
+}
+
+class Tulip extends Crop {
+    public Tulip () {
+        super ("Tulip", 9, 5,
+            2, 10, 2,
+            3, 0, 1,
+            1, 1, 2, 9);
+    }
+}
+
+class Sunflower extends Crop {
+    public Sunflower () {
+        super ("Sunflower", 19, 7.5,
+        3, 20, 2,
+        3, 1, 2,
+        1, 1, 2, 10);
+    }
+}
+
+class Mango extends Crop {
+    public Mango () {
+        super ("Mango", 8, 25,
+        10, 100, 7,
+        7, 4, 4,
+        5, 15, 3, 11);
+    }
+}
+
+class Apple extends Crop {
+    public Apple () {
+        super ("Apple", 5, 25,
+        10, 200, 7,
+        7, 5, 5,
+        10, 15, 3, 12);
     }
 }

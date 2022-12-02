@@ -28,6 +28,10 @@ public class InfoBar extends JPanel {
         showStats();
     }
 
+    public logic.MyFarm getMyFarm () {
+        return this.myfarm;
+    }
+
     public JButton getFarmerBtn () {
         return this.regFarmerBtn;
     }
@@ -66,7 +70,7 @@ public class InfoBar extends JPanel {
         this.myfarm.getFarmer().updateLvl();
         this.statsPan.setLayout(new GridLayout(6, 1));
 
-        mco1.Farmer tempFarmer = this.myfarm.getFarmer();
+        logic.Farmer tempFarmer = this.myfarm.getFarmer();
         if (tempFarmer.getFarmerType() == 3) regFarmerBtn.setEnabled(false);
 
         statsPan.removeAll();
