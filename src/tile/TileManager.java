@@ -12,6 +12,7 @@ public class TileManager {
     Board board;
     public Tile[] tile;
     public int tileMapID[][];
+    logic.PlotGrid tileCopy;
 
     public TileManager(Board board){
         this.board = board;
@@ -25,6 +26,10 @@ public class TileManager {
 
     }
 
+    public void updateTileCopy (logic.PlotGrid updatedCopy) {
+        this.tileCopy = updatedCopy;
+    } 
+
     public void getTileImage(){
         try {
             tile[0] = new Tile(); //unplowed
@@ -32,7 +37,7 @@ public class TileManager {
             
 
             tile[1] = new Tile(); //plowed
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/003.png"));
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/plowed.png"));
 
             tile[2] = new Tile(); //tree
             tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/016.png"));
@@ -94,6 +99,19 @@ public class TileManager {
                 y += board.tileSize;
             }
         }
+<<<<<<< Updated upstream
         
+=======
+
+        //Plow tile
+        // AHHH GETS
+        // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
+        // portion of the MVC :))
+        if (tile[tileMapID[colz.x][colz.y]].isPlowable){
+            if (kh.spacePressed == true){
+                tileMapID[colz.x][colz.y] = 1;
+            }
+        }
+>>>>>>> Stashed changes
     }
 }

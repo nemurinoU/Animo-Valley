@@ -1,14 +1,26 @@
 package logic;
 
 public class MyFarm {
-    private mco1.Farmer farmer;
+    private logic.Farmer farmer;
     
     private String farmName = "Ram Ranch";
     private int currentDay = 0;
 
 
+<<<<<<< Updated upstream
     public MyFarm (){
         this.farmer = new mco1.Farmer();
+=======
+    public MyFarm (String farmName, String farmerName){
+        this.farmName = farmName;
+        this.farmer = new logic.Farmer(farmerName);
+
+        this.farmField = new PlotGrid ();
+    }
+
+    public PlotGrid getFarmField() {
+        return this.farmField;
+>>>>>>> Stashed changes
     }
     
     public void incrementCurrentDay () {
@@ -23,7 +35,7 @@ public class MyFarm {
         return this.farmName;
     }
 
-    public mco1.Farmer getFarmer () {
+    public logic.Farmer getFarmer () {
         return this.farmer;
     }
 

@@ -1,105 +1,15 @@
-package main;
+package logic;
 
 import java.awt.*;
 import javax.swing.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class InfoBar extends JPanel {
-    logic.MyFarm myfarm;
-    JPanel statsPan;
-
-    public InfoBar() {
-        this.setBackground(Color.green);
-        statsPan = new JPanel();
-
-        this.myfarm = new logic.MyFarm();
-
-        this.add(statsPan);
-        btnOptions();
-        showStats();
-    }
-
-<<<<<<< Updated upstream
-=======
-    public logic.MyFarm getMyFarm () {
-        return this.myfarm;
-    }
-
-    public JButton getFarmerBtn () {
-        return this.regFarmerBtn;
-    }
-
->>>>>>> Stashed changes
-    public void btnOptions() {
-        JButton nextDayBtn = new JButton("Sleep the Night");
-        JButton regFarmerBtn = new JButton("Register Farmer");
-
-        nextDayBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                myfarm.incrementCurrentDay();
-            }
-        });
-
-        regFarmerBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // reg farmer logic
-                RegisterFarmer rf = new RegisterFarmer(myfarm.getFarmer());
-            }
-        });
-
-        JPanel btnPan = new JPanel();
-        btnPan.setLayout(new GridLayout(2, 1));
-
-        btnPan.add(nextDayBtn);
-        btnPan.add(regFarmerBtn);
-
-        this.add(btnPan);
-    }
-
-    public void showStats() {
-        this.myfarm.getFarmer().updateLvl();
-        this.statsPan.setLayout(new GridLayout(6, 1));
-
-<<<<<<< Updated upstream
-        mco1.Farmer tempFarmer = this.myfarm.getFarmer();
-=======
-        logic.Farmer tempFarmer = this.myfarm.getFarmer();
-        if (tempFarmer.getFarmerType() == 3) regFarmerBtn.setEnabled(false);
->>>>>>> Stashed changes
-
-        statsPan.removeAll();
-
-        statsPan.add(new JLabel("[" + this.myfarm.getFarmName() + "]"));
-
-        statsPan.add(new JLabel(tempFarmer.getName() + " - DAY " + this.myfarm.getCurrentDay()));
-
-        statsPan.add(new JLabel(tempFarmer.getFarmerTitle()));
-
-        statsPan.add(new JLabel("LVL: " + tempFarmer.getLvl()));
-
-        statsPan.add(new JLabel("EXP: " + tempFarmer.getXp() + " / " + (tempFarmer.getLvl() + 1) * 100));
-
-        statsPan.add(new JLabel("BAL: " + tempFarmer.getCoins() + " coins"));
-
-        statsPan.setVisible(true);
-        statsPan.revalidate();
-        statsPan.repaint();
-    }
-
-    public void update() {
-        showStats();
-        revalidate();
-        repaint();
-    }
-}
-
-class RegisterFarmer extends JDialog {
+public class RegisterFarmer extends JDialog {
     final int tileSize = 96;
 
-    public RegisterFarmer(mco1.Farmer farmer) {
+    public RegisterFarmer(logic.Farmer farmer) {
         this.pack();
         this.setModal(true);
         this.setAlwaysOnTop(true);
@@ -109,7 +19,7 @@ class RegisterFarmer extends JDialog {
         this.registerFarmer(farmer);
     }
 
-    public void registerFarmer(mco1.Farmer farmer) {
+    public void registerFarmer(logic.Farmer farmer) {
         String[] farmerTier = { "Farmer", "Registered Farmer", "Distinguished Farmer", "Legendary Farmer" };
         int[] tierFees = { 200, 300, 400 }, tierLvl = { 0, 5, 10, 15 };
         int farmerType;
@@ -175,11 +85,7 @@ class RegisterFarmer extends JDialog {
                         "Insufficient level to register higher tier. Required Lvl: " + tierLvl[farmerType + 1],
                         "Register Unsuccessful...",
                         JOptionPane.WARNING_MESSAGE);
-        } else
-            JOptionPane.showMessageDialog(this,
-                    "Maximum Farmer Tier reached!" + tierLvl[farmerType + 1],
-                    "Register Unsuccessful...",
-                    JOptionPane.WARNING_MESSAGE);
+        }
     }
     
 }

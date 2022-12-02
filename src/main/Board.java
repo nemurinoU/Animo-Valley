@@ -82,10 +82,15 @@ public class Board extends JPanel implements Runnable{
     }
 
     public void update(){
+        // update player sprite and menu/info bar above the grid
         this.menu.update();
         player.update();
 
+        // keeps the game window focused all the time
         this.requestFocus();
+
+        // update the PlotGrid object inside the TileManager class
+       // tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
     }
 
     public void paintComponent(Graphics g){
