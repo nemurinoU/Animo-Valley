@@ -20,12 +20,7 @@ public class Player extends Sprite{
 
         spriteArea = new Rectangle(8, 16, 32, 32);
 
-        /*spriteArea.x = 8;
-        spriteArea.y = 16;
-        spriteArea.width = 48;
-        spriteArea.width = 48;*/
-
-        setValues();
+        defaultValues();
         getPlayerSprite();
 
     }
@@ -47,12 +42,12 @@ public class Player extends Sprite{
             up2 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile047.png"));
 
         } catch (Exception e) {
-            System.out.println("boang");
+            System.out.println(e);
         }
         
     }
 
-    public void setValues(){
+    public void defaultValues(){
         x = 250;
         y = 100;
         speed = 4;

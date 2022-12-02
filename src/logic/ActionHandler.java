@@ -33,7 +33,7 @@ public class ActionHandler {
 	 * @param farmer		the player object interacting
 	 *
      */
-    public void plotIsRawLogic (int nCode, PlotLand tempPlot, Farmer farmer) {
+    public void plotIsRawLogic (int nCode, PlotLand tempPlot, mco1.Farmer farmer) {
         
         switch (nCode){
         case 1: //farmer plows tile (0, 0)
@@ -70,7 +70,7 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
+    public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, , mco1.Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
         int nSeedCode;
         Scanner sc = new Scanner (System.in);
         // THIS IS A VERY DANGEROUS THING TO DO yung not closing the sc?
@@ -105,7 +105,7 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void seedChoiceLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
+    public void seedChoiceLogic (int nCode, PlotLand tempPlot, mco1.Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
             switch (nCode){
             case 1:
                     // farmer does the planting

@@ -7,19 +7,24 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import main.Board;
-
+import main.KeyHandler;
+import main.Collision;
+import mco1.Farmer;
 public class TileManager {
     Board board;
+    KeyHandler kh;
+    Collision colz;
+    Farmer farmer;
     public Tile[] tile;
     public int tileMapID[][];
     logic.PlotGrid tileCopy;
 
-    public TileManager(Board board){
+    public TileManager(Board board, KeyHandler kh, Collision colz){
         this.board = board;
-
+        this.kh = kh;
+        this.colz = colz;
         tile = new Tile[6]; //number of kinds of tiles
         tileMapID = new int [board.maxScreenCol][board.maxScreenRow];
-
 
         getTileImage();
         loadMap("farm_map.txt");
@@ -33,19 +38,28 @@ public class TileManager {
     public void getTileImage(){
         try {
             tile[0] = new Tile(); //unplowed
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/002.png"));
-            
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/grass.png"));
+            tile[0].isUnplowed = true;
 
             tile[1] = new Tile(); //plowed
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/plowed.png"));
+            
+            tile[1].isPlowed = true;
 
             tile[2] = new Tile(); //tree
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/016.png"));
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/tree.png"));
             tile[2].hasCollision = true;
 
             tile[3] = new Tile(); //rock
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/032.png"));
-            
+            tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/rock.png"));
+            tile[3].hasRock = true;
+
+            tile[4] = new Tile(); //seedling
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png"));
+
+            tile[5] = new Tile(); //seedling
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png"));
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -71,17 +85,24 @@ public class TileManager {
                     col = 0;
                     row++;
                 }
+
+                //rock generator
+                for (int i = 10; i < 15; i++){
+                    int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
+                    int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
+                    tileMapID[randX][randY] = 3;
+                }
+                
             }
             br.close();
         } catch (Exception e) {
-            System.out.println("krazy");
+            System.out.println(e);
         }
     }
     
     public void draw(Graphics2D g2){
         //g2.drawImage(tile[0].image, 0, 0, board.tileSize, board.tileSize, null);
 
-        
         int col = 0;
         int row = 0;
         int x = 0;
@@ -99,19 +120,29 @@ public class TileManager {
                 y += board.tileSize;
             }
         }
-<<<<<<< Updated upstream
-        
-=======
 
         //Plow tile
         // AHHH GETS
         // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
         // portion of the MVC :))
-        if (tile[tileMapID[colz.x][colz.y]].isPlowable){
+        if (tile[tileMapID[colz.x][colz.y]].isUnplowed){
             if (kh.spacePressed == true){
                 tileMapID[colz.x][colz.y] = 1;
             }
         }
->>>>>>> Stashed changes
+
+        if (tile[tileMapID[colz.x][colz.y]].isPlowed){
+            if (kh.uPressed == true){
+                tileMapID[colz.x][colz.y] = 4;
+            }
+        }
+
+        if (tile[tileMapID[colz.x][colz.y]].hasRock){
+            if(kh.pPressed == true){
+                //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
+                tileMapID[colz.x][colz.y] = 0;
+                //farmer.setCoins(farmer.getCoins() - 50);
+            }
+        }
     }
 }

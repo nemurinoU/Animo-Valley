@@ -1,4 +1,4 @@
-package mco1;
+package logic;
 
 /***
  * <h1>PlotLand</h1>
@@ -36,10 +36,10 @@ public class PlotLand {
 	*
     */
     //Basic __INIT with NO crop yet
-    public PlotLand(boolean isOccupied, boolean hasRock, boolean isPlowed) {
+    public PlotLand(boolean isOccupied, boolean hasRock, boolean isPlowed, int x, int y) {
         /*Let's be mathematically consistent with cartesian values and start with <0,0>*/
-        this.x = 0; 
-        this.y = 0;
+        this.x = x;
+        this.y = y;
         this.isOccupied = isOccupied;
         this.hasRock = hasRock;
         this.isPlowed = isPlowed;
