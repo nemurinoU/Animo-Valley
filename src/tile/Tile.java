@@ -5,5 +5,7 @@ public class Tile {
     
     public BufferedImage image;
     public boolean hasCollision = false;
-    public boolean isPlowable = false;
+    public boolean isUnplowed = false;
+    public boolean isPlowed = false;
+    public boolean hasRock = false;
 }

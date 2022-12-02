@@ -9,10 +9,12 @@ import java.io.InputStreamReader;
 import main.Board;
 import main.KeyHandler;
 import main.Collision;
+import mco1.Farmer;
 public class TileManager {
     Board board;
     KeyHandler kh;
     Collision colz;
+    Farmer farmer;
     public Tile[] tile;
     public int tileMapID[][];
 
@@ -31,19 +33,26 @@ public class TileManager {
     public void getTileImage(){
         try {
             tile[0] = new Tile(); //unplowed
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/002.png"));
-            tile[0].isPlowable = true;
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/grass.png"));
+            tile[0].isUnplowed = true;
 
             tile[1] = new Tile(); //plowed
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/003.png"));
+            tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/plowed.png"));
+            tile[1].isPlowed = true;
 
             tile[2] = new Tile(); //tree
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/016.png"));
+            tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/tree.png"));
             tile[2].hasCollision = true;
 
             tile[3] = new Tile(); //rock
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/rock.png"));
-            
+            tile[3].hasRock = true;
+
+            tile[4] = new Tile(); //seedling
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png"));
+
+            tile[5] = new Tile(); //seedling
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png"));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -107,9 +116,23 @@ public class TileManager {
         }
 
         //Plow tile
-        if (tile[tileMapID[colz.x][colz.y]].isPlowable){
+        if (tile[tileMapID[colz.x][colz.y]].isUnplowed){
             if (kh.spacePressed == true){
                 tileMapID[colz.x][colz.y] = 1;
+            }
+        }
+
+        if (tile[tileMapID[colz.x][colz.y]].isPlowed){
+            if (kh.uPressed == true){
+                tileMapID[colz.x][colz.y] = 4;
+            }
+        }
+
+        if (tile[tileMapID[colz.x][colz.y]].hasRock){
+            if(kh.pPressed == true){
+                //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
+                tileMapID[colz.x][colz.y] = 0;
+                //farmer.setCoins(farmer.getCoins() - 50);
             }
         }
     }

@@ -6,6 +6,8 @@ import tile.TileManager;
 import java.awt.*;
 import javax.swing.*;
 
+import mco1.Farmer;
+
 /***
  * <h1>Board</h1>
  * <p>
