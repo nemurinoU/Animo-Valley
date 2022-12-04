@@ -23,7 +23,7 @@ public class TileManager {
         this.board = board;
         this.kh = kh;
         this.colz = colz;
-        tile = new Tile[6]; //number of kinds of tiles
+        tile = new Tile[10]; //number of kinds of tiles
         tileMapID = new int [board.maxScreenCol][board.maxScreenRow];
 
         getTileImage();
@@ -58,11 +58,20 @@ public class TileManager {
             tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/rock.png"));
             tile[3].hasRock = true;
 
-            tile[4] = new Tile(); //seedling
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png"));
+            tile[4] = new Tile(); //watered & plowed
+            tile[4].image = ImageIO.read(getClass().getResourceAsStream("tile_images/water_unplowed.png"));
+            tile[4].isDry = false;
 
             tile[5] = new Tile(); //seedling
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png"));
+            tile[5].image = ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png"));
+            tile[5].isSeeded = true;
+
+            tile[6] = new Tile(); //watered, plowed & seeded
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("tile_images/water_seeded.png"));
+            tile[6].isDry = false;
+
+            tile[7] = new Tile(); //turnip
+            tile[7].image = ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png"));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -135,17 +144,40 @@ public class TileManager {
             }
         }
 
+        // Plant on tile
         if (tile[tileMapID[colz.x][colz.y]].isPlowed){
             if (kh.uPressed == true){
-                tileMapID[colz.x][colz.y] = 4;
+                tileMapID[colz.x][colz.y] = 5;
             }
         }
+        
 
+        //Mine rock
         if (tile[tileMapID[colz.x][colz.y]].hasRock){
             if(kh.pPressed == true){
                 //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
                 tileMapID[colz.x][colz.y] = 0;
                 //farmer.setCoins(farmer.getCoins() - 50);
+            }
+        }
+
+        //If tile is dry and plowed, water it
+        if (tile[tileMapID[colz.x][colz.y]].isDry && tile[tileMapID[colz.x][colz.y]].isPlowed){
+            if (kh.iPressed == true){
+                tileMapID[colz.x][colz.y] = 4;
+            }
+        }
+        
+        //If tile is dry and has seed, water it
+        if (tile[tileMapID[colz.x][colz.y]].isSeeded){
+            if (kh.iPressed == true){
+                tileMapID[colz.x][colz.y] = 6;
+            }
+        }
+
+        if (tile[tileMapID[colz.x][colz.y]].isDry == false){
+            if (kh.uPressed == true){
+                tileMapID[colz.x][colz.y] = 6;
             }
         }
     }
