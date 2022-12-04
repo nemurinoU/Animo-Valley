@@ -2,6 +2,7 @@ package main;
 
 import logic.ActionHandler;
 import player.Sprite;
+import logic.Coordinates;
 
 public class Collision {
     Board board;
@@ -76,11 +77,7 @@ public class Collision {
         }
     }
 
-    public int getX () {
-        return this.x;
-    }
-
-    public int getY () {
-        return this.y;
+    public Coordinates getCoords () {
+        return new Coordinates (this.x, this.y);
     }
 }

@@ -1,7 +1,7 @@
 package logic;
 
-import java.util.Scanner;
 import java.util.ArrayList;
+import main.KeyHandler;
 
 /**
  * <h1> ActionHandler </h1>
@@ -17,12 +17,16 @@ import java.util.ArrayList;
  * @since   2022-11-07 
  */
 public class ActionHandler {
+    KeyHandler kh;
+    Coordinates currentXY;
+
 	/**
      * This constructor method creates a new instance of ActionHandler
 	 *
      */
-    public ActionHandler () {
-
+    public ActionHandler (KeyHandler kh) {
+        this.kh = kh;
+        this.currentXY = new Coordinates(0, 0);
     }
 
     /**
@@ -33,7 +37,7 @@ public class ActionHandler {
 	 * @param farmer		the player object interacting
 	 *
      */
-    public void plotIsRawLogic (int nCode, PlotLand tempPlot, mco1.Farmer farmer) {
+    public void plotIsRawLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer) {
         
         switch (nCode){
         case 1: //farmer plows tile (0, 0)
@@ -70,12 +74,8 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, , mco1.Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
+    public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
         int nSeedCode;
-        Scanner sc = new Scanner (System.in);
-        // THIS IS A VERY DANGEROUS THING TO DO yung not closing the sc?
-        // IM DOING THIS BECAUSE I CANT BE ASSED TO MOVE THE COMMANDLISTS TO A PROPER DISPLAY CLASS YET AHAHAHAH
-        Display dp = new Display ();
 
         switch (nCode){
         case 2: // farmer uses shovel @ plotGrid (0,0)
@@ -83,10 +83,8 @@ public class ActionHandler {
                 break;
         case 1: // when farmer chooses to plant a seed
                 //display list of seeds and ask user which seed to plant
-                dp.seedList(); 
-                
-                nSeedCode = sc.nextInt();
-                seedChoiceLogic (nSeedCode, tempPlot, farmer, currentDay, cropBook);
+
+                //seedChoiceLogic (nSeedCode, tempPlot, farmer, currentDay, cropBook);
 
                 break;
         default:
@@ -105,7 +103,7 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void seedChoiceLogic (int nCode, PlotLand tempPlot, mco1.Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
+    public void seedChoiceLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
             switch (nCode){
             case 1:
                     // farmer does the planting
@@ -222,6 +220,28 @@ public class ActionHandler {
             System.out.println ("!!*** " + a + " ***!!\n");
     }
 
-    public void displayOptions (int x, int y) {
+    public void updateLocation (Coordinates coords) {
+        this.currentXY = coords;
+    }
+
+    public Coordinates getCurrentXY () {
+        return this.currentXY;
+    }
+
+    public void updateLogic () {
+            if (kh.spacePressed == true){
+                System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + ", " + this.currentXY.getY());
+            }
+        
+
+            if (kh.uPressed == true){
+                System.out.println("OMG! TILE SEEDED!!");
+            }
+
+            if(kh.pPressed == true){
+                System.out.println("OMG! TILE PICKED!!");
+                //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
+                //farmer.setCoins(farmer.getCoins() - 50);
+            }
     }
 }

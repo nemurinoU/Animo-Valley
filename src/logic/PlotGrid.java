@@ -12,6 +12,10 @@ public class PlotGrid {
     public ArrayList<PlotLand> getPlotGrid () {
         return this.plotGrid;
     }
+
+    public PlotLand getPlot(int i) {
+        return this.plotGrid.get(i);
+    }
   
     public void update (int currentDay) {
         for (int i = 0; i < plotGrid.size(); i++) {
@@ -19,5 +23,9 @@ public class PlotGrid {
                plotGrid.get(i).getCrop().grow(currentDay);
             }
        }
+    }
+
+    public void addPlot (PlotLand plot) {
+        this.plotGrid.add(plot);
     }
 }
