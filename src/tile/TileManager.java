@@ -35,6 +35,10 @@ public class TileManager {
         this.tileCopy = updatedCopy;
     } 
 
+    public logic.PlotGrid getTileCopy () {
+        return this.tileCopy;
+    }
+
     public void getTileImage(){
         try {
             tile[0] = new Tile(); //unplowed

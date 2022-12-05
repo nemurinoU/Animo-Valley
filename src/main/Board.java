@@ -2,11 +2,11 @@ package main;
 
 import player.*;
 import tile.TileManager;
+import logic.*;
 
 import java.awt.*;
 import javax.swing.*;
-
-import mco1.Farmer;
+import java.util.ArrayList;
 
 /***
  * <h1>Board</h1>
@@ -43,8 +43,12 @@ public class Board extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this, keyH);
-    logic.NamePrompt namePrompt = new logic.NamePrompt ();
+    ActionHandler actH = new ActionHandler(keyH);
+
+    NamePrompt namePrompt = new NamePrompt ();
     InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
+    
+
     public Collision collision = new Collision(this);
     TileManager tileMan = new TileManager(this, keyH, collision);
 
@@ -114,7 +118,27 @@ public class Board extends JPanel implements Runnable{
         this.requestFocus();
 
         // update the PlotGrid object inside the TileManager class
-       // tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
+        tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
+
+        // OH MY GOD IM SO SMART HAHAHAHHAHAH GODDAMN NOTHING CAN BEAT ME
+        /***
+         * So basically how this works is, it gets coordinates from collsion class
+         * updates the "current coordinates of the player in the actionhandler for actions"
+         * then it updates the plot based on logic done on the plot :)))
+         */
+        actH.updateLocation( collision.getCoords() );
+        //this.getPlotByCoord(actH.getCurrentXY())
+        actH.updateLogic(  );
+    }
+
+    public PlotLand getPlotByCoord (Coordinates coords) {
+        ArrayList<PlotLand> tempGrid = this.menu.getMyFarm().getFarmField().getPlotGrid();
+        PlotLand tempPlot;
+
+        /*** 
+        for (int i = 0; i < this.tempGrid.size(); i++) {
+            if (tempGrid.get(i).getCoords().isEquals(coords))
+        }*/
     }
 
     public void paintComponent(Graphics g){
@@ -128,4 +152,5 @@ public class Board extends JPanel implements Runnable{
 
         g2.dispose();
     }
+
 }

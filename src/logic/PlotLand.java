@@ -23,7 +23,7 @@ public class PlotLand {
 	* > plantedCrop is an object instance from the Crop class "planted" inside the PlotLand
 	*
 	*/
-    private int x, y;
+    private Coordinates coords;
     private boolean isOccupied = false, hasRock = false, isPlowed = false;
     private Crop plantedCrop;
 
@@ -37,13 +37,15 @@ public class PlotLand {
     */
     //Basic __INIT with NO crop yet
     public PlotLand(boolean isOccupied, boolean hasRock, boolean isPlowed, int x, int y) {
-        /*Let's be mathematically consistent with cartesian values and start with <0,0>*/
-        this.x = x;
-        this.y = y;
+        this.coords = new Coordinates (x, y);
         this.isOccupied = isOccupied;
         this.hasRock = hasRock;
         this.isPlowed = isPlowed;
         this.plantedCrop = null;
+    }
+
+    public Coordinates getCoords () {
+        return this.coords;
     }
     
 	/**
@@ -55,6 +57,13 @@ public class PlotLand {
     	return this.plantedCrop;
     }
     
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
 	/**
     * This method sets the Crop object
     * 

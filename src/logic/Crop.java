@@ -50,6 +50,10 @@ abstract class Crop {
     	this.isWithered = false;
     }
 
+    public int getCropType () {
+        return this.cropType;
+    }
+
     /** 
      * This method is called when the user uses fertilizer on the crop.
      * It is limited by the fertilizerBonus variable & the limit is increased when the farmer status is upgraded.
