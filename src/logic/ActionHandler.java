@@ -240,14 +240,14 @@ public class ActionHandler {
             tempPlot = menu.getMyFarm().getFarmField().getPlot(i);
 
             if ( tempPlot.getHasRock()) { // has rock
-                    if(kh.getPPressed() == true){ //when tile gets picked
+                    if(kh.getPickaxePressed() == true){ //when tile gets picked
                         System.out.println("OMG! TILE PICKED!!");
                         
                         farmer.mineRock (tempPlot);
                     }
             }
             else if ( !tempPlot.getIsPlowed()){ // When plot is NOT plowed
-                    if (kh.getSpacePressed() == true){
+                    if (kh.getPlowPressed() == true){
                         System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + 
                         ", " + this.currentXY.getY());
 
@@ -255,7 +255,7 @@ public class ActionHandler {
                     }
             }
 
-            if(kh.getPPressed() == true){
+            if(kh.getPickaxePressed() == true){
                 System.out.println("OMG! TILE PICKED!!");
                 //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
                 //farmer.setCoins(farmer.getCoins() - 50);

@@ -188,14 +188,14 @@ public class TileManager {
         // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
         // portion of the MVC :))
         if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
-            if (kh.getSpacePressed() == true){
+            if (kh.getPlowPressed() == true){
                 tileID[colz.getX()][colz.getY()] = 1;
             }
         }
 
         // Plant on tile
         if (tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
-            if (kh.getUPressed() == true){
+            if (kh.getSeedPressed() == true){
                 tileID[colz.getX()][colz.getY()] = 5;
             }
         }
@@ -203,7 +203,7 @@ public class TileManager {
 
         //Mine rock
         if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
-            if(kh.getPPressed() == true){
+            if(kh.getPickaxePressed() == true){
                 //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
                 tileID[colz.getX()][colz.getY()] = 0;
                 //farmer.setCoins(farmer.getCoins() - 50);
@@ -212,20 +212,20 @@ public class TileManager {
 
         //If tile is dry and plowed, water it
         if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() && tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
-            if (kh.getIPressed() == true){
+            if (kh.getWaterPressed() == true){
                 tileID[colz.getX()][colz.getY()] = 4;
             }
         }
         
         //If tile is dry and has seed, water it
         if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
-            if (kh.getIPressed() == true){
+            if (kh.getWaterPressed() == true){
                 tileID[colz.getX()][colz.getY()] = 6;
             }
         }
 
         if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() == false){
-            if (kh.getUPressed() == true){
+            if (kh.getPlowPressed() == true){
                 tileID[colz.getX()][colz.getY()] = 6;
             }
         }
