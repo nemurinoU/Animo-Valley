@@ -19,8 +19,7 @@ public class Driver {
         /***
          * 
          * Note: What this does is turn the window into a GridBag layout, which is like a grid layout but the cells
-         * can be resized to our liking. Will clean this up later. Cannot turn into a subroutine because java
-         * passes by VALUE not REFERENCE.
+         * can be resized to our liking. Will clean this up later. 
          */
         gbc.gridx = 0;
         gbc.gridy = 0;

@@ -124,9 +124,6 @@ public class Board extends JPanel implements Runnable{
         // keeps the game window focused all the time
         this.requestFocus();
 
-        // update the PlotGrid object inside the TileManager class
-        // tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
-
         /***
          * So basically how this works is, it gets coordinates from collsion class
          * updates the "current coordinates of the player in the actionhandler for actions"
@@ -140,6 +137,9 @@ public class Board extends JPanel implements Runnable{
         
         tileMan.updateTileCopy (tempGrid);
         actH.updateLogic(menu);
+
+        // update the PlotGrid object inside the TileManager class
+        tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
     }
 
     public PlotLand getPlotByCoord (Coordinates coords) {

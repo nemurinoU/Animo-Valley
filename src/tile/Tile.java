@@ -18,6 +18,7 @@ public class Tile {
     private boolean hasRock;
     private boolean isSeeded;
     private boolean isDry;
+    private boolean isHarvestable;
 
     public Tile(){
         this.hasCollision = false;
@@ -25,6 +26,7 @@ public class Tile {
         this.hasRock = false;
         this.isSeeded = false;
         this.isDry = true;
+        this.isHarvestable = false;
     }
 
     public BufferedImage getImage() {
@@ -35,6 +37,15 @@ public class Tile {
         this.image = image;
     }
 
+    public boolean isHarvestable() {
+        return this.isHarvestable;
+    }
+
+    public void setIsHarvestable (boolean isHarvestable) {
+        this.isHarvestable = isHarvestable;
+    }
+
+    
     public boolean isHasCollision() {
         return this.hasCollision;
     }
