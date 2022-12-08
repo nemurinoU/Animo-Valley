@@ -24,16 +24,16 @@ public class Collision {
         int topY = s.getY() + s.getSpriteArea().y;
         int botY = s.getY() + s.getSpriteArea().x + s.getSpriteArea().height;
 
-        int leftCol = leftX / board.tileSize;
-        int rightCol = rightX / board.tileSize;
-        int topRow = topY / board.tileSize;
-        int botRow = botY / board.tileSize;
+        int leftCol = leftX / board.getTileSize();
+        int rightCol = rightX / board.getTileSize();
+        int topRow = topY / board.getTileSize();
+        int botRow = botY / board.getTileSize();
 
         int tile1, tile2;
 
         switch (s.getDirection()){
             case "up":
-                topRow = ((s.getY() - s.getSpeed()) / board.tileSize);
+                topRow = ((s.getY() - s.getSpeed()) / board.getTileSize());
                 tile1 = board.tileMan.getTileID()[leftCol][topRow];
                 tile2 = board.tileMan.getTileID()[rightCol][topRow];
                 if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
@@ -45,7 +45,7 @@ public class Collision {
                 this.y = topRow;
                 break;
             case "down":
-                botRow = ((s.getY() + s.getSpeed()) / board.tileSize) + 1;
+                botRow = ((s.getY() + s.getSpeed()) / board.getTileSize()) + 1;
                 tile1 = board.tileMan.getTileID()[leftCol][botRow];
                 tile2 = board.tileMan.getTileID()[rightCol][botRow];
                 if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
@@ -57,7 +57,7 @@ public class Collision {
                 this.y = botRow;
                 break;
             case "left":
-                leftCol = (s.getX() - s.getSpeed()) / board.tileSize;
+                leftCol = (s.getX() - s.getSpeed()) / board.getTileSize();
                 tile1 = board.tileMan.getTileID()[leftCol][topRow];
                 tile2 = board.tileMan.getTileID()[leftCol][botRow];
                 if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
@@ -69,7 +69,7 @@ public class Collision {
                 this.y = botRow;
                 break;
             case "right":
-                rightCol = ((s.getX() + s.getSpeed()) / board.tileSize) + 1;
+                rightCol = ((s.getX() + s.getSpeed()) / board.getTileSize()) + 1;
                 tile1 = board.tileMan.getTileID()[rightCol][topRow];
                 tile2 = board.tileMan.getTileID()[rightCol][botRow];
                 if (board.tileMan.getTile()[tile1].getHasCollision() == true || 

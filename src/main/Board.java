@@ -34,11 +34,11 @@ public class Board extends JPanel implements Runnable{
     final int originalTileSize = 16;
     final int scaleSize = 3;
 
-    public final int tileSize = originalTileSize * scaleSize;
-    public final int maxScreenRow = 7;
-    public final int maxScreenCol = 12;
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
+    private final int tileSize = originalTileSize * scaleSize;
+    private final int maxScreenRow = 7;
+    private final int maxScreenCol = 12;
+    private final int screenWidth = tileSize * maxScreenCol;
+    private final int screenHeight = tileSize * maxScreenRow;
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
@@ -162,6 +162,48 @@ public class Board extends JPanel implements Runnable{
         player.draw(g2);
 
         g2.dispose();
+    }
+
+    public int getFPS() {
+        return this.FPS;
+    }
+
+    public void setFPS(int FPS) {
+        this.FPS = FPS;
+    }
+
+    public int getOriginalTileSize() {
+        return this.originalTileSize;
+    }
+
+
+    public int getScaleSize() {
+        return this.scaleSize;
+    }
+
+
+    public int getTileSize() {
+        return this.tileSize;
+    }
+
+
+    public int getMaxScreenRow() {
+        return this.maxScreenRow;
+    }
+
+
+    public int getMaxScreenCol() {
+        return this.maxScreenCol;
+    }
+
+
+    public int getScreenWidth() {
+        return this.screenWidth;
+    }
+
+
+    public int getScreenHeight() {
+        return this.screenHeight;
     }
 
 }

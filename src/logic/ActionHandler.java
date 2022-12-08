@@ -240,14 +240,14 @@ public class ActionHandler {
              * I - water plant
              */
             if ( tempPlot.getHasRock()) { // has rock
-                    if(kh.getPPressed()){ //when tile gets picked
+                    if(kh.getPickaxePressed() == true){ //when tile gets picked
                         System.out.println("OMG! TILE PICKED!!");
                         
                         farmer.mineRock (tempPlot);
                     }
             }
             else if ( !tempPlot.getIsPlowed()){ // When plot is NOT plowed
-                    if (kh.getSpacePressed()){
+                    if (kh.getPlowPressed() == true){
                         System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + 
                         ", " + this.currentXY.getY());
 
@@ -256,18 +256,18 @@ public class ActionHandler {
             }
             else if ( tempPlot.getIsPlowed()) {
                     if ( !tempPlot.getIsOccupied()){ // When plowed plot is NOT occupied (i.e., no crop on it)
-                        if (kh.getUPressed()) {
+                        if (kh.getSeedPressed()) {
                             seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), new Turnip());
                         }
                     }
                     else { //When plowed plot IS occupied, actions are: water, fertilize, shovel
-                        if (kh.getIPressed()) { //watering
+                        if (kh.getWaterPressed()) { //watering
                            farmer.waterPlant (tempPlot);
                         }
-                        else if (kh.getOPressed()) { //fertilizing
+                        else if (kh.getFertilizerPressed()) { //fertilizing
                             farmer.fertilizePlant (tempPlot);
                         }
-                        else if (kh.getYPressed()) { //shoveling
+                        else if (kh.getShovelPressed()) { //shoveling
                             farmer.digOut(tempPlot);
                         }
                         
@@ -277,12 +277,11 @@ public class ActionHandler {
                             }
                         }
                         else {
-                            if (kh.getSpacePressed()) {
+                            if (kh.getHarvestPressed()) {
                                 if (tempPlot.getCrop().getIsWithered())
                                     alertMessage ("Crop is dead. Please use shovel...");
                                 else{
                                     int readyInDays;
-
                                     readyInDays = tempPlot.getCrop().getHarvestTime() - (menu.getMyFarm().getCurrentDay()  - tempPlot.getCrop().getDayPlanted());
                                     alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");    
                                 }

@@ -35,7 +35,7 @@ public class TileManager {
         this.kh = kh;
         this.colz = colz;
         tile = new Tile[10]; //number of kinds of tiles
-        tileID = new int [board.maxScreenCol][board.maxScreenRow];
+        tileID = new int [board.getMaxScreenCol()][board.getMaxScreenRow()];
 
         getTileImage();
         loadMap("farm_map.txt");
@@ -133,15 +133,15 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col < board.maxScreenCol && row < board.maxScreenRow){
+            while (col < board.getMaxScreenCol() && row < board.getMaxScreenRow()){
                 String line = br.readLine();
-                while (col < board.maxScreenCol){
+                while (col < board.getMaxScreenCol()){
                     String id[] = line.split(" ");
                     int i = Integer.parseInt(id[col]);
                     tileID[col][row] = i;
                     col++;
                 }
-                if (col == board.maxScreenCol){
+                if (col == board.getMaxScreenCol()){
                     col = 0;
                     row++;
                 }
@@ -172,17 +172,17 @@ public class TileManager {
         int row = 0;
         int x = 0;
         int y = 0;
-        while (col < board.maxScreenCol && row < board.maxScreenRow){
+        while (col < board.getMaxScreenCol() && row < board.getMaxScreenRow()){
             int tileIndex = tileID[col][row];
-            g2.drawImage(tile[tileIndex].getImage(), x, y, board.tileSize, board.tileSize, null);
+            g2.drawImage(tile[tileIndex].getImage(), x, y, board.getTileSize(), board.getTileSize(), null);
             col++;
-            x += board.tileSize;
+            x += board.getTileSize();
 
-            if (col == board.maxScreenCol){
+            if (col == board.getMaxScreenCol()){
                 col = 0;
                 x = 0;
                 row++;
-                y += board.tileSize;
+                y += board.getTileSize();
             }
         }
 
@@ -197,45 +197,52 @@ public class TileManager {
         int i = coords.linearize();
 
         if (i != -1) {
-            if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
-                if (kh.getSpacePressed() == true){
-                    tileID[colz.getX()][colz.getY()] = 1;
-                }
-            }
-            // Plant on tile
-            else if (tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
-                if (kh.getUPressed() == true){
-                    tileID[colz.getX()][colz.getY()] = 5;
-                }
-            }
-            //Mine rock
-            else if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
-                if(kh.getPPressed() == true){
-                    //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
-                    tileID[colz.getX()][colz.getY()] = 0;
-                    //farmer.setCoins(farmer.getCoins() - 50);
-                }
-            }
+			if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
+				if (kh.getPlowPressed() == true){
+					tileID[colz.getX()][colz.getY()] = 1;
+				}
+			}
+			// Plant on tile
+			else if (tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
+				if (kh.getSeedPressed() == true){
+					tileID[colz.getX()][colz.getY()] = 5;
+				}
+			}
+			//Mine rock
+			else if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
+				if(kh.getPickaxePressed() == true){
+					//mco1.Farmer tempFarmer = this.myfarm.getFarmer();
+					tileID[colz.getX()][colz.getY()] = 0;
+					//farmer.setCoins(farmer.getCoins() - 50);
+				}
+			}
             //If tile is dry and has seed, water it
             else if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
-                if (kh.getIPressed() == true){
+                if (kh.getWaterPressed() == true){
                     tileID[colz.getX()][colz.getY()] = 6;
                 }
             }
             else if (tileCopy.getPlot(i).getCrop() == null ) {
-                if (kh.getSpacePressed()) {
+                if (kh.getHarvestPressed()) {
                     tileID[colz.getX()][colz.getY()] = 0;
                 }  
             }
-    }
-
-                /*** 
-        //If tile is dry and plowed, water it
-        if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() && tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
-            if (kh.getIPressed() == true){
-                tileID[colz.getX()][colz.getY()] = 4;
+		}
+		/***        
+        //If tile is dry and has seed, water it
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
+            if (kh.getWaterPressed() == true){
+                tileID[colz.getX()][colz.getY()] = 6;
             }
-        } */
+        }
+
+        //If tile is wet, plant seed
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() == false){
+            if (kh.getSeedPressed() == true){
+                tileID[colz.getX()][colz.getY()] = 6;
+            }
+        }
+		***/
     }
 
     
