@@ -179,6 +179,6 @@ public class Player extends Sprite{
                 break;
         }
 
-        g2.drawImage(image, getX(), getY(), board.tileSize, board.tileSize, null);
+        g2.drawImage(image, getX(), getY(), board.getTileSize(), board.getTileSize(), null);
     }
 }

@@ -33,7 +33,7 @@ public class TileManager {
         this.kh = kh;
         this.colz = colz;
         tile = new Tile[10]; //number of kinds of tiles
-        tileID = new int [board.maxScreenCol][board.maxScreenRow];
+        tileID = new int [board.getMaxScreenCol()][board.getMaxScreenRow()];
 
         getTileImage();
         loadMap("farm_map.txt");
@@ -130,15 +130,15 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
-            while (col < board.maxScreenCol && row < board.maxScreenRow){
+            while (col < board.getMaxScreenCol() && row < board.getMaxScreenRow()){
                 String line = br.readLine();
-                while (col < board.maxScreenCol){
+                while (col < board.getMaxScreenCol()){
                     String id[] = line.split(" ");
                     int i = Integer.parseInt(id[col]);
                     tileID[col][row] = i;
                     col++;
                 }
-                if (col == board.maxScreenCol){
+                if (col == board.getMaxScreenCol()){
                     col = 0;
                     row++;
                 }
@@ -169,17 +169,17 @@ public class TileManager {
         int row = 0;
         int x = 0;
         int y = 0;
-        while (col < board.maxScreenCol && row < board.maxScreenRow){
+        while (col < board.getMaxScreenCol() && row < board.getMaxScreenRow()){
             int tileIndex = tileID[col][row];
-            g2.drawImage(tile[tileIndex].getImage(), x, y, board.tileSize, board.tileSize, null);
+            g2.drawImage(tile[tileIndex].getImage(), x, y, board.getTileSize(), board.getTileSize(), null);
             col++;
-            x += board.tileSize;
+            x += board.getTileSize();
 
-            if (col == board.maxScreenCol){
+            if (col == board.getMaxScreenCol()){
                 col = 0;
                 x = 0;
                 row++;
-                y += board.tileSize;
+                y += board.getTileSize();
             }
         }
 
