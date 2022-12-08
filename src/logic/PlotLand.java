@@ -54,6 +54,13 @@ public class PlotLand {
 
         return false;
     }
+
+    public boolean isWithered () {
+        if (this.getCrop() != null)
+            return this.getCrop().getIsWithered();
+
+        return true;
+    }
     
 	/**
     * This method gets the Crop object

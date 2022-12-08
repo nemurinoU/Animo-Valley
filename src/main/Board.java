@@ -39,6 +39,7 @@ public class Board extends JPanel implements Runnable{
     private final int maxScreenCol = 12;
     private final int screenWidth = tileSize * maxScreenCol;
     private final int screenHeight = tileSize * maxScreenRow;
+    private boolean success;
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
@@ -136,7 +137,7 @@ public class Board extends JPanel implements Runnable{
         PlotGrid tempGrid = menu.getMyFarm().getFarmField();
         
         tileMan.updateTileCopy (tempGrid);
-        actH.updateLogic(menu);
+        this.success = actH.updateLogic(menu);
 
         // update the PlotGrid object inside the TileManager class
         tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
@@ -157,7 +158,7 @@ public class Board extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;
 
-        tileMan.draw(g2);
+        tileMan.draw(g2, this.success);
 
         player.draw(g2);
 

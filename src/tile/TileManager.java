@@ -115,6 +115,9 @@ public class TileManager {
             tile[7] = new Tile(); //turnip
             tile[7].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png")));
 
+            tile[8] = new Tile(); // withered
+            tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/wilted.png")));
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -165,7 +168,7 @@ public class TileManager {
      * This is the draw() method for the tiles.
      * @param g2
      */
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2, boolean success){
         //g2.drawImage(tile[0].image, 0, 0, board.tileSize, board.tileSize, null);
 
         int col = 0;
@@ -186,17 +189,31 @@ public class TileManager {
             }
         }
 
+        Coordinates coords;
+
+        // update the grid to have harvested or withered plants
+        for (int i = 0; i < tileCopy.getPlotGrid().size(); i++) {
+            coords = tileCopy.getPlot(i).getCoords();
+
+
+            if (tileCopy.getPlot(i) != null) {
+                if (tileCopy.getPlot(i).isHarvestable()) {
+                   if (tileCopy.getPlot(i).isWithered()) tileID[coords.getX()][coords.getY()] = 8; // update to withered plant
+                   else tileID[coords.getX()][coords.getY()] = 7; // update to turnip
+                }
+            }
+        }
+
         //Plow tile
         // AHHH GETS
         // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
         // portion of the MVC :))
         // plow tile
 
-        Coordinates coords;
         coords = new Coordinates (colz.getX(), colz.getY());
         int i = coords.linearize();
 
-        if (i != -1) {
+        if (i != -1 && success) {
 			if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
 				if (kh.getPlowPressed() == true){
 					tileID[colz.getX()][colz.getY()] = 1;
@@ -207,6 +224,9 @@ public class TileManager {
 				if (kh.getSeedPressed() == true){
 					tileID[colz.getX()][colz.getY()] = 5;
 				}
+                else if(kh.getShovelPressed()) {
+                    tileID[colz.getX()][colz.getY()] = 0;
+                }
 			}
 			//Mine rock
 			else if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
@@ -221,6 +241,9 @@ public class TileManager {
                 if (kh.getWaterPressed() == true){
                     tileID[colz.getX()][colz.getY()] = 6;
                 }
+                else if(kh.getShovelPressed()) {
+                    tileID[colz.getX()][colz.getY()] = 0;
+                }
             }
             else if (tileCopy.getPlot(i).getCrop() == null ) {
                 if (kh.getHarvestPressed()) {
@@ -228,6 +251,9 @@ public class TileManager {
                 }  
             }
 		}
+        else {
+            System.out.println ("Not enough money...");
+        }
 		/***        
         //If tile is dry and has seed, water it
         if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){

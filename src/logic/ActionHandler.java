@@ -105,16 +105,20 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop) {
+    public boolean seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop) {
             // farmer does the planting
             // farmer USES plotGrid given coordinate reference
             // farmer USES cropBook to copy TURNIP info and put into plot
+            boolean success = false;
+
             if (tempPlot.getIsOccupied())
                 System.out.println ("You cannot plant on an occupied tile!\n");
             else{
-                farmer.plantCrop(tempPlot, crop, currentDay);
+                success = farmer.plantCrop(tempPlot, crop, currentDay);
                 alertMessage ("~~~ Crop planted! ~~~");
             }
+
+            return success;
     }
 	
 	/**
@@ -221,11 +225,11 @@ public class ActionHandler {
         return this.currentXY;
     }
 
-    public void updateLogic (InfoBar menu) {
+    public boolean updateLogic (InfoBar menu) {
         PlotLand tempPlot;
         Farmer farmer = menu.getMyFarm().getFarmer();
         int i = this.currentXY.linearize();
-
+        boolean success = true;
         
 
         if (i != -1) {
@@ -243,7 +247,7 @@ public class ActionHandler {
                     if(kh.getPickaxePressed() == true){ //when tile gets picked
                         System.out.println("OMG! TILE PICKED!!");
                         
-                        farmer.mineRock (tempPlot);
+                        success = farmer.mineRock (tempPlot);
                     }
             }
             else if ( !tempPlot.getIsPlowed()){ // When plot is NOT plowed
@@ -252,27 +256,32 @@ public class ActionHandler {
                         ", " + this.currentXY.getY());
 
                         farmer.plowLand(tempPlot);
+                        success = true;
                     }
             }
             else if ( tempPlot.getIsPlowed()) {
                     if ( !tempPlot.getIsOccupied()){ // When plowed plot is NOT occupied (i.e., no crop on it)
                         if (kh.getSeedPressed()) {
-                            seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), new Turnip());
+                            success = seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), new Turnip());
+                        }
+                        else if (kh.getShovelPressed()) { //shoveling
+                            success = farmer.digOut(tempPlot);
                         }
                     }
                     else { //When plowed plot IS occupied, actions are: water, fertilize, shovel
                         if (kh.getWaterPressed()) { //watering
                            farmer.waterPlant (tempPlot);
+                           success = true;
                         }
                         else if (kh.getFertilizerPressed()) { //fertilizing
-                            farmer.fertilizePlant (tempPlot);
+                            success = farmer.fertilizePlant (tempPlot);
                         }
                         else if (kh.getShovelPressed()) { //shoveling
-                            farmer.digOut(tempPlot);
+                            success = farmer.digOut(tempPlot);
                         }
                         
-                        if (tempPlot.getCrop().getIsHarvestable()) { // harvesting the plant
-                            if (kh.getSpacePressed()) {
+                        if (tempPlot.getCrop() !=null && tempPlot.getCrop().getIsHarvestable()) { // harvesting the plant
+                            if (kh.getHarvestPressed()) {
                                 farmer.harvestCrop(tempPlot);
                             }
                         }
@@ -289,9 +298,9 @@ public class ActionHandler {
                         }
                     }
             }
-            
-
         }
+
+        return success;
     }
 
     public void updateMyFarm (MyFarm myfarm) {

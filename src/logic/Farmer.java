@@ -59,9 +59,11 @@ public class Farmer {
     * 
     * @param plot		the tile in question to be interacted with
     */
-	public void digOut (PlotLand plot) {
+	public boolean digOut (PlotLand plot) {
+		if (this.getCoins() - 7 < 5) return false;
+		
 		plot.setIsOccupied (false);
-		plot.setIsPlowed ((false));
+		plot.setIsPlowed (false);
 		plot.delCrop ();
 		
 		// digging costs 7 coins
@@ -70,6 +72,8 @@ public class Farmer {
 		// farmer earns 2xp from shoveling
 		this.setXp (this.getXp() + 2);
 		System.out.println("~~~ Shovel used! ~~~\n");
+
+		return true;
 	}
 	
 	/**
@@ -77,7 +81,9 @@ public class Farmer {
     * 
     * @param plot		the tile in question to be interacted with
     */
-	public void mineRock (PlotLand plot) {
+	public boolean mineRock (PlotLand plot) {
+		if (this.getCoins() - 50 < 5) return false;
+
 		plot.setIsOccupied (false);
 		plot.setHasRock (false);
 		
@@ -86,6 +92,8 @@ public class Farmer {
 		
 		// farmer earns 15 xp from pickaxe
 		this.setXp (this.getXp() + 15);
+
+		return true;
 	}
 	
 	/**
@@ -107,7 +115,9 @@ public class Farmer {
     * 
     * @param plot		the tile in question to be interacted with
     */
-	public void fertilizePlant (PlotLand plot) {
+	public boolean fertilizePlant (PlotLand plot) {
+		if (this.getCoins() - 10 < 5) return false;
+
 		// increment the amt of times fertilized a crop
 		// inside a plot
 		plot.getCrop ().fertilizeSelf ( this.getFertilizerBonusLimitIncrease ( this.getFarmerType ()));		
@@ -118,6 +128,8 @@ public class Farmer {
 		// farmer loses 10 coins per fertilize
 		this.setCoins (this.getCoins () - 10);
 		System.out.println("~~~ Fertilizer used! ~~~\n");
+
+		return true;
 	}
 	
 	/**
@@ -142,7 +154,8 @@ public class Farmer {
 	* @param seedling	the Crop object to be put inside plot
 	* @param currentDay	what the current game day is for growing reference
     */
-	public void plantCrop (PlotLand plot, Crop seedling, int currentDay) {
+	public boolean plantCrop (PlotLand plot, Crop seedling, int currentDay) {
+		if (this.getCoins() - seedling.getSeedCost () < 5) return false;
 		//activate the crop so that it's not a dictionary type anymore
 		seedling.activateCrop (currentDay);
 
@@ -152,6 +165,8 @@ public class Farmer {
 		//put seedling inside plot, occupied is now true
 		plot.setCrop((seedling));
 		plot.setIsOccupied (true);
+
+		return true;
 	}
 	
 	/**
@@ -169,7 +184,7 @@ public class Farmer {
 		max = plot.getCrop().getMaxProduce();
 		
 		plot.setIsOccupied (false);
-		plot.setIsPlowed ((false));
+		plot.setIsPlowed (false);
 		
 		// randomize harvest yield
 		nYield = random.nextInt (max - min + 1) + min;
