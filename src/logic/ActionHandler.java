@@ -272,7 +272,7 @@ public class ActionHandler {
                         }
                         
                         if (tempPlot.getCrop().getIsHarvestable()) { // harvesting the plant
-                            if (kh.getSpacePressed()) {
+                            if (kh.getHarvestPressed()) {
                                 farmer.harvestCrop(tempPlot);
                             }
                         }
