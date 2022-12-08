@@ -85,7 +85,8 @@ public class InfoBar extends JPanel {
 
         statsPan.add(new JLabel("EXP: " + tempFarmer.getXp() + " / " + (tempFarmer.getLvl() + 1) * 100));
 
-        statsPan.add(new JLabel("BAL: " + tempFarmer.getCoins() + " coins"));
+        //statsPan.add(new JLabel("BAL: " + tempFarmer.getCoins() + " coins"));
+        statsPan.add(new JLabel(String.format("BAL %.2f coins", tempFarmer.getCoins())));
 
         statsPan.setVisible(true);
         statsPan.revalidate();

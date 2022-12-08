@@ -105,7 +105,7 @@ public class TileManager {
             tile[4].setIsDry(false);
 
             tile[5] = new Tile(); //seedling
-            tile[5].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/tset.png")));
+            tile[5].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png")));
             tile[5].setIsSeeded(true);
 
             tile[6] = new Tile(); //watered, plowed & seeded
@@ -133,8 +133,11 @@ public class TileManager {
             tile[13] = new Tile(); //mango-tree
             tile[13].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/mango-tree.png")));
 
-            tile[14] = new Tile(); //sunflower
+            tile[14] = new Tile(); //apple-tree
             tile[14].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/apple-tree.png")));
+
+            tile[15] = new Tile(); //dead
+            tile[15].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/dead.png")));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -213,6 +216,15 @@ public class TileManager {
         // portion of the MVC :))
         // plow tile
 
+        /*
+         * 1 plow
+         * 2 water
+         * 3 fertilize
+         * 4 pickaxe
+         * 5 shovel
+         * 0 seed
+         * space harvest
+         */
         Coordinates coords;
         coords = new Coordinates (colz.getX(), colz.getY());
         int i = coords.linearize();
