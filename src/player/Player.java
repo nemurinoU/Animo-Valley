@@ -2,6 +2,7 @@ package player;
 
 import main.Board;
 import main.KeyHandler;
+import main.Collision;
 import java.awt.*;
 
 import java.awt.image.BufferedImage;
@@ -12,34 +13,44 @@ public class Player extends Sprite{
 
     Board board;
     KeyHandler keyH;
+    Collision colz;
 
-    public Player(Board board, KeyHandler keyH){
-        
+    /**
+     * This constructor sets the default attributes to be used in other classes
+     * @param board
+     * @param keyH
+     * @param colz
+     */
+    public Player(Board board, KeyHandler keyH, Collision colz){
         this.board = board;
         this.keyH = keyH;
+        this.colz = colz;
 
-        spriteArea = new Rectangle(8, 16, 32, 32);
+        setSpriteArea(new Rectangle(8, 16, 32, 32));
 
         defaultValues();
         getPlayerSprite();
-
     }
 
+    /**
+     * This method gets the player sprite images.
+     * It uses the try-catch statement because if there is no sprite to be set, it would return an error
+     */
     public void getPlayerSprite(){
         try {
             
-            down0 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile001.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile000.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile002.png"));
-            left0 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile016.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile015.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile017.png"));
-            right0 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile031.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile030.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile032.png"));
-            up0 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile046.png"));
-            up1 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile045.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile047.png"));
+            setDown0(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile001.png")));
+            setDown1(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile000.png")));
+            setDown2(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile002.png")));
+            setLeft0(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile016.png")));
+            setLeft1(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile015.png")));
+            setLeft2(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile017.png")));
+            setRight0(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile031.png")));
+            setRight1(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile030.png")));
+            setRight2(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile032.png")));
+            setUp0(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile046.png")));
+            setUp1(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile045.png")));
+            setUp2(ImageIO.read(getClass().getResourceAsStream("spliced_sprites/tile047.png")));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -47,103 +58,127 @@ public class Player extends Sprite{
         
     }
 
+    /**
+     * This method sets the default values of the player.
+     */
     public void defaultValues(){
-        x = 250;
-        y = 100;
-        speed = 4;
-        direction = "down";
+        //These two set the starting position of the player on the farm.
+        setX(250);
+        setY(100);
+        //This is the speed of the player
+        setSpeed(4);;
+        //The player looks down by default
+        setDirection("down");
     }
 
+    /**
+     * This update() method is called every frame, whenever the player moves.
+     * If the player presses W, they go up.
+     * If the player presses A, they go left. 
+     * If the player presses D, they go right. 
+     * If the player presses S, they go down.
+     */
     public void update(){
         
-        if (keyH.upPressed == true|| keyH.downPressed ==true|| 
-        keyH.leftPressed ==true|| keyH.rightPressed==true){
+        if (keyH.getUpPressed() == true|| keyH.getDownPressed() == true|| 
+        keyH.getLeftPressed() ==true|| keyH.getRightPressed() == true){
             
-            if (keyH.upPressed == true){
-                direction = "up";
+            if (keyH.getUpPressed() == true){
+                setDirection("up");
                 //y -= speed;
             }
-            else if (keyH.downPressed == true){
-                direction = "down";
+            else if (keyH.getDownPressed() == true){
+                setDirection("down");
                 //y += speed;
             }
-            else if (keyH.leftPressed == true){
-                direction = "left";
+            else if (keyH.getLeftPressed() == true){
+                setDirection("left");
                 //x -= speed;
             }
-            else if (keyH.rightPressed == true){
-                direction = "right";
+            else if (keyH.getRightPressed() == true){
+                setDirection("right");
                 //x += speed;
             }
     
-            collisionOn = false;
-            board.collision.checkTile(this);
+            //There is no collision by default
+            setCollisionOn(false);
+            //But it checks for collision i.e. the trees
+            colz.checkTile(this);
 
-            if (collisionOn == false){
-                switch (direction){
+            //This is for the direction of the player
+            if (getCollisionOn() == false){
+                switch (getDirection()){
                     case "up":
-                        y -= speed;
+                        //y -= speed;
+                        setY(getY() - getSpeed());
                         break;
                     case "down":
-                        y += speed;
+                        //y += speed;
+                        setY(getY() + getSpeed());
                         break;
                     case "left":
-                        x -= speed;
+                        //x -= speed;
+                        setX(getX() - getSpeed());
                         break;
                     case "right":
-                        x += speed;
+                        //x += speed;
+                        setX(getX() + getSpeed());
                         break;
                 }
             }
 
-            counter++;
-            if (counter > 10){
-                if (spriteID == 0){
-                    spriteID = 1;
+            //This is the animation for the walking
+            setCounter(getCounter() + 1);
+            if (getCounter() > 10){
+                if (getSpriteID() == 0){
+                    setSpriteID(1);
                 }
-                else if (spriteID == 1){
-                    spriteID = 2;
+                else if (getSpriteID() == 1){
+                    setSpriteID(2);
                 }
-                else if (spriteID == 2){
-                    spriteID = 1;
+                else if (getSpriteID() == 2){
+                    setSpriteID(1);
                 }
                 
-                counter = 0;
+                setCounter(0);;
             }
         }
         else{
-            spriteID = 0;
+            setSpriteID(0);
         }
     }
+    
+    /** 
+     * This is the draw() method used in the update() method in Board.java
+     * @param g2 The 2D graphics to be drawn
+     */
     public void draw(Graphics2D g2){
-        /*g2.setColor(Color.white);
-        g2.fillRect(x, y, board.tileSize, board.tileSize);*/
 
         BufferedImage image = null;
 
-        switch (direction){
+        switch (getDirection()){
             case "up":
-                if(spriteID == 0)image = up0;
-                if (spriteID == 1)image = up1;
-                if (spriteID == 2)image = up2;
+                if(getSpriteID() == 0)image = getUp0();
+                if (getSpriteID() == 1)image = getUp1();
+                if (getSpriteID() == 2)image = getUp2();
                 break;
             case "down":
-                if(spriteID == 0)image = down0;
-                if (spriteID == 1)image = down1;
-                if (spriteID == 2)image = down2;
+                if(getSpriteID() == 0)image = getDown0();
+                if (getSpriteID() == 1)image = getDown1();
+                if (getSpriteID() == 2)image = getDown2();
                 break;
             case "left":
-                if(spriteID == 0)image = left0;
-                if (spriteID == 1)image = left1;
-                if (spriteID == 2)image = left2;
+                if(getSpriteID() == 0)image = getLeft0();
+                if (getSpriteID() == 1)image = getLeft1();
+                if (getSpriteID() == 2)image = getLeft2();
                 break;
             case "right":
-                if(spriteID == 0)image = right0; 
-                if (spriteID == 1)image = right1;
-                if (spriteID == 2)image = right2;
+                if(getSpriteID() == 0)image = getRight0();
+                if (getSpriteID() == 1)image = getRight1();
+                if (getSpriteID() == 2)image = getRight2();
                 break;
         }
 
-        g2.drawImage(image, x, y, board.tileSize, board.tileSize, null);
+        g2.drawImage(image, getX(), getY(), board.tileSize, board.tileSize, null);
     }
 }

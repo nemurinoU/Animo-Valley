@@ -42,14 +42,15 @@ public class Board extends JPanel implements Runnable{
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyH);
+    Collision collision = new Collision(this);
+    Player player = new Player(this, keyH, collision);
     ActionHandler actH = new ActionHandler(keyH);
 
     NamePrompt namePrompt = new NamePrompt ();
     InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
     
 
-    public Collision collision = new Collision(this);
+    
     TileManager tileMan = new TileManager(this, keyH, collision);
 
     //Player settings
@@ -120,7 +121,7 @@ public class Board extends JPanel implements Runnable{
         // update the PlotGrid object inside the TileManager class
         tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
 
-        // OH MY GOD IM SO SMART HAHAHAHHAHAH GODDAMN NOTHING CAN BEAT ME
+        // OH MY GOD IM SO SMART HAHAHAHHAHAH GODDAMN NOTHING CAN BEAT ME LMFAOO u right this works
         /***
          * So basically how this works is, it gets coordinates from collsion class
          * updates the "current coordinates of the player in the actionhandler for actions"

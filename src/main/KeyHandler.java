@@ -4,8 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
-    public boolean spacePressed, uPressed, pPressed, iPressed;
+    private boolean upPressed, downPressed, leftPressed, rightPressed;
+    private boolean spacePressed, uPressed, pPressed, iPressed;
     @Override
     public void keyTyped(KeyEvent e){
 
@@ -84,4 +84,69 @@ public class KeyHandler implements KeyListener{
             iPressed = false;
         }
     }
+
+    public boolean getUpPressed() {
+        return this.upPressed;
+    }
+
+    public void setUpPressed(boolean upPressed) {
+        this.upPressed = upPressed;
+    }
+
+    public boolean getDownPressed() {
+        return this.downPressed;
+    }
+
+    public void setDownPressed(boolean downPressed) {
+        this.downPressed = downPressed;
+    }
+
+    public boolean getLeftPressed() {
+        return this.leftPressed;
+    }
+
+    public void setLeftPressed(boolean leftPressed) {
+        this.leftPressed = leftPressed;
+    }
+
+    public boolean getRightPressed() {
+        return this.rightPressed;
+    }
+
+    public void setRightPressed(boolean rightPressed) {
+        this.rightPressed = rightPressed;
+    }
+
+    public boolean getSpacePressed() {
+        return this.spacePressed;
+    }
+
+    public void setSpacePressed(boolean spacePressed) {
+        this.spacePressed = spacePressed;
+    }
+
+    public boolean getUPressed() {
+        return this.uPressed;
+    }
+
+    public void setUPressed(boolean uPressed) {
+        this.uPressed = uPressed;
+    }
+
+    public boolean getPPressed() {
+        return this.pPressed;
+    }
+
+    public void setPPressed(boolean pPressed) {
+        this.pPressed = pPressed;
+    }
+
+    public boolean getIPressed() {
+        return this.iPressed;
+    }
+
+    public void setIPressed(boolean iPressed) {
+        this.iPressed = iPressed;
+    }
+
 }

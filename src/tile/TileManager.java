@@ -15,69 +15,92 @@ public class TileManager {
     KeyHandler kh;
     Collision colz;
     Farmer farmer;
-    public Tile[] tile;
-    public int tileMapID[][];
+    private Tile[] tile;
+    private int[][] tileID;
     logic.PlotGrid tileCopy;
 
+    /**
+     * This constructor is invoked when a TileManager object is created.
+     * @param board The board or view class
+     * @param kh The key handler class where key inputs are modified
+     * @param colz The collision class that checks for collision on the tiles
+     */
     public TileManager(Board board, KeyHandler kh, Collision colz){
         this.board = board;
         this.kh = kh;
         this.colz = colz;
         tile = new Tile[10]; //number of kinds of tiles
-        tileMapID = new int [board.maxScreenCol][board.maxScreenRow];
+        tileID = new int [board.maxScreenCol][board.maxScreenRow];
 
         getTileImage();
         loadMap("farm_map.txt");
 
     }
 
+    
+    /** 
+     * This method updates the tiles for every instance
+     * @param updatedCopy The updated copy of the tile
+     */
     public void updateTileCopy (logic.PlotGrid updatedCopy) {
         this.tileCopy = updatedCopy;
     } 
 
+    
+    /** 
+     * @return PlotGrid
+     */
     public logic.PlotGrid getTileCopy () {
         return this.tileCopy;
     }
 
+    /**
+     * This method is used to get the tile images such as the trees, rocks, crops, and plot lands.
+     */
     public void getTileImage(){
         try {
             tile[0] = new Tile(); //unplowed
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("tile_images/grass.png"));
-            tile[0].isUnplowed = true;
+            tile[0].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/grass.png")));
+            tile[0].setIsUnplowed(true);
 
             tile[1] = new Tile(); //plowed
-            tile[1].image = ImageIO.read(getClass().getResourceAsStream("tile_images/plowed.png"));
-            
-            tile[1].isPlowed = true;
+            tile[1].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/plowed.png"))); 
+            //tile[1].isPlowed = true;
+            tile[1].setIsPlowed(true);
 
             tile[2] = new Tile(); //tree
-            tile[2].image = ImageIO.read(getClass().getResourceAsStream("tile_images/tree.png"));
-            tile[2].hasCollision = true;
+            tile[2].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/tree.png")));
+            tile[2].setHasCollision(true);
 
             tile[3] = new Tile(); //rock
-            tile[3].image = ImageIO.read(getClass().getResourceAsStream("tile_images/rock.png"));
-            tile[3].hasRock = true;
+            tile[3].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/rock.png")));
+            tile[3].setHasRock(true);
 
             tile[4] = new Tile(); //watered & plowed
-            tile[4].image = ImageIO.read(getClass().getResourceAsStream("tile_images/water_unplowed.png"));
-            tile[4].isDry = false;
+            tile[4].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/water_unplowed.png")));
+            tile[4].setIsDry(false);
 
             tile[5] = new Tile(); //seedling
-            tile[5].image = ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png"));
-            tile[5].isSeeded = true;
+            tile[5].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png")));
+            tile[5].setIsSeeded(true);
 
             tile[6] = new Tile(); //watered, plowed & seeded
-            tile[6].image = ImageIO.read(getClass().getResourceAsStream("tile_images/water_seeded.png"));
-            tile[6].isDry = false;
+            tile[6].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/water_seeded.png")));
+            tile[6].setIsDry(false);
 
             tile[7] = new Tile(); //turnip
-            tile[7].image = ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png"));
+            tile[7].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png")));
 
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    
+    /** 
+     * This method is used to load the map automatically by painting the Board with the sprites breadth-first.
+     * @param fileName The filename of the map in .txt format
+     */
     public void loadMap(String fileName){
         try {
             InputStream is = getClass().getResourceAsStream(fileName);
@@ -91,7 +114,7 @@ public class TileManager {
                 while (col < board.maxScreenCol){
                     String id[] = line.split(" ");
                     int i = Integer.parseInt(id[col]);
-                    tileMapID[col][row] = i;
+                    tileID[col][row] = i;
                     col++;
                 }
                 if (col == board.maxScreenCol){
@@ -99,11 +122,11 @@ public class TileManager {
                     row++;
                 }
 
-                //rock generator
+                //rock generator (randomized)
                 for (int i = 10; i < 15; i++){
                     int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
                     int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
-                    tileMapID[randX][randY] = 3;
+                    tileID[randX][randY] = 3;
                 }
                 
             }
@@ -113,6 +136,11 @@ public class TileManager {
         }
     }
     
+    
+    /** 
+     * This is the draw() method for the tiles.
+     * @param g2
+     */
     public void draw(Graphics2D g2){
         //g2.drawImage(tile[0].image, 0, 0, board.tileSize, board.tileSize, null);
 
@@ -121,8 +149,8 @@ public class TileManager {
         int x = 0;
         int y = 0;
         while (col < board.maxScreenCol && row < board.maxScreenRow){
-            int tileID = tileMapID[col][row];
-            g2.drawImage(tile[tileID].image, x, y, board.tileSize, board.tileSize, null);
+            int tileIndex = tileID[col][row];
+            g2.drawImage(tile[tileIndex].getImage(), x, y, board.tileSize, board.tileSize, null);
             col++;
             x += board.tileSize;
 
@@ -138,47 +166,84 @@ public class TileManager {
         // AHHH GETS
         // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
         // portion of the MVC :))
-        if (tile[tileMapID[colz.x][colz.y]].isUnplowed){
-            if (kh.spacePressed == true){
-                tileMapID[colz.x][colz.y] = 1;
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
+            if (kh.getSpacePressed() == true){
+                tileID[colz.getX()][colz.getY()] = 1;
             }
         }
 
         // Plant on tile
-        if (tile[tileMapID[colz.x][colz.y]].isPlowed){
-            if (kh.uPressed == true){
-                tileMapID[colz.x][colz.y] = 5;
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
+            if (kh.getUPressed() == true){
+                tileID[colz.getX()][colz.getY()] = 5;
             }
         }
         
 
         //Mine rock
-        if (tile[tileMapID[colz.x][colz.y]].hasRock){
-            if(kh.pPressed == true){
+        if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
+            if(kh.getPPressed() == true){
                 //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
-                tileMapID[colz.x][colz.y] = 0;
+                tileID[colz.getX()][colz.getY()] = 0;
                 //farmer.setCoins(farmer.getCoins() - 50);
             }
         }
 
         //If tile is dry and plowed, water it
-        if (tile[tileMapID[colz.x][colz.y]].isDry && tile[tileMapID[colz.x][colz.y]].isPlowed){
-            if (kh.iPressed == true){
-                tileMapID[colz.x][colz.y] = 4;
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() && tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
+            if (kh.getIPressed() == true){
+                tileID[colz.getX()][colz.getY()] = 4;
             }
         }
         
         //If tile is dry and has seed, water it
-        if (tile[tileMapID[colz.x][colz.y]].isSeeded){
-            if (kh.iPressed == true){
-                tileMapID[colz.x][colz.y] = 6;
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
+            if (kh.getIPressed() == true){
+                tileID[colz.getX()][colz.getY()] = 6;
             }
         }
 
-        if (tile[tileMapID[colz.x][colz.y]].isDry == false){
-            if (kh.uPressed == true){
-                tileMapID[colz.x][colz.y] = 6;
+        if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() == false){
+            if (kh.getUPressed() == true){
+                tileID[colz.getX()][colz.getY()] = 6;
             }
         }
     }
+
+    
+    /** 
+     * This method gets the tile.
+     * @return Tile[]
+     */
+    public Tile[] getTile() {
+        return this.tile;
+    }
+
+    
+    /** 
+     * This method, when called, updates the tile.
+     * @param tile
+     */
+    public void setTile(Tile[] tile) {
+        this.tile = tile;
+    }
+
+    
+    /** 
+     * This method gets the tile ID
+     * @return int[][] The tile ID in 2D array form [row][col]
+     */
+    public int[][] getTileID() {
+        return this.tileID;
+    }
+
+    
+    /** 
+     * This method, when called, updates the tile ID
+     * @param tileMapID The tile ID in 2D array form [row][col]
+     */
+    public void setTileID(int[][] tileMapID) {
+        this.tileID = tileMapID;
+    }
+
 }

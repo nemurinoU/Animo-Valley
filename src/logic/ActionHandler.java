@@ -229,16 +229,16 @@ public class ActionHandler {
     }
 
     public void updateLogic () {
-            if (kh.spacePressed == true){
+            if (kh.getSpacePressed() == true){
                 System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + ", " + this.currentXY.getY());
             }
         
 
-            if (kh.uPressed == true){
+            if (kh.getUPressed() == true){
                 System.out.println("OMG! TILE SEEDED!!");
             }
 
-            if(kh.pPressed == true){
+            if(kh.getPPressed() == true){
                 System.out.println("OMG! TILE PICKED!!");
                 //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
                 //farmer.setCoins(farmer.getCoins() - 50);
