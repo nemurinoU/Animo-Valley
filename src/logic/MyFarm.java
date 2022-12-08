@@ -26,6 +26,10 @@ public class MyFarm {
     public PlotGrid getFarmField() {
         return this.farmField;
     }
+
+    public void setFarmField (PlotGrid tempGrid) {
+        this.farmField = tempGrid;
+    }
     
     public void incrementCurrentDay () {
         this.currentDay++;

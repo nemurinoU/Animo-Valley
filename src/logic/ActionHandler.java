@@ -2,6 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 import main.KeyHandler;
+import main.InfoBar;
 
 /**
  * <h1> ActionHandler </h1>
@@ -19,6 +20,7 @@ import main.KeyHandler;
 public class ActionHandler {
     KeyHandler kh;
     Coordinates currentXY;
+    MyFarm farm;
 
 	/**
      * This constructor method creates a new instance of ActionHandler
@@ -228,20 +230,47 @@ public class ActionHandler {
         return this.currentXY;
     }
 
-    public void updateLogic () {
-            if (kh.spacePressed == true){
-                System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + ", " + this.currentXY.getY());
-            }
-        
+    public void updateLogic (InfoBar menu) {
+        PlotLand tempPlot;
+        Farmer farmer = menu.getMyFarm().getFarmer();
+        int i = this.currentXY.linearize();
 
-            if (kh.uPressed == true){
-                System.out.println("OMG! TILE SEEDED!!");
-            }
+        if (i != -1) {
+            // get the plot the player is looking at
+            tempPlot = menu.getMyFarm().getFarmField().getPlot(i);
 
-            if(kh.pPressed == true){
-                System.out.println("OMG! TILE PICKED!!");
-                //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
-                //farmer.setCoins(farmer.getCoins() - 50);
+            if ( tempPlot.getHasRock()) { // has rock
+                    if(kh.pPressed == true){ //when tile gets picked
+                        System.out.println("OMG! TILE PICKED!!");
+                        
+                        farmer.mineRock (tempPlot);
+                    }
             }
+            else if ( !tempPlot.getIsPlowed()){ // When plot is NOT plowed
+                    if (kh.spacePressed == true){
+                        System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + 
+                        ", " + this.currentXY.getY());
+
+                        farmer.plowLand(tempPlot);
+                    }
+            }
+            else if (tempPlot.getIsPlowed()){ // When plot is plowed
+                
+                    if ( !tempPlot.getIsOccupied()){ // When plowed plot is NOT occupied (i.e., no crop on it)
+                        
+                    }
+                    else { //When plowed plot IS occupied, actions are: water, fertilize, shovel
+                    
+                    }
+            
+            }
+            // update info when a tile is plowed
+        }
     }
+
+    public void updateMyFarm (MyFarm myfarm) {
+        this.farm = myfarm;
+    }
+
+    
 }

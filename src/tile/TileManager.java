@@ -1,6 +1,9 @@
 package tile;
 
 import javax.imageio.ImageIO;
+
+import logic.PlotLand;
+
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -28,9 +31,28 @@ public class TileManager {
 
         getTileImage();
         loadMap("farm_map.txt");
-
     }
 
+    // This inputs the textfile input into the PlotGrid class
+    public logic.PlotGrid updateTileGrid (main.InfoBar menu) {
+        logic.PlotGrid tempGrid = menu.getMyFarm().getFarmField();
+        logic.PlotLand tempPlot = new PlotLand(false, false, false, 0, 0);
+
+        for (int i = 1; i <= 5; i++) {
+            for (int j = 1; j <= 10; j++) {
+                if (this.tileMapID[j][i] == 3) 
+                    tempPlot = new logic.PlotLand(false, true, false, j, i);
+                else if (this.tileMapID[j][i] == 0) 
+                    tempPlot = new logic.PlotLand(false, false, false, j, i);
+                
+                tempGrid.addPlot (tempPlot);
+            }
+        }
+
+        return tempGrid;
+    }
+
+    // this updates the local copy of the PlotGrid
     public void updateTileCopy (logic.PlotGrid updatedCopy) {
         this.tileCopy = updatedCopy;
     } 
@@ -102,7 +124,7 @@ public class TileManager {
                 //rock generator
                 for (int i = 10; i < 15; i++){
                     int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
-                    int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
+                    int randY = (int)Math.floor(Math.random()*(5-1+1)+1);
                     tileMapID[randX][randY] = 3;
                 }
                 
