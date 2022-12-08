@@ -47,6 +47,13 @@ public class PlotLand {
     public Coordinates getCoords () {
         return this.coords;
     }
+
+    public boolean isHarvestable() {
+        if (this.getCrop() != null)
+            return this.getCrop().getIsHarvestable();
+
+        return false;
+    }
     
 	/**
     * This method gets the Crop object

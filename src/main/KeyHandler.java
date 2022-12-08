@@ -5,12 +5,13 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
     private boolean upPressed, downPressed, leftPressed, rightPressed;
+
     private boolean plowPressed, waterPressed, fertilizerPressed, pickaxePressed, shovelPressed, harvestPressed;
     private boolean seedPressed;
 
     @Override
     public void keyTyped(KeyEvent e){
-
+        
     }
 
     @Override
@@ -109,7 +110,9 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_0){
             seedPressed = false;
         }
+
     }
+
 
     public boolean getUpPressed() {
         return this.upPressed;
@@ -150,5 +153,9 @@ public class KeyHandler implements KeyListener{
     public boolean getSeedPressed() {
         return this.seedPressed;
     }
+	
+	public boolean getHarvestPressed() {
+		return this.harvestPressed;
+	}
 
 }

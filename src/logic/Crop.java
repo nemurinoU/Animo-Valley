@@ -50,6 +50,18 @@ abstract class Crop {
     	this.isWithered = false;
     }
 
+    /** 
+     * This method is called when the user plants a seed, thus activating the crop with default values.
+     * @param currentDay The current day of the game.
+     */
+    public void activateCrop (int currentDay) {
+    	this.dayPlanted = currentDay;
+    	this.isHarvestable = false;
+    	this.isWithered = false;
+    	this.timesWatered = 0;
+    	this.timesFertilized = 0;
+    }
+
     public int getCropType () {
         return this.cropType;
     }
@@ -75,6 +87,7 @@ abstract class Crop {
     	if (this.getTimesWatered () < this.getWaterBonus () + waterBonusIncrease)
     		    this.timesWatered++;
     }
+    
     
     
     /** 

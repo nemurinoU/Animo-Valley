@@ -105,24 +105,15 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void seedChoiceLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer, int currentDay, ArrayList<Crop> cropBook) {
-            switch (nCode){
-            case 1:
-                    // farmer does the planting
-                    // farmer USES plotGrid given coordinate reference
-                    // farmer USES cropBook to copy TURNIP info and put into plot
-                    // nCode - 1 because seedList() starts at 1
-                    if (tempPlot.getIsOccupied())
-                        System.out.println ("You cannot plant on an occupied tile!\n");
-                    else{
-                        farmer.plantCrop(tempPlot, cropBook.get(nCode - 1), currentDay);
-                        alertMessage ("~~~ Turnip planted! ~~~");
-                    }
-                        
-                    break;
-            default:
-                    errorMessage ("Seed not found!");
-                    break;
+    public void seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop) {
+            // farmer does the planting
+            // farmer USES plotGrid given coordinate reference
+            // farmer USES cropBook to copy TURNIP info and put into plot
+            if (tempPlot.getIsOccupied())
+                System.out.println ("You cannot plant on an occupied tile!\n");
+            else{
+                farmer.plantCrop(tempPlot, crop, currentDay);
+                alertMessage ("~~~ Crop planted! ~~~");
             }
     }
 	
@@ -235,10 +226,19 @@ public class ActionHandler {
         Farmer farmer = menu.getMyFarm().getFarmer();
         int i = this.currentXY.linearize();
 
+        
+
         if (i != -1) {
             // get the plot the player is looking at
-            tempPlot = menu.getMyFarm().getFarmField().getPlot(i);
 
+            tempPlot = menu.getMyFarm().getFarmField().getPlot(i);
+            /***
+             * KEYBOARD CONTROLS
+             * P - pickaxe
+             * SPACE - plow
+             * U - plant seed
+             * I - water plant
+             */
             if ( tempPlot.getHasRock()) { // has rock
                     if(kh.getPickaxePressed() == true){ //when tile gets picked
                         System.out.println("OMG! TILE PICKED!!");
@@ -254,13 +254,43 @@ public class ActionHandler {
                         farmer.plowLand(tempPlot);
                     }
             }
-
-            if(kh.getPickaxePressed() == true){
-                System.out.println("OMG! TILE PICKED!!");
-                //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
-                //farmer.setCoins(farmer.getCoins() - 50);
+            else if ( tempPlot.getIsPlowed()) {
+                    if ( !tempPlot.getIsOccupied()){ // When plowed plot is NOT occupied (i.e., no crop on it)
+                        if (kh.getSeedPressed()) {
+                            seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), new Turnip());
+                        }
+                    }
+                    else { //When plowed plot IS occupied, actions are: water, fertilize, shovel
+                        if (kh.getWaterPressed()) { //watering
+                           farmer.waterPlant (tempPlot);
+                        }
+                        else if (kh.getFertilizerPressed()) { //fertilizing
+                            farmer.fertilizePlant (tempPlot);
+                        }
+                        else if (kh.getShovelPressed()) { //shoveling
+                            farmer.digOut(tempPlot);
+                        }
+                        
+                        if (tempPlot.getCrop().getIsHarvestable()) { // harvesting the plant
+                            if (kh.getSpacePressed()) {
+                                farmer.harvestCrop(tempPlot);
+                            }
+                        }
+                        else {
+                            if (kh.getHarvestPressed()) {
+                                if (tempPlot.getCrop().getIsWithered())
+                                    alertMessage ("Crop is dead. Please use shovel...");
+                                else{
+                                    int readyInDays;
+                                    readyInDays = tempPlot.getCrop().getHarvestTime() - (menu.getMyFarm().getCurrentDay()  - tempPlot.getCrop().getDayPlanted());
+                                    alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");    
+                                }
+                            }
+                        }
+                    }
             }
-            // update info when a tile is plowed
+            
+
         }
     }
 

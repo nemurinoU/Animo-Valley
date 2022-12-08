@@ -2,7 +2,9 @@ package tile;
 
 import javax.imageio.ImageIO;
 
+import logic.Coordinates;
 import logic.PlotLand;
+import logic.PlotGrid;
 
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -20,7 +22,7 @@ public class TileManager {
     Farmer farmer;
     private Tile[] tile;
     private int[][] tileID;
-    logic.PlotGrid tileCopy;
+    PlotGrid tileCopy;
 
     /**
      * This constructor is invoked when a TileManager object is created.
@@ -54,6 +56,7 @@ public class TileManager {
                 tempGrid.addPlot (tempPlot);
             }
         }
+        
 
         return tempGrid;
     }
@@ -193,36 +196,45 @@ public class TileManager {
         // AHHH GETS
         // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
         // portion of the MVC :))
-        if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
-            if (kh.getPlowPressed() == true){
-                tileID[colz.getX()][colz.getY()] = 1;
-            }
-        }
+        // plow tile
 
-        // Plant on tile
-        if (tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
-            if (kh.getSeedPressed() == true){
-                tileID[colz.getX()][colz.getY()] = 5;
-            }
-        }
-        
+        Coordinates coords;
+        coords = new Coordinates (colz.getX(), colz.getY());
+        int i = coords.linearize();
 
-        //Mine rock
-        if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
-            if(kh.getPickaxePressed() == true){
-                //mco1.Farmer tempFarmer = this.myfarm.getFarmer();
-                tileID[colz.getX()][colz.getY()] = 0;
-                //farmer.setCoins(farmer.getCoins() - 50);
+        if (i != -1) {
+			if (tile[tileID[colz.getX()][colz.getY()]].getIsUnplowed()){
+				if (kh.getPlowPressed() == true){
+					tileID[colz.getX()][colz.getY()] = 1;
+				}
+			}
+			// Plant on tile
+			else if (tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
+				if (kh.getSeedPressed() == true){
+					tileID[colz.getX()][colz.getY()] = 5;
+				}
+			}
+			//Mine rock
+			else if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
+				if(kh.getPickaxePressed() == true){
+					//mco1.Farmer tempFarmer = this.myfarm.getFarmer();
+					tileID[colz.getX()][colz.getY()] = 0;
+					//farmer.setCoins(farmer.getCoins() - 50);
+				}
+			}
+            //If tile is dry and has seed, water it
+            else if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
+                if (kh.getWaterPressed() == true){
+                    tileID[colz.getX()][colz.getY()] = 6;
+                }
             }
-        }
-
-        //If tile is dry and plowed, water it
-        if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() && tile[tileID[colz.getX()][colz.getY()]].getIsPlowed()){
-            if (kh.getWaterPressed() == true){
-                tileID[colz.getX()][colz.getY()] = 4;
+            else if (tileCopy.getPlot(i).getCrop() == null ) {
+                if (kh.getHarvestPressed()) {
+                    tileID[colz.getX()][colz.getY()] = 0;
+                }  
             }
-        }
-        
+		}
+		/***        
         //If tile is dry and has seed, water it
         if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
             if (kh.getWaterPressed() == true){
@@ -236,6 +248,7 @@ public class TileManager {
                 tileID[colz.getX()][colz.getY()] = 6;
             }
         }
+		***/
     }
 
     
