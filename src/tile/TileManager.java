@@ -32,7 +32,7 @@ public class TileManager {
         this.board = board;
         this.kh = kh;
         this.colz = colz;
-        tile = new Tile[10]; //number of kinds of tiles
+        tile = new Tile[20]; //number of kinds of tiles
         tileID = new int [board.getMaxScreenCol()][board.getMaxScreenRow()];
 
         getTileImage();
@@ -110,7 +110,13 @@ public class TileManager {
             tile[6].setIsDry(false);
 
             tile[7] = new Tile(); //turnip
-            tile[7].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png")));
+            tile[7].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/turnip.png")));
+
+            tile[8] = new Tile(); //carrot
+            tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/carrot.png")));
+
+            tile[9] = new Tile(); //carrot
+            tile[9].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/potato.png")));
 
         } catch (Exception e) {
             System.out.println(e);
