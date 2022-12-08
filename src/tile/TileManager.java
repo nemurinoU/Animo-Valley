@@ -105,7 +105,7 @@ public class TileManager {
             tile[4].setIsDry(false);
 
             tile[5] = new Tile(); //seedling
-            tile[5].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/seeded.png")));
+            tile[5].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/tset.png")));
             tile[5].setIsSeeded(true);
 
             tile[6] = new Tile(); //watered, plowed & seeded
@@ -118,8 +118,23 @@ public class TileManager {
             tile[8] = new Tile(); //carrot
             tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/carrot.png")));
 
-            tile[9] = new Tile(); //carrot
+            tile[9] = new Tile(); //potato
             tile[9].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/potato.png")));
+
+            tile[10] = new Tile(); //rose
+            tile[10].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/rose.png")));
+
+            tile[11] = new Tile(); //tulip
+            tile[11].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/tulip.png")));
+
+            tile[12] = new Tile(); //sunflower
+            tile[12].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/sunflower.png")));
+
+            tile[13] = new Tile(); //mango-tree
+            tile[13].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/mango-tree.png")));
+
+            tile[14] = new Tile(); //sunflower
+            tile[14].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/apple-tree.png")));
 
         } catch (Exception e) {
             System.out.println(e);
