@@ -224,8 +224,9 @@ public class TileManager {
             }
         }
 
+        //If tile is wet, plant seed
         if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() == false){
-            if (kh.getPlowPressed() == true){
+            if (kh.getSeedPressed() == true){
                 tileID[colz.getX()][colz.getY()] = 6;
             }
         }
