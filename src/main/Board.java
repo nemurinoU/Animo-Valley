@@ -35,7 +35,7 @@ public class Board extends JPanel implements Runnable{
     final int scaleSize = 3;
 
     public final int tileSize = originalTileSize * scaleSize;
-    public final int maxScreenRow = 6;
+    public final int maxScreenRow = 7;
     public final int maxScreenCol = 12;
     public final int screenWidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
@@ -66,6 +66,9 @@ public class Board extends JPanel implements Runnable{
         this.addKeyListener(keyH);
         this.setFocusable(true);
         this.setLayout(new GridLayout (2, 1));
+
+        // bridges the text file and actual plotgrid at the start
+        this.menu.getMyFarm().setFarmField( tileMan.updateTileGrid(menu));
     }
 
     public InfoBar getMenu () {
@@ -105,6 +108,9 @@ public class Board extends JPanel implements Runnable{
                 System.out.println("FPS: " + drawCount);
                 timer = 0;
                 drawCount = 0;
+
+                Display test = new Display();
+                test.displayGrid (this.menu.getMyFarm().getFarmField());
             }
             
         }
@@ -119,17 +125,21 @@ public class Board extends JPanel implements Runnable{
         this.requestFocus();
 
         // update the PlotGrid object inside the TileManager class
-        tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
+        // tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
 
-        // OH MY GOD IM SO SMART HAHAHAHHAHAH GODDAMN NOTHING CAN BEAT ME LMFAOO u right this works
         /***
          * So basically how this works is, it gets coordinates from collsion class
          * updates the "current coordinates of the player in the actionhandler for actions"
          * then it updates the plot based on logic done on the plot :)))
          */
         actH.updateLocation( collision.getCoords() );
-        //this.getPlotByCoord(actH.getCurrentXY())
-        actH.updateLogic(  );
+        actH.updateMyFarm ( menu.getMyFarm());
+
+        // will  update the logic plotgrid depending on keys pressed
+        PlotGrid tempGrid = menu.getMyFarm().getFarmField();
+        
+        tileMan.updateTileCopy (tempGrid);
+        actH.updateLogic(menu);
     }
 
     public PlotLand getPlotByCoord (Coordinates coords) {

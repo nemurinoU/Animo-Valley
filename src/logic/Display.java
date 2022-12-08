@@ -1,4 +1,4 @@
-package mco1;
+package logic;
 
 import java.util.ArrayList;
 /***
@@ -95,7 +95,6 @@ public class Display {
 			else if (plotGrid.get(i).getIsPlowed() == false){ //not plowed 
 				System.out.print ("_");
 			} 
-			
 			else if (plotGrid.get(i).getIsPlowed()){//plowed
 					if (!plotGrid.get(i).getIsOccupied()) //plowed & not occupied
 						System.out.print ("-");
@@ -105,7 +104,7 @@ public class Display {
 						System.out.print ("X");
 					else if (plotGrid.get(i).getIsOccupied())//plowed & occupied
 						System.out.print ("t");
-			}***/
+			}
 
 			System.out.print (" ]");
 		}
