@@ -34,7 +34,7 @@ public class TileManager {
         this.board = board;
         this.kh = kh;
         this.colz = colz;
-        tile = new Tile[10]; //number of kinds of tiles
+        tile = new Tile[20]; //number of kinds of tiles
         tileID = new int [board.getMaxScreenCol()][board.getMaxScreenRow()];
 
         getTileImage();
@@ -113,7 +113,31 @@ public class TileManager {
             tile[6].setIsDry(false);
 
             tile[7] = new Tile(); //turnip
-            tile[7].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/turnip.png")));
+            tile[7].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/turnip.png")));
+
+            tile[8] = new Tile(); //carrot
+            tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/carrot.png")));
+
+            tile[9] = new Tile(); //potato
+            tile[9].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/potato.png")));
+
+            tile[10] = new Tile(); //rose
+            tile[10].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/rose.png")));
+
+            tile[11] = new Tile(); //tulip
+            tile[11].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/tulip.png")));
+
+            tile[12] = new Tile(); //sunflower
+            tile[12].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/sunflower.png")));
+
+            tile[13] = new Tile(); //mango-tree
+            tile[13].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/mango-tree.png")));
+
+            tile[14] = new Tile(); //apple-tree
+            tile[14].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/apple-tree.png")));
+
+            tile[15] = new Tile(); //dead
+            tile[15].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/dead.png")));
 
             tile[8] = new Tile(); // withered
             tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/wilted.png")));
@@ -209,7 +233,16 @@ public class TileManager {
         // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
         // portion of the MVC :))
         // plow tile
-
+        /*
+         * 1 plow
+         * 2 water
+         * 3 fertilize
+         * 4 pickaxe
+         * 5 shovel
+         * 0 seed
+         * space harvest
+         */
+        Coordinates coords;
         coords = new Coordinates (colz.getX(), colz.getY());
         int i = coords.linearize();
 

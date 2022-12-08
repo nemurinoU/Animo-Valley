@@ -279,7 +279,7 @@ public class ActionHandler {
                         else if (kh.getShovelPressed()) { //shoveling
                             success = farmer.digOut(tempPlot);
                         }
-                        
+
                         if (tempPlot.getCrop() !=null && tempPlot.getCrop().getIsHarvestable()) { // harvesting the plant
                             if (kh.getHarvestPressed()) {
                                 farmer.harvestCrop(tempPlot);
