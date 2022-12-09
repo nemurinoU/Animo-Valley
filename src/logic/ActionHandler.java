@@ -325,7 +325,12 @@ public class ActionHandler {
             else if ( tempPlot.getIsPlowed()) { // is plowed
                     if ( !tempPlot.getIsOccupied()){ // When plowed plot is NOT occupied (i.e., no crop on it)
                         if (kh.getSeedPressed()) { // plant seed
-                            success = seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), tempCrop, tempMsgs);
+                            System.out.println("CROP TYPE: " + tempCrop.getCropType());
+                            if (tempCrop.getCropType() == 3) // if tree, check for corner cases
+                                success = treeCheck (menu.getMyFarm().getFarmField(), tempCrop);
+                            
+                            if (success)
+                                success = seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), tempCrop, tempMsgs);
                             
                             if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
                             else tempMsgFinal = concatMsg (tempMsgs);
@@ -435,5 +440,22 @@ public class ActionHandler {
         return rString;
     }
 
-    
+    public boolean treeCheck (PlotGrid tempGrid, Crop tempCrop) {
+        boolean rCheck = true;
+
+        // when x is 0 or 9
+        // when y is 0 or 4
+        if (this.currentXY.getX() == 0 || 
+            this.currentXY.getX() == 9 ||
+            this.currentXY.getY() == 0 ||
+            this.currentXY.getY() == 4) {
+                
+            System.out.println ("CORNER CASE!");
+        }
+        else {
+            System.out.println ("NOT CORNER CASE!");
+        }
+
+        return rCheck;
+    }
 }
