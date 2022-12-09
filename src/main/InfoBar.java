@@ -171,20 +171,13 @@ public class InfoBar extends JPanel {
     public void showToolCommands(){
         this.toolPan.setLayout(new GridLayout(3, 2));
         //getIcons();
-        /*try {
+        try {
             pickImg = ImageIO.read(getClass().getResourceAsStream("res/Pick.png"));
             shovelImg = ImageIO.read(getClass().getResourceAsStream("res/Shovel.png"));
             hoeImg = ImageIO.read(getClass().getResourceAsStream("res/Hoe.png"));
             wateringCanImg = ImageIO.read(getClass().getResourceAsStream("res/Watering_Can.png"));
             seedBagImg = ImageIO.read(getClass().getResourceAsStream("res/Seed_Bag.png"));
         } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-        try {
-            pickImg = ImageIO.read(new File("Pick.png"));
-        } catch (IOException e) {
-
             e.printStackTrace();
         }
         
