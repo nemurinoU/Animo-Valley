@@ -230,6 +230,7 @@ public class ActionHandler {
         Farmer farmer = menu.getMyFarm().getFarmer();
         int i = this.currentXY.linearize();
         boolean success = true;
+        String tempMsg = "";
         
 
         if (i != -1) {
@@ -292,12 +293,15 @@ public class ActionHandler {
                                 else{
                                     int readyInDays;
                                     readyInDays = tempPlot.getCrop().getHarvestTime() - (menu.getMyFarm().getCurrentDay()  - tempPlot.getCrop().getDayPlanted());
-                                    alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");    
+                                    alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");
+                                    tempMsg = "Crop not ready yet... Ready in " + readyInDays + " days";    
                                 }
                             }
                         }
                     }
             }
+
+            
         }
 
         return success;

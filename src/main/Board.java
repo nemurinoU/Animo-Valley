@@ -8,6 +8,10 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusListener;
+
 /***
  * <h1>Board</h1>
  * <p>
@@ -30,7 +34,7 @@ public class Board extends JPanel implements Runnable{
     * > screenWidth is defined by the tileSize times the number of columns
     * > screenHeight is tileSize times the number of rows
 	*/
-    int FPS = 60;
+    int FPS = 50;
     final int originalTileSize = 16;
     final int scaleSize = 3;
 
@@ -141,16 +145,6 @@ public class Board extends JPanel implements Runnable{
 
         // update the PlotGrid object inside the TileManager class
         tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
-    }
-
-    public PlotLand getPlotByCoord (Coordinates coords) {
-        ArrayList<PlotLand> tempGrid = this.menu.getMyFarm().getFarmField().getPlotGrid();
-        PlotLand tempPlot;
-
-        /*** 
-        for (int i = 0; i < this.tempGrid.size(); i++) {
-            if (tempGrid.get(i).getCoords().isEquals(coords))
-        }*/
     }
 
     public void paintComponent(Graphics g){

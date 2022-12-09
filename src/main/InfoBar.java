@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
 
@@ -11,21 +10,23 @@ import java.awt.event.ActionListener;
 
 public class InfoBar extends JPanel {
     private logic.MyFarm myfarm;
-    private JPanel statsPan;
+    private JPanel statsPan, feedBack;
     private JButton regFarmerBtn;
 
     public InfoBar(String farmName, String farmerName) {
         this.setBackground(Color.green);
         this.regFarmerBtn = new JButton("Register Farmer");
-
         this.statsPan = new JPanel();
+        this.feedBack = new JPanel();
 
         this.myfarm = new logic.MyFarm(farmName, farmerName);
 
         this.add(statsPan);
+        this.add(feedBack);
 
         btnOptions();
         showStats();
+        showFeedback();
     }
 
     public logic.MyFarm getMyFarm () {
@@ -64,6 +65,28 @@ public class InfoBar extends JPanel {
         btnPan.add(regFarmerBtn);
 
         this.add(btnPan);
+    }
+
+    public void showFeedback() {
+        this.feedBack.setLayout(new GridLayout(2, 1));
+
+        this.feedBack.add(new JLabel ("Placeholder Seed"));
+        this.feedBack.add(new JLabel ("Placeholder Msg"));
+
+        feedBack.setVisible(true);
+        feedBack.revalidate();
+        feedBack.repaint();
+    }
+
+    public void updateFeedback (String seed, String msg) {
+        this.feedBack.removeAll();
+
+        this.feedBack.add(new JLabel (seed));
+        this.feedBack.add(new JLabel (msg));
+
+        feedBack.setVisible(true);
+        feedBack.revalidate();
+        feedBack.repaint();
     }
 
     public void showStats() {
