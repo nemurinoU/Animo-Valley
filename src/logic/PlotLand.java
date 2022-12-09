@@ -79,11 +79,11 @@ public class PlotLand {
     }
     
     public int getX() {
-        return this.x;
+        return this.coords.getX();
     }
 
     public int getY() {
-        return this.y;
+        return this.coords.getY();
     }
 	/**
     * This method sets the Crop object

@@ -134,7 +134,7 @@ public class ActionHandler {
             else{
                 success = farmer.plantCrop(tempPlot, crop, currentDay);
                 tempMsgs.add("~~~ Crop planted! ~~~\n");
-                alertMessage ("~~~ Crop planted! ~~~");
+                alertMessage ("~~~ Crop planted! ~~~" + tempPlot.getX() + "," + tempPlot.getY());
             }
 
             return success;
@@ -329,11 +329,15 @@ public class ActionHandler {
                             if (tempCrop.getCropType() == 3) // if tree, check for corner cases
                                 success = treeCheck (menu.getMyFarm().getFarmField(), tempCrop);
                             
-                            if (success)
+                            if (success) {// if allowed to plant do this
                                 success = seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), tempCrop, tempMsgs);
-                            
-                            if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
-                            else tempMsgFinal = concatMsg (tempMsgs);
+
+                                if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                                else tempMsgFinal = concatMsg (tempMsgs);
+                            }
+                            else tempMsgFinal = "~~~ Not allowed to plant tree ~~~";
+
+                            menu.updateFeedback(cropInfo, tempMsgFinal);
                         }
                         else if (kh.getShovelPressed()) { //shoveling
                             success = farmer.digOut(tempPlot);
@@ -442,18 +446,48 @@ public class ActionHandler {
 
     public boolean treeCheck (PlotGrid tempGrid, Crop tempCrop) {
         boolean rCheck = true;
+        PlotLand tempPlot;
+        int x = this.currentXY.getX(), y = this.currentXY.getY();
+        int ind;
 
-        // when x is 0 or 9
-        // when y is 0 or 4
-        if (this.currentXY.getX() == 0 || 
-            this.currentXY.getX() == 9 ||
-            this.currentXY.getY() == 0 ||
-            this.currentXY.getY() == 4) {
+        // when x is 1 or 10
+        // when y is 1 or 5
+        if (x == 1 || 
+            x == 10 ||
+            y == 1 ||
+            y == 5) {
                 
             System.out.println ("CORNER CASE!");
+            rCheck = false;
         }
         else {
             System.out.println ("NOT CORNER CASE!");
+
+            
+            // check top
+            for (int i = -1; i < 2; i++) {
+                ind = new Coordinates(x + i, y - 1).linearize();
+                tempPlot = tempGrid.getPlot(ind);
+
+                if (tempPlot.getIsOccupied() || tempPlot.isWithered() || tempPlot.getHasRock()) rCheck = false;
+            }
+
+            // check sides
+            for (int i = -1; i < 2; i++) {
+                ind = new Coordinates(x + i, y).linearize();
+                tempPlot = tempGrid.getPlot(ind);
+
+                if (i != 0)
+                    if (tempPlot.getIsOccupied() || tempPlot.isWithered() || tempPlot.getHasRock()) rCheck = false;
+            }
+            
+            // check bottom
+            for (int i = -1; i < 2; i++) {
+                ind = new Coordinates(x + i, y + 1).linearize();
+                tempPlot = tempGrid.getPlot(ind);
+
+                if (tempPlot.getIsOccupied() || tempPlot.isWithered() || tempPlot.getHasRock()) rCheck = false;
+            }
         }
 
         return rCheck;
