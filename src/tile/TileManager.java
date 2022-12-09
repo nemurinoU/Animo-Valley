@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import main.Board;
 import main.KeyHandler;
 import main.Collision;
-
+import logic.Farmer;
 
 public class TileManager {
     Board board;

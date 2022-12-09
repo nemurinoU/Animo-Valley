@@ -74,7 +74,7 @@ public class Board extends JPanel implements Runnable{
 
         // bridges the text file and actual plotgrid at the start
         this.menu.getMyFarm().setFarmField( tileMan.updateTileGrid(menu));
-        this.toolbar.showToolCommands();
+        //this.toolbar.showToolCommands();
     }
 
     public InfoBar getMenu () {
