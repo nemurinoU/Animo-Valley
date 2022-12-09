@@ -1,6 +1,7 @@
 package logic;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 /***
  * <h1>Farmer</h1>
@@ -47,7 +48,7 @@ public class Farmer {
 	
 	public Farmer(String name){
 		this.name = name;
-		this.coins = 100.0;
+		this.coins = 1000000.0;
 		this.xp = 0.0;
 		this.farmerType = 0;
 		this.farmerTitle = "<Farmer>";
@@ -175,7 +176,7 @@ public class Farmer {
     * 
     * @param plot		the tile in question to be interacted with
     */
-	public void harvestCrop (PlotLand plot) {
+	public void harvestCrop (PlotLand plot, ArrayList<String> msg) {
 		Random random = new Random ();
 		int nYield, min, max;
 		double earnings;
@@ -189,16 +190,20 @@ public class Farmer {
 		// randomize harvest yield
 		nYield = random.nextInt (max - min + 1) + min;
 		System.out.println ("You harvested " + nYield + " " + plot.getCrop().getCropName() + "!");
-		
+		msg.add ( "You harvested " + nYield + " " + plot.getCrop().getCropName() + "!");
 		// earn xp from harvesting
 		this.setXp (this.getXp() + plot.getCrop().getXpYield() * nYield);
+		msg.add ("Gained " + plot.getCrop().getXpYield() * nYield + " xp");
 		
 		// earn coins from this harvest
 		earnings = calculateFinalHarvestPrice (plot, nYield, plot.getCrop().getBasePrice(), 
 												this.getFTBEarning( this.getFarmerType()));
-		
+		if (plot.getCrop().getCropType() == 2) earnings = earnings * 1.1;
+
 		//show earnings from harvest
 		System.out.println ("You earned " + earnings + " coins!");
+		
+		msg.add(String.format("You earned %.2f coins!", earnings) );
 		this.setCoins (this.getCoins () + earnings);
 		
 		//remove crop from plot land

@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener{
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     private boolean plowPressed, waterPressed, fertilizerPressed, pickaxePressed, shovelPressed, harvestPressed;
-    private boolean seedPressed;
+    private boolean seedPressed, nextSeed, prevSeed, isHeld;
 
     @Override
     public void keyTyped(KeyEvent e){
@@ -16,6 +16,7 @@ public class KeyHandler implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e){
+        
         int code = e.getKeyCode();
 
         if (code == KeyEvent.VK_W){
@@ -61,6 +62,16 @@ public class KeyHandler implements KeyListener{
         if (code == KeyEvent.VK_0){
             seedPressed = true;
         }
+
+        if (code == KeyEvent.VK_EQUALS) {
+            nextSeed = true;
+        }
+
+        if (code == KeyEvent.VK_MINUS) {
+            prevSeed = true;
+        }
+
+        
     }
 
     @Override
@@ -111,8 +122,33 @@ public class KeyHandler implements KeyListener{
             seedPressed = false;
         }
 
+        if (code == KeyEvent.VK_EQUALS) {
+            nextSeed = false;
+        }
+
+        if (code == KeyEvent.VK_MINUS) {
+            prevSeed = false;
+        }
+
+        this.isHeld = false;
+
     }
 
+    public boolean getIsHeld () {
+        return this.isHeld;
+    }
+
+    public void setIsHeld (boolean isHeld) {
+        this.isHeld = isHeld;
+    }
+
+    public boolean getNextSeed() {
+        return this.nextSeed;
+    }
+
+    public boolean getPrevSeed() {
+        return this.prevSeed;
+    }
 
     public boolean getUpPressed() {
         return this.upPressed;
