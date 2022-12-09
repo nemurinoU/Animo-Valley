@@ -19,7 +19,9 @@ public class InfoBar extends JPanel {
     private logic.MyFarm myfarm;
     private JPanel statsPan;
     private JButton regFarmerBtn;
-    private BufferedImage pick, shovel, hoe, watering_can, seed_bag;
+    //Toolbar stuff below
+    private BufferedImage pickImg, shovelImg, hoeImg, wateringCanImg, seedBagImg;
+    private JPanel toolPan;
 
     public InfoBar(String farmName, String farmerName) {
         this.setBackground(Color.green);
@@ -35,6 +37,16 @@ public class InfoBar extends JPanel {
         showStats();
     }
 
+    public InfoBar(){
+        this.setBackground(Color.gray);
+
+        this.toolPan = new JPanel();
+        
+        this.add(toolPan);
+
+        showToolCommands();
+    }
+
     public logic.MyFarm getMyFarm () {
         return this.myfarm;
     }
@@ -45,7 +57,7 @@ public class InfoBar extends JPanel {
 
     public void btnOptions() {
         JButton nextDayBtn = new JButton("Sleep the Night");
-
+        //Sleep the night button
         nextDayBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +68,7 @@ public class InfoBar extends JPanel {
             }
         });
 
+        //Register Farmer button
         regFarmerBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,24 +113,37 @@ public class InfoBar extends JPanel {
         statsPan.repaint();
     }
 
-    public void getIcons(){
-        try {
-            pick = ImageIO.read(new File("res/Pick.png"));
-            shovel = ImageIO.read(new File("res/Shovel.png"));
-            hoe = ImageIO.read(new File("res/Hoe.png"));
-            watering_can = ImageIO.read(new File("res/Watering_Can.png"));
-            seed_bag = ImageIO.read(new File("res/Seed_Bag.png"));
+    public void showToolCommands(){
+        this.toolPan.setLayout(new GridLayout(3, 2));
+        //getIcons();
+        /*try {
+            pickImg = ImageIO.read(getClass().getResourceAsStream("res/Pick.png"));
+            shovelImg = ImageIO.read(getClass().getResourceAsStream("res/Shovel.png"));
+            hoeImg = ImageIO.read(getClass().getResourceAsStream("res/Hoe.png"));
+            wateringCanImg = ImageIO.read(getClass().getResourceAsStream("res/Watering_Can.png"));
+            seedBagImg = ImageIO.read(getClass().getResourceAsStream("res/Seed_Bag.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
 
-        } catch (Exception e) {
-            System.out.println(e);
-            // TODO: handle exception
+        try {
+            pickImg = ImageIO.read(new File("Pick.png"));
+        } catch (IOException e) {
+
+            e.printStackTrace();
         }
+        
+        JLabel pick = new JLabel(new ImageIcon(pickImg));
+        toolPan.add(pick);
+
+        //JLabel
+        //toolPan.add(new JLabel("test"));
     }
 
     public void update() {
         showStats();
         revalidate();
         repaint();
-        getIcons();
+        //getIcons();
     }
 }

@@ -172,7 +172,7 @@ public class TileManager {
                 //rock generator (randomized)
                 for (int i = 10; i < 15; i++){
                     int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
-                    int randY = (int)Math.floor(Math.random()*(4-1+1)+1);
+                    int randY = (int)Math.floor(Math.random()*(5-1+1)+1);
                     tileID[randX][randY] = 3;
                 }
                 

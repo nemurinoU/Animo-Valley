@@ -49,7 +49,7 @@ public class Board extends JPanel implements Runnable{
 
     NamePrompt namePrompt = new NamePrompt ();
     InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
-    InfoBar toolbar = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
+    InfoBar toolbar = new InfoBar();
     //InfoBar toolbar = new Toolbar();
     
     TileManager tileMan = new TileManager(this, keyH, collision);
@@ -70,6 +70,7 @@ public class Board extends JPanel implements Runnable{
 
         // bridges the text file and actual plotgrid at the start
         this.menu.getMyFarm().setFarmField( tileMan.updateTileGrid(menu));
+        this.toolbar.showToolCommands();
     }
 
     public InfoBar getMenu () {
