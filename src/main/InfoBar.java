@@ -8,8 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
-
-import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -23,7 +21,7 @@ public class InfoBar extends JPanel {
     private JPanel statsPan, feedBack;
     private JButton regFarmerBtn;
     //Toolbar stuff below
-    private BufferedImage pickImg, shovelImg, hoeImg, wateringCanImg, seedBagImg;
+    private BufferedImage pickImg, fertilizerImg, shovelImg, hoeImg, wateringCanImg, seedBagImg;
     private JPanel toolPan;
 
     public InfoBar(String farmName, String farmerName) {
@@ -60,7 +58,7 @@ public class InfoBar extends JPanel {
     }
 
     public InfoBar(){
-        this.setBackground(Color.gray);
+        this.setBackground(Color.decode("#B59F84"));
 
         this.toolPan = new JPanel();
         
@@ -169,7 +167,7 @@ public class InfoBar extends JPanel {
     }
 
     public void showToolCommands(){
-        this.toolPan.setLayout(new GridLayout(3, 2));
+        this.toolPan.setLayout(new GridLayout(7, 2));
         //getIcons();
         try {
             pickImg = ImageIO.read(getClass().getResourceAsStream("res/Pick.png"));
@@ -177,12 +175,26 @@ public class InfoBar extends JPanel {
             hoeImg = ImageIO.read(getClass().getResourceAsStream("res/Hoe.png"));
             wateringCanImg = ImageIO.read(getClass().getResourceAsStream("res/Watering_Can.png"));
             seedBagImg = ImageIO.read(getClass().getResourceAsStream("res/Seed_Bag.png"));
+            fertilizerImg = ImageIO.read(getClass().getResourceAsStream("res/Fertilizer2.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
         
-        JLabel pick = new JLabel(new ImageIcon(pickImg));
-        toolPan.add(pick);
+        //JLabel pick = );
+        toolPan.add(new JLabel(new ImageIcon(hoeImg)));
+        toolPan.add(new JLabel("[1] Hoe "));
+        toolPan.add(new JLabel(new ImageIcon(wateringCanImg)));
+        toolPan.add(new JLabel("[2] Watering Can    "));
+        toolPan.add(new JLabel(new ImageIcon(fertilizerImg)));
+        toolPan.add(new JLabel("[3] Fertilizer  "));
+        toolPan.add(new JLabel(new ImageIcon(pickImg)));
+        toolPan.add(new JLabel("[4] Pickaxe "));
+        toolPan.add(new JLabel(new ImageIcon(shovelImg)));
+        toolPan.add(new JLabel("[5] Shovel  "));
+        toolPan.add(new JLabel(new ImageIcon(seedBagImg)));
+        toolPan.add(new JLabel("[0] Seed Bag  "));
+        toolPan.add(new JLabel("   [-] Select previous seed   "));
+        toolPan.add(new JLabel("[+] Select next seed"));
 
         //JLabel
         //toolPan.add(new JLabel("test"));
