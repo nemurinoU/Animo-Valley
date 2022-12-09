@@ -140,7 +140,7 @@ public class TileManager {
             tile[15].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/dead.png")));
 
             tile[8] = new Tile(); // withered
-            tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/wilted.png")));
+            tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/wilted.png")));
 
         } catch (Exception e) {
             System.out.println(e);
@@ -242,7 +242,6 @@ public class TileManager {
          * 0 seed
          * space harvest
          */
-        Coordinates coords;
         coords = new Coordinates (colz.getX(), colz.getY());
         int i = coords.linearize();
 
