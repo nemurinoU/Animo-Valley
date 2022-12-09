@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
+
 import logic.RegisterFarmer;
 
 import java.awt.event.ActionEvent;
@@ -21,7 +25,24 @@ public class InfoBar extends JPanel {
     private BufferedImage pick, shovel, hoe, watering_can, seed_bag;
 
     public InfoBar(String farmName, String farmerName) {
-        this.setBackground(Color.green);
+        Border compound, raisedbevel, loweredbevel;
+        Border line = BorderFactory.createLineBorder(Color.decode("#d29226"));
+
+        raisedbevel = BorderFactory.createRaisedBevelBorder();
+        loweredbevel = BorderFactory.createLoweredBevelBorder();
+        compound = BorderFactory.createCompoundBorder(
+                          raisedbevel, loweredbevel);
+
+        compound = BorderFactory.createCompoundBorder(
+                            line, compound);
+
+        compound = BorderFactory.createTitledBorder(
+                          compound, "Animo Valley",
+                          TitledBorder.RIGHT,
+                          TitledBorder.ABOVE_TOP);
+        
+        this.setBackground(Color.decode("#f1ab27"));
+        this.setBorder(compound);
         this.regFarmerBtn = new JButton("Register Farmer");
         this.statsPan = new JPanel();
         this.feedBack = new JPanel();
