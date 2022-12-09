@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 import logic.Coordinates;
 import logic.PlotLand;
 import logic.PlotGrid;
+import logic.Farmer;
 
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
@@ -14,7 +15,7 @@ import java.io.InputStreamReader;
 import main.Board;
 import main.KeyHandler;
 import main.Collision;
-import mco1.Farmer;
+
 
 public class TileManager {
     Board board;
@@ -263,9 +264,7 @@ public class TileManager {
 			//Mine rock
 			else if (tile[tileID[colz.getX()][colz.getY()]].getHasRock()){
 				if(kh.getPickaxePressed() == true){
-					//mco1.Farmer tempFarmer = this.myfarm.getFarmer();
 					tileID[colz.getX()][colz.getY()] = 0;
-					//farmer.setCoins(farmer.getCoins() - 50);
 				}
 			}
             //If tile is dry and has seed, water it
