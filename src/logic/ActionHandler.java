@@ -33,17 +33,7 @@ public class ActionHandler {
         this.kh = kh;
         this.currentXY = new Coordinates(0, 0);
         this.currentSeed = 0;
-
-        tempCrops = new ArrayList<Crop>();
-        
-        tempCrops.add (new Turnip());
-        tempCrops.add (new Carrot());
-        tempCrops.add (new Potato());
-        tempCrops.add (new Rose());
-        tempCrops.add (new Tulip());
-        tempCrops.add (new Sunflower());
-        tempCrops.add (new Mango());
-        tempCrops.add (new Apple());
+       
         tempCrop = new Turnip();
     }
 
@@ -251,6 +241,17 @@ public class ActionHandler {
         boolean success = true;
         ArrayList<String> tempMsgs = new ArrayList<String>();
         String tempMsgFinal = "", cropInfo = "";
+
+        tempCrops = new ArrayList<Crop>();
+        
+        tempCrops.add (new Turnip());
+        tempCrops.add (new Carrot());
+        tempCrops.add (new Potato());
+        tempCrops.add (new Rose());
+        tempCrops.add (new Tulip());
+        tempCrops.add (new Sunflower());
+        tempCrops.add (new Mango());
+        tempCrops.add (new Apple());
         
         
         if (kh.getNextSeed() && !kh.getIsHeld()) {

@@ -1,6 +1,6 @@
 package logic;
 
-abstract class Crop {
+abstract class Crop implements Cloneable{
     private String  cropName;
 
     private double  basePrice,
@@ -115,6 +115,12 @@ abstract class Crop {
     	}
     		
     }
+
+    public Crop clone () throws CloneNotSupportedException {
+        return ((Crop)super.clone());
+    }
+    
+
     
     // GETTERS
 
