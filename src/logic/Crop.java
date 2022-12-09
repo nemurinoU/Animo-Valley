@@ -110,7 +110,8 @@ abstract class Crop {
     			this.setIsWithered (true); //The crop withers
     	}
     	else if (daysElapsed > this.getHarvestTime () && !this.getIsWithered()) { //Else if daysElapsed > harvestTime and plant is not yet withered
-    		this.setIsWithered (true); //Becomes withered
+    		this.setIsHarvestable(false);
+            this.setIsWithered (true); //Becomes withered
     	}
     		
     }

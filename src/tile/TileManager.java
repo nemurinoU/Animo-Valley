@@ -138,10 +138,6 @@ public class TileManager {
 
             tile[15] = new Tile(); //dead
             tile[15].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/dead.png")));
-
-            tile[8] = new Tile(); // withered
-            tile[8].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/crops/wilted.png")));
-
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -219,13 +215,13 @@ public class TileManager {
         for (int i = 0; i < tileCopy.getPlotGrid().size(); i++) {
             coords = tileCopy.getPlot(i).getCoords();
 
-
-            if (tileCopy.getPlot(i) != null) {
-                if (tileCopy.getPlot(i).isHarvestable()) {
-                   if (tileCopy.getPlot(i).isWithered()) tileID[coords.getX()][coords.getY()] = 8; // update to withered plant
-                   else tileID[coords.getX()][coords.getY()] = 7; // update to turnip
-                }
+            if (tileCopy.getPlot(i) != null && !tileCopy.getPlot(i).getHasRock()) {
+                if (tileCopy.getPlot(i).isHarvestable()) tileID[coords.getX()][coords.getY()] = 7; // update to turnip
+                // gonna have to change this code above to handle all types of plants
+                if (tileCopy.getPlot(i).isWithered()) tileID[coords.getX()][coords.getY()] = 15; // update to withered plant
+                if (!tileCopy.getPlot(i).getIsOccupied() && !tileCopy.getPlot(i).getIsPlowed()) tileID[coords.getX()][coords.getY()] = 0; // when shoveled
             }
+
         }
 
         //Plow tile

@@ -59,7 +59,7 @@ public class PlotLand {
         if (this.getCrop() != null)
             return this.getCrop().getIsWithered();
 
-        return true;
+        return false;
     }
     
 	/**
