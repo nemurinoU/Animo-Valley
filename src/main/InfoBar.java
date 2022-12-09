@@ -70,8 +70,8 @@ public class InfoBar extends JPanel {
     public void showFeedback() {
         this.feedBack.setLayout(new GridLayout(2, 1));
 
-        this.feedBack.add(new JLabel ("Placeholder Seed"));
-        this.feedBack.add(new JLabel ("Placeholder Msg"));
+        this.feedBack.add(new JLabel ("Current Seed: Turnip (5.0 coins)"));
+        this.feedBack.add(new JLabel ("Welcome to Animo Valley!"));
 
         feedBack.setVisible(true);
         feedBack.revalidate();
@@ -81,8 +81,19 @@ public class InfoBar extends JPanel {
     public void updateFeedback (String seed, String msg) {
         this.feedBack.removeAll();
 
-        this.feedBack.add(new JLabel (seed));
+        this.feedBack.add(new JLabel ("Current Seed: " + seed));
         this.feedBack.add(new JLabel (msg));
+
+        feedBack.setVisible(true);
+        feedBack.revalidate();
+        feedBack.repaint();
+    }
+
+    public void updateFeedback (String seed) {
+        Component c = this.feedBack.getComponent(0);
+
+        if (c instanceof JLabel) ((JLabel)c).setText("Current Seed: " + seed);
+
 
         feedBack.setVisible(true);
         feedBack.revalidate();

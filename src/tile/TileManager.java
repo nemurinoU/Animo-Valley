@@ -15,6 +15,7 @@ import main.Board;
 import main.KeyHandler;
 import main.Collision;
 import mco1.Farmer;
+
 public class TileManager {
     Board board;
     KeyHandler kh;
@@ -212,11 +213,14 @@ public class TileManager {
         Coordinates coords;
 
         // update the grid to have harvested or withered plants
-        for (int i = 0; i < tileCopy.getPlotGrid().size(); i++) {
+        for (int i = 0; tileCopy != null && i < tileCopy.getPlotGrid().size(); i++) {
             coords = tileCopy.getPlot(i).getCoords();
 
             if (tileCopy.getPlot(i) != null && !tileCopy.getPlot(i).getHasRock()) {
-                if (tileCopy.getPlot(i).isHarvestable()) tileID[coords.getX()][coords.getY()] = 7; // update to turnip
+                if (tileCopy.getPlot(i).isHarvestable()) { // update plants to proper texture
+
+                    tileID[coords.getX()][coords.getY()] = tileCopy.getPlot(i).getPublicID();
+                }
                 // gonna have to change this code above to handle all types of plants
                 if (tileCopy.getPlot(i).isWithered()) tileID[coords.getX()][coords.getY()] = 15; // update to withered plant
                 if (!tileCopy.getPlot(i).getIsOccupied() && !tileCopy.getPlot(i).getIsPlowed()) tileID[coords.getX()][coords.getY()] = 0; // when shoveled
@@ -279,9 +283,6 @@ public class TileManager {
                 }  
             }
 		}
-        else {
-            System.out.println ("Not enough money...");
-        }
 		/***        
         //If tile is dry and has seed, water it
         if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){

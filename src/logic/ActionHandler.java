@@ -21,6 +21,9 @@ public class ActionHandler {
     KeyHandler kh;
     Coordinates currentXY;
     MyFarm farm;
+    int currentSeed;
+    ArrayList<Crop> tempCrops;
+    Crop tempCrop;
 
 	/**
      * This constructor method creates a new instance of ActionHandler
@@ -29,6 +32,19 @@ public class ActionHandler {
     public ActionHandler (KeyHandler kh) {
         this.kh = kh;
         this.currentXY = new Coordinates(0, 0);
+        this.currentSeed = 0;
+
+        tempCrops = new ArrayList<Crop>();
+        
+        tempCrops.add (new Turnip());
+        tempCrops.add (new Carrot());
+        tempCrops.add (new Potato());
+        tempCrops.add (new Rose());
+        tempCrops.add (new Tulip());
+        tempCrops.add (new Sunflower());
+        tempCrops.add (new Mango());
+        tempCrops.add (new Apple());
+        tempCrop = new Turnip();
     }
 
     /**
@@ -105,16 +121,19 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public boolean seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop) {
+    public boolean seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop, ArrayList<String> tempMsgs) {
             // farmer does the planting
             // farmer USES plotGrid given coordinate reference
             // farmer USES cropBook to copy TURNIP info and put into plot
             boolean success = false;
 
-            if (tempPlot.getIsOccupied())
+            if (tempPlot.getIsOccupied()) {
                 System.out.println ("You cannot plant on an occupied tile!\n");
+                tempMsgs.add("You cannot plant on an occupied tile!\n");
+            }
             else{
                 success = farmer.plantCrop(tempPlot, crop, currentDay);
+                tempMsgs.add("~~~ Crop planted! ~~~\n");
                 alertMessage ("~~~ Crop planted! ~~~");
             }
 
@@ -230,8 +249,30 @@ public class ActionHandler {
         Farmer farmer = menu.getMyFarm().getFarmer();
         int i = this.currentXY.linearize();
         boolean success = true;
-        String tempMsg = "";
+        ArrayList<String> tempMsgs = new ArrayList<String>();
+        String tempMsgFinal = "", cropInfo = "";
         
+        
+        if (kh.getNextSeed() && !kh.getIsHeld()) {
+            kh.setIsHeld(true);
+            if (currentSeed < tempCrops.size() - 1) currentSeed++;
+            tempCrop = tempCrops.get(this.currentSeed);
+
+            System.out.println("next");
+            cropInfo += tempCrop.getCropName() + " (" + tempCrop.getSeedCost() + " coins)";
+
+            menu.updateFeedback(cropInfo);
+        }
+        else if (kh.getPrevSeed() && !kh.getIsHeld()) {
+            kh.setIsHeld(true);
+            if (currentSeed != 0) currentSeed--;
+            tempCrop = tempCrops.get(this.currentSeed);
+
+            System.out.println("prev");
+            cropInfo += tempCrop.getCropName() + " (" + tempCrop.getSeedCost() + " coins)";
+
+            menu.updateFeedback(cropInfo);
+        }
 
         if (i != -1) {
             // get the plot the player is looking at
@@ -244,63 +285,133 @@ public class ActionHandler {
              * U - plant seed
              * I - water plant
              */
+            cropInfo += tempCrop.getCropName() + " (" + tempCrop.getSeedCost() + " coins)";
             if ( tempPlot.getHasRock()) { // has rock
                     if(kh.getPickaxePressed() == true){ //when tile gets picked
-                        System.out.println("OMG! TILE PICKED!!");
+                        //System.out.println("OMG! TILE PICKED!!");
                         
                         success = farmer.mineRock (tempPlot);
+
+                        if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                        else {
+                            tempMsgs.add ("~~~ Rock Mined! ~~~");
+                            tempMsgs.add ("Gained xp: 15");
+                            tempMsgs.add ("You paid 50 coins.");
+                            tempMsgFinal = concatMsg (tempMsgs);
+                        }
+
+                        menu.updateFeedback(cropInfo, tempMsgFinal);
+                        
                     }
             }
             else if ( !tempPlot.getIsPlowed()){ // When plot is NOT plowed
-                    if (kh.getPlowPressed() == true){
+                    if (kh.getPlowPressed() == true){ // plow
                         System.out.println("OMG! TILE PLOWED!! " + this.currentXY.getX() + 
                         ", " + this.currentXY.getY());
 
                         farmer.plowLand(tempPlot);
                         success = true;
+
+                        if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                        else {
+                            tempMsgs.add ("~~~ Plot has been plowed! ~~~");
+                            tempMsgs.add ("Gained xp: 0.5");
+
+                            tempMsgFinal = concatMsg (tempMsgs);
+                        }
+                        menu.updateFeedback(cropInfo, tempMsgFinal);
                     }
             }
-            else if ( tempPlot.getIsPlowed()) {
+            else if ( tempPlot.getIsPlowed()) { // is plowed
                     if ( !tempPlot.getIsOccupied()){ // When plowed plot is NOT occupied (i.e., no crop on it)
-                        if (kh.getSeedPressed()) {
-                            success = seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), new Turnip());
+                        if (kh.getSeedPressed()) { // plant seed
+                            success = seedChoiceLogic (tempPlot, farmer, menu.getMyFarm().getCurrentDay(), tempCrop, tempMsgs);
+                            
+                            if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                            else tempMsgFinal = concatMsg (tempMsgs);
                         }
                         else if (kh.getShovelPressed()) { //shoveling
                             success = farmer.digOut(tempPlot);
+
+                            if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                            else {
+                                tempMsgs.add ("~~~ Shovel used! ~~~");
+                                tempMsgs.add ("Gained xp: 2");
+                                tempMsgs.add ("You paid 7 coins.");
+
+                                tempMsgFinal = concatMsg (tempMsgs);
+                            }
+
+                            menu.updateFeedback(cropInfo, tempMsgFinal);
                         }
                     }
                     else { //When plowed plot IS occupied, actions are: water, fertilize, shovel
-                        if (kh.getWaterPressed()) { //watering
+                        if (kh.getWaterPressed() && !kh.getIsHeld()) { //watering
+                           kh.setIsHeld(true);
                            farmer.waterPlant (tempPlot);
                            success = true;
+                           
+                           if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                           else {
+                                tempMsgs.add ("~~~ Watering can used! ~~~");
+                                tempMsgs.add ("Gained xp: 0.5");
+
+                                tempMsgFinal = concatMsg (tempMsgs);
+                           }
+
+                           menu.updateFeedback(cropInfo, tempMsgFinal);
                         }
-                        else if (kh.getFertilizerPressed()) { //fertilizing
+                        else if (kh.getFertilizerPressed() && !kh.getIsHeld()) { //fertilizing
+                            kh.setIsHeld(true);
                             success = farmer.fertilizePlant (tempPlot);
+                            
+                            if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                            tempMsgFinal = "~~~ Fertilizer used! ~~~";
+                            
+                            menu.updateFeedback(cropInfo, tempMsgFinal);
                         }
                         else if (kh.getShovelPressed()) { //shoveling
                             success = farmer.digOut(tempPlot);
+
+                            if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
+                            else {
+                                tempMsgs.add ("~~~ Shovel used! ~~~");
+                                tempMsgs.add ("Gained xp: 2");
+                                tempMsgs.add ("You paid 7 coins.");
+
+                                tempMsgFinal = concatMsg (tempMsgs);
+                            }
+
+                            menu.updateFeedback(cropInfo, tempMsgFinal);
                         }
 
                         if (tempPlot.getCrop() !=null && tempPlot.getCrop().getIsHarvestable()) { // harvesting the plant
                             if (kh.getHarvestPressed()) {
-                                farmer.harvestCrop(tempPlot);
+                                farmer.harvestCrop(tempPlot, tempMsgs);
+
+                                tempMsgFinal = concatMsg (tempMsgs);
+
+                                menu.updateFeedback(cropInfo , tempMsgFinal);
                             }
                         }
                         else {
                             if (kh.getHarvestPressed()) {
-                                if (tempPlot.getCrop().getIsWithered())
+                                if (tempPlot.getCrop().getIsWithered()) {
                                     alertMessage ("Crop is dead. Please use shovel...");
+                                    tempMsgFinal = "Crop is dead. Please use shovel...";
+                                }
                                 else{
                                     int readyInDays;
                                     readyInDays = tempPlot.getCrop().getHarvestTime() - (menu.getMyFarm().getCurrentDay()  - tempPlot.getCrop().getDayPlanted());
                                     alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");
-                                    tempMsg = "Crop not ready yet... Ready in " + readyInDays + " days";    
+                                    tempMsgFinal = "Crop not ready yet... Ready in " + readyInDays + " days";    
+
+                                    menu.updateFeedback(cropInfo, tempMsgFinal);
                                 }
                             }
                         }
                     }
             }
-
             
         }
 
@@ -309,6 +420,19 @@ public class ActionHandler {
 
     public void updateMyFarm (MyFarm myfarm) {
         this.farm = myfarm;
+    }
+
+    public String concatMsg (ArrayList<String> tempMsgs) {
+        String rString = "";
+
+        rString = "<html>";
+
+        for (int i = 0; i < tempMsgs.size(); i++) 
+            rString += tempMsgs.get(i) + "<br/>";
+
+        rString += "</html>";
+
+        return rString;
     }
 
     

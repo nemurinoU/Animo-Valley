@@ -61,6 +61,13 @@ public class PlotLand {
 
         return false;
     }
+
+    public int getPublicID () {
+        if (this.getCrop() != null)
+            return this.getCrop().getCropID() + 2;
+    
+        return 0;    
+    }
     
 	/**
     * This method gets the Crop object

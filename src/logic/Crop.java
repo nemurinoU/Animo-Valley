@@ -410,7 +410,7 @@ class Carrot extends Crop {
 
 class Potato extends Crop {
     public Potato () {
-        super ("Carrot", 3.0, 12.5,
+        super ("Potato", 3.0, 12.5,
               5, 20, 3,
               4, 1, 2,
               1, 10, 1, 7);
