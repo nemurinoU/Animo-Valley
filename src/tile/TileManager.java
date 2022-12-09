@@ -242,7 +242,7 @@ public class TileManager {
          * 0 seed
          * space harvest
          */
-        Coordinates coords;
+        //Coordinates coords;
         coords = new Coordinates (colz.getX(), colz.getY());
         int i = coords.linearize();
 
