@@ -31,7 +31,10 @@ public class Driver {
         gbc.gridy = 1;
         window.add(board, gbc);
         
-
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        window.add(board.getToolbar(), gbc);
+        
         window.pack();
 
         window.setLocationRelativeTo(null);

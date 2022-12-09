@@ -34,9 +34,9 @@ public class Board extends JPanel implements Runnable{
     * > screenWidth is defined by the tileSize times the number of columns
     * > screenHeight is tileSize times the number of rows
 	*/
-    int FPS = 50;
-    final int originalTileSize = 16;
-    final int scaleSize = 3;
+    int FPS = 60;
+    private final int originalTileSize = 16;
+    private final int scaleSize = 3;
 
     private final int tileSize = originalTileSize * scaleSize;
     private final int maxScreenRow = 7;
@@ -53,8 +53,8 @@ public class Board extends JPanel implements Runnable{
 
     NamePrompt namePrompt = new NamePrompt ();
     InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
-    
-
+    InfoBar toolbar = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
+    //InfoBar toolbar = new Toolbar();
     
     TileManager tileMan = new TileManager(this, keyH, collision);
 
@@ -78,6 +78,10 @@ public class Board extends JPanel implements Runnable{
 
     public InfoBar getMenu () {
         return this.menu;
+    }
+
+    public InfoBar getToolbar () {
+        return this.toolbar;
     }
 
     public void startGameThread(){

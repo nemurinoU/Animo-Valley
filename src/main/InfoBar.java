@@ -1,6 +1,12 @@
 package main;
 
 import java.awt.*;
+
+import javax.imageio.ImageIO;
+
+import java.io.File;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 import logic.RegisterFarmer;
@@ -12,6 +18,7 @@ public class InfoBar extends JPanel {
     private logic.MyFarm myfarm;
     private JPanel statsPan, feedBack;
     private JButton regFarmerBtn;
+    private BufferedImage pick, shovel, hoe, watering_can, seed_bag;
 
     public InfoBar(String farmName, String farmerName) {
         this.setBackground(Color.green);
@@ -127,9 +134,24 @@ public class InfoBar extends JPanel {
         statsPan.repaint();
     }
 
+    public void getIcons(){
+        try {
+            pick = ImageIO.read(new File("res/Pick.png"));
+            shovel = ImageIO.read(new File("res/Shovel.png"));
+            hoe = ImageIO.read(new File("res/Hoe.png"));
+            watering_can = ImageIO.read(new File("res/Watering_Can.png"));
+            seed_bag = ImageIO.read(new File("res/Seed_Bag.png"));
+
+        } catch (Exception e) {
+            System.out.println(e);
+            // TODO: handle exception
+        }
+    }
+
     public void update() {
         showStats();
         revalidate();
         repaint();
+        getIcons();
     }
 }
