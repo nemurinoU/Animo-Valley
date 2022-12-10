@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @version a0.0.8
  * @since   2022-11-07 
  */
-public class Display {
+public class Display{
 	
 	/** This method displays the statistics of the farmer, which is called as a subroutine in the MyFarm class.
 	 * @param farmer The Farmer object
@@ -22,9 +22,9 @@ public class Display {
 		for (int i = 0; i < 17; i++) 
 			System.out.print ("=");
 
-		System.out.println ("\n[" + MyFarm.getFarmName() + "]");
+		System.out.println ("\n[" + "Animo Valley" + "]");
 		
-		System.out.println (farmer.getName() + " - DAY " + MyFarm.getCurrentDay());
+		System.out.println (farmer.getName() + " - DAY " + "0");
 		System.out.println (farmer.getFarmerTitle());
 		System.out.println ("LVL: " + farmer.getLvl());
 		System.out.println ("EXP: " + farmerXP + " / " + (farmer.getLvl() + 1) * 100);
