@@ -56,7 +56,7 @@ public class InfoBar extends JPanel {
      */
     public InfoBar(String farmName, String farmerName) {
         Border compound, raisedbevel, loweredbevel;
-        Border line = BorderFactory.createLineBorder(Color.decode("#d29226"));
+        Border line = BorderFactory.createLineBorder(Color.decode("#6F4E37"));
 
         raisedbevel = BorderFactory.createRaisedBevelBorder();
         loweredbevel = BorderFactory.createLoweredBevelBorder();
@@ -71,7 +71,7 @@ public class InfoBar extends JPanel {
                           TitledBorder.RIGHT,
                           TitledBorder.ABOVE_TOP);
         
-        this.setBackground(Color.decode("#f1ab27"));
+        this.setBackground(Color.decode("#B59F84"));
         this.setBorder(compound);
         this.regFarmerBtn = new JButton("Register Farmer");
         this.statsPan = new JPanel();
@@ -120,6 +120,9 @@ public class InfoBar extends JPanel {
         return this.regFarmerBtn;
     }
 
+    /**
+     * This method shows the button for Sleep the Night and Register Farmer
+     */
     public void btnOptions() {
         JButton nextDayBtn = new JButton("Sleep the Night");
         //Sleep the night button
@@ -167,8 +170,9 @@ public class InfoBar extends JPanel {
 
     
     /** 
-     * @param seed
-     * @param msg
+     * This method updates the feed back messages using the seed name and active message
+     * @param seed The seed name
+     * @param msg The message or alert in string format
      */
     public void updateFeedback (String seed, String msg) {
         this.feedBack.removeAll();
@@ -183,7 +187,8 @@ public class InfoBar extends JPanel {
 
     
     /** 
-     * @param seed
+     * This method updates the feedback but only accepts the seed name
+     * @param seed The seed name
      */
     public void updateFeedback (String seed) {
         Component c = this.feedBack.getComponent(0);
@@ -196,6 +201,9 @@ public class InfoBar extends JPanel {
         feedBack.repaint();
     }
 
+    /**
+     * This method displays the stats on the stats panel on the upper left
+     */
     public void showStats() {
         this.myfarm.getFarmer().updateLvl();
         this.statsPan.setLayout(new GridLayout(6, 1));
@@ -223,6 +231,9 @@ public class InfoBar extends JPanel {
         statsPan.repaint();
     }
 
+    /**
+     * This method displays the tool bar found at the bottom of the game window.
+     */
     public void showToolCommands(){
         this.toolPan.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -266,7 +277,7 @@ public class InfoBar extends JPanel {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 3;
         c.gridy = 1;
-        toolPan.add(new JLabel("   [3]"), c);
+        toolPan.add(new JLabel("  [3]"), c);
 
         //Pickaxe
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -297,7 +308,7 @@ public class InfoBar extends JPanel {
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 6;
         c.gridy = 1;
-        toolPan.add(new JLabel("   [0]"), c);
+        toolPan.add(new JLabel("  [0]"), c);
         //Seed commands
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 7;
@@ -309,6 +320,9 @@ public class InfoBar extends JPanel {
         toolPan.add(new JLabel("   [+] Select next seed"), c);
     }
 
+    /**
+     * This is the update method that is called constantly to keep the game bars updated all the time
+     */
     public void update() {
         showStats();
         revalidate();

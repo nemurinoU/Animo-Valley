@@ -25,6 +25,9 @@ public class Sprite {
     private Rectangle spriteArea;
     private boolean collisionOn;
     
+    /**
+     * This constructor contains the default values of the attributes needed for sprite animation and collision
+     */
     public Sprite(){
         this.counter = 0;
         this.spriteID = 1;
@@ -42,7 +45,7 @@ public class Sprite {
 
     
     /** 
-     * @param x
+     * @param x The x coordinate of the sprite to be set
      */
     public void setX(int x) {
         this.x = x;
@@ -58,7 +61,7 @@ public class Sprite {
 
     
     /** 
-     * @param y
+     * @param y The y coordinate of the sprite to be set
      */
     public void setY(int y) {
         this.y = y;
@@ -74,7 +77,7 @@ public class Sprite {
 
     
     /** 
-     * @param speed
+     * @param speed The speed of the sprite to be set
      */
     public void setSpeed(int speed) {
         this.speed = speed;
@@ -90,7 +93,7 @@ public class Sprite {
 
     
     /** 
-     * @param up0
+     * @param up0 The up0 animation image to be set
      */
     public void setUp0(BufferedImage up0) {
         this.up0 = up0;
@@ -106,7 +109,7 @@ public class Sprite {
 
     
     /** 
-     * @param up1
+     * @param up1 The up1 animation image to be set
      */
     public void setUp1(BufferedImage up1) {
         this.up1 = up1;
@@ -122,7 +125,7 @@ public class Sprite {
 
     
     /** 
-     * @param up2
+     * @param up2 The up2 animation image to be set
      */
     public void setUp2(BufferedImage up2) {
         this.up2 = up2;
@@ -138,7 +141,7 @@ public class Sprite {
 
     
     /** 
-     * @param down0
+     * @param down0 The down0 animation image to be set
      */
     public void setDown0(BufferedImage down0) {
         this.down0 = down0;
@@ -154,7 +157,7 @@ public class Sprite {
 
     
     /** 
-     * @param down1
+     * @param down1 The down1 animation image to be set
      */
     public void setDown1(BufferedImage down1) {
         this.down1 = down1;
@@ -170,7 +173,7 @@ public class Sprite {
 
     
     /** 
-     * @param down2
+     * @param down2 The down2 animation image to be set
      */
     public void setDown2(BufferedImage down2) {
         this.down2 = down2;
@@ -186,7 +189,7 @@ public class Sprite {
 
     
     /** 
-     * @param left0
+     * @param left0 The left0 animation image to be set
      */
     public void setLeft0(BufferedImage left0) {
         this.left0 = left0;
@@ -202,7 +205,7 @@ public class Sprite {
 
     
     /** 
-     * @param left1
+     * @param left1 The left1 animation image to be set
      */
     public void setLeft1(BufferedImage left1) {
         this.left1 = left1;
@@ -218,7 +221,7 @@ public class Sprite {
 
     
     /** 
-     * @param left2
+     * @param left2 The left2 animation image to be set
      */
     public void setLeft2(BufferedImage left2) {
         this.left2 = left2;
@@ -234,7 +237,7 @@ public class Sprite {
 
     
     /** 
-     * @param right0
+     * @param right0 The right0 animation image to be set
      */
     public void setRight0(BufferedImage right0) {
         this.right0 = right0;
@@ -250,7 +253,7 @@ public class Sprite {
 
     
     /** 
-     * @param right1
+     * @param right1 The right1 animation image to be set
      */
     public void setRight1(BufferedImage right1) {
         this.right1 = right1;
@@ -266,7 +269,7 @@ public class Sprite {
 
     
     /** 
-     * @param right2
+     * @param right2 The right2 animation image to be set
      */
     public void setRight2(BufferedImage right2) {
         this.right2 = right2;
@@ -282,7 +285,7 @@ public class Sprite {
 
     
     /** 
-     * @param direction
+     * @param direction The direction of where the sprite is facing to be set
      */
     public void setDirection(String direction) {
         this.direction = direction;
@@ -298,7 +301,7 @@ public class Sprite {
 
     
     /** 
-     * @param counter
+     * @param counter The animation counter to be set
      */
     public void setCounter(int counter) {
         this.counter = counter;
@@ -314,7 +317,7 @@ public class Sprite {
 
     
     /** 
-     * @param spriteID
+     * @param spriteID The sprite ID to be set
      */
     public void setSpriteID(int spriteID) {
         this.spriteID = spriteID;
@@ -330,7 +333,7 @@ public class Sprite {
 
     
     /** 
-     * @param spriteArea
+     * @param spriteArea The rectangle area inside the sprite to be set
      */
     public void setSpriteArea(Rectangle spriteArea) {
         this.spriteArea = spriteArea;
@@ -346,7 +349,7 @@ public class Sprite {
 
     
     /** 
-     * @param collisionOn
+     * @param collisionOn The boolean value of collision turned on to be set
      */
     public void setCollisionOn(boolean collisionOn) {
         this.collisionOn = collisionOn;

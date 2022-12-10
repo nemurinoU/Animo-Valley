@@ -173,7 +173,7 @@ public class KeyHandler implements KeyListener{
 
     
     /** 
-     * @param isHeld
+     * @param isHeld The new isHeld value
      */
     public void setIsHeld (boolean isHeld) {
         this.isHeld = isHeld;

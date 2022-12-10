@@ -60,6 +60,9 @@ public class Display {
 		System.out.print("> ");
 	}
 
+	/**
+	 * Show the commands of a plowed tile with a crop on it
+	 */
 	public static void plowedWithCropCommands(){
 		System.out.println("[1] Watering can - water plot (0 coins)");
 		System.out.println("[2] Fertilizer - fertilize plot (10 coins)");
@@ -79,6 +82,7 @@ public class Display {
 	 * [_] not plowed
 	 * [R] rocked
 	 * [X] withered
+	 * @param tempGrid The temporary PlotGrid object to be displayed
 	 */
     public void displayGrid(logic.PlotGrid tempGrid) {
 		ArrayList<logic.PlotLand> plotGrid = tempGrid.getPlotGrid();

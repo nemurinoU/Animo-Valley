@@ -59,7 +59,8 @@ public class Farmer {
 	/**
     * This method is what the player does when shoveling up a tile.
     * 
-    * @param plot		the tile in question to be interacted with
+    * @param plot the tile in question to be interacted with
+	* @return boolean whether the plot was dug out successfully or not
     */
 	public boolean digOut (PlotLand plot) {
 		if (this.getCoins() - 7 < 0) return false;
@@ -81,7 +82,8 @@ public class Farmer {
 	/**
     * This method is what the player does when mining a rock on a tile.
     * 
-    * @param plot		the tile in question to be interacted with
+    * @param plot the tile in question to be interacted with
+	* @return boolean whether the plot, with a rock, was mined successfully or not
     */
 	public boolean mineRock (PlotLand plot) {
 		if (this.getCoins() - 50 < 0) return false;
@@ -115,7 +117,8 @@ public class Farmer {
 	/**
     * This method is what the player does when fertilizing a plant on a tile.
     * 
-    * @param plot		the tile in question to be interacted with
+    * @param plot the tile in question to be interacted with
+	* @return boolean whether the plot was fertilized successfully or not
     */
 	public boolean fertilizePlant (PlotLand plot) {
 		if (this.getCoins() - 10 < 0) return false;
@@ -155,6 +158,7 @@ public class Farmer {
     * @param plot		the tile in question to be interacted with
 	* @param seedling	the Crop object to be put inside plot
 	* @param currentDay	what the current game day is for growing reference
+	* @return boolean whether the crop was planted successfully or not
     */
 	public boolean plantCrop (PlotLand plot, Crop seedling, int currentDay) {
 		if (this.getCoins() - seedling.getSeedCost () < 0) return false;
@@ -180,6 +184,7 @@ public class Farmer {
 	* the calculations in income from harvesting a crop.
     * 
     * @param plot		the tile in question to be interacted with
+	* @param msg the message to be displayed in string format
     */
 	public void harvestCrop (PlotLand plot, ArrayList<String> msg) {
 		Random random = new Random ();

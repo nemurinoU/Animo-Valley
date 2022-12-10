@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class Driver {
     
+    /**
+     * The main method
+     * @param args Command line arguments
+     */
     public static void main(String[] args){
         boolean exitCode = false, retry = true;
         JFrame window = new JFrame();

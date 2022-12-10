@@ -39,7 +39,7 @@ public class MyFarm {
         return this.currentDay;
     }
 
-    public String getFarmName () {
+    public String getTheFarmName () {
         return this.farmName;
     }
 
