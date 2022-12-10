@@ -19,6 +19,7 @@ import main.InfoBar;
 public class ActionHandler {
     private KeyHandler kh;
     private Coordinates currentXY;
+    /** farm is the current farm instance */
     public MyFarm farm;
     private int currentSeed;
     private ArrayList<Crop> tempCrops;
@@ -26,7 +27,7 @@ public class ActionHandler {
 
 	/**
      * This constructor method creates a new instance of ActionHandler
-	 *
+	 * @param kh the KeyHandler object
      */
     public ActionHandler (KeyHandler kh) {
         this.kh = kh;
@@ -108,7 +109,7 @@ public class ActionHandler {
 	 * @param currentDay the current day in the game world
      * @param crop the crop object
      * @param tempMsgs the ArrayList containing the messages to be displayed
-	 *
+	 * @return boolean whether the action was successful or not
      */
     public boolean seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop, ArrayList<String> tempMsgs) {
             // farmer does the planting
@@ -176,14 +177,27 @@ public class ActionHandler {
             System.out.println ("!!*** " + a + " ***!!\n");
     }
 
+    /**
+     * This method updates the current location using coordinates
+     * @param coords The coordinates of the current location
+     */
     public void updateLocation (Coordinates coords) {
         this.currentXY = coords;
     }
 
+    /**
+     * This method gets the current coordinates
+     * @return Coordinates the current (x, y) coordinate pair
+     */
     public Coordinates getCurrentXY () {
         return this.currentXY;
     }
 
+    /**
+     * This method updates the logic of the game
+     * @param menu The menu bar
+     * @return whether the updates was successful or not
+     */
     public boolean updateLogic (InfoBar menu) {
         PlotLand tempPlot;
         Farmer farmer = menu.getMyFarm().getFarmer();
@@ -390,10 +404,19 @@ public class ActionHandler {
         return success;
     }
 
+    /**
+     * This method updates the farm instance
+     * @param myfarm the MyFarm object or instance
+     */
     public void updateMyFarm (MyFarm myfarm) {
         this.farm = myfarm;
     }
 
+    /**
+     * This method concatenates the strings with the parameter and the html tags
+     * @param tempMsgs The messages to be displayed
+     * @return String the concatenated message
+     */
     public String concatMsg (ArrayList<String> tempMsgs) {
         String rString = "";
 
@@ -407,6 +430,12 @@ public class ActionHandler {
         return rString;
     }
 
+    /**
+     * This method checks if the tree can be planted or not
+     * @param tempGrid the PlotGrid object
+     * @param tempCrop the Crop object to be modified (temp)
+     * @return boolean whether or not the tree check was successful
+     */
     public boolean treeCheck (PlotGrid tempGrid, Crop tempCrop) {
         boolean rCheck = true;
         PlotLand tempPlot;

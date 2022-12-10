@@ -204,7 +204,7 @@ public class Board extends JPanel implements Runnable{
      * This method is part of the Swing GUI system, which basically paints the sprites shown on the screen.
      * <p>
      * It is not called directly, rather it is used in the run() method via the repaint() method
-     * @param g
+     * @param g The graphic object
      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);

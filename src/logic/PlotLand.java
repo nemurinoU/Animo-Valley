@@ -31,6 +31,8 @@ public class PlotLand {
     * @param isOccupied		if tile is occupied
 	* @param hasRock		if tile has rock
 	* @param isPlowed		if tile is plowed or not
+    * @param x the x coordinate
+    * @param y the y coordinate
 	*
     */
     //Basic __INIT with NO crop yet
