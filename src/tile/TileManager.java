@@ -15,7 +15,6 @@ import java.io.InputStreamReader;
 import main.Board;
 import main.KeyHandler;
 import main.Collision;
-import logic.Farmer;
 
 public class TileManager {
     Board board;
@@ -80,7 +79,7 @@ public class TileManager {
     
     /** 
      * This method gets a PlotGrid
-     * @return PlotGrid
+     * @return PlotGrid the copy of the tiles to be modified
      */
     public logic.PlotGrid getTileCopy () {
         return this.tileCopy;
@@ -90,6 +89,13 @@ public class TileManager {
      * This method is used to get the tile images such as the trees, rocks, crops, and plot lands.
      */
     public void getTileImage(){
+        /**
+         * A try-catch statement is implemented because the ImageIO throws an error is the file is not found.
+         * <p>
+         * It works by saving the tiles to an array of tiles, which are accessible via its index. 
+         * <p>
+         * It also sets the boolean variables, which will affect the tool commands that can be done on the tile.
+         */
         try {
             tile[0] = new Tile(); //unplowed
             tile[0].setImage(ImageIO.read(getClass().getResourceAsStream("tile_images/grass.png")));
@@ -157,6 +163,9 @@ public class TileManager {
      * @param fileName The filename of the map in .txt format
      */
     public void loadMap(String fileName){
+        /**
+         * A try-catch method is used for the InputStream because it throws an error when the file is not found.
+         */
         try {
             InputStream is = getClass().getResourceAsStream(fileName);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -164,6 +173,11 @@ public class TileManager {
             int col = 0;
             int row = 0;
 
+            /**
+             * Basically automatically paints the screen with the sprites row-first
+             * <p>
+             * Start at row 0 col 0, then row 0 col 1, row 0 col 2, etc. until the last row and col of the farm.
+             */
             while (col < board.getMaxScreenCol() && row < board.getMaxScreenRow()){
                 String line = br.readLine();
                 while (col < board.getMaxScreenCol()){
@@ -177,7 +191,8 @@ public class TileManager {
                     row++;
                 }
 
-                //rock generator (randomized)
+                //This is the rock generator which randomizes the placement of the rocks
+                //Sorry sir we like random rocks
                 for (int i = 10; i < 15; i++){
                     int randX = (int)Math.floor(Math.random()*(10-1+1)+1);
                     int randY = (int)Math.floor(Math.random()*(5-1+1)+1);
@@ -193,11 +208,10 @@ public class TileManager {
     
     
     /** 
-     * This is the draw() method for the tiles.
-     * @param g2
+     * This is the draw() method, which allows us to "draw" tiles on the farm. 
+     * @param g2 It accepts a Graphics2D object to modify the map
      */
     public void draw(Graphics2D g2, boolean success){
-        //g2.drawImage(tile[0].image, 0, 0, board.tileSize, board.tileSize, null);
 
         int col = 0;
         int row = 0;
@@ -217,6 +231,7 @@ public class TileManager {
             }
         }
 
+        //The coordinates of the tile the player is going to modify
         Coordinates coords;
 
         // update the grid to have harvested or withered plants
@@ -234,7 +249,9 @@ public class TileManager {
             }
 
         }
-        /*
+        /**
+         * This statement provides the tool options since there is no tool class created.
+         * <p>
          * 1 plow
          * 2 water
          * 3 fertilize
@@ -272,10 +289,12 @@ public class TileManager {
                 if (kh.getWaterPressed() == true){
                     tileID[colz.getX()][colz.getY()] = 6;
                 }
+                //Else if tile is shoveled
                 else if(kh.getShovelPressed()) {
                     tileID[colz.getX()][colz.getY()] = 0;
                 }
             }
+            //Harvesting statement
             else if (tileCopy.getPlot(i).getCrop() == null ) {
                 if (kh.getHarvestPressed()) {
                     tileID[colz.getX()][colz.getY()] = 0;
@@ -288,21 +307,11 @@ public class TileManager {
     
     /** 
      * This method gets the tile.
-     * @return Tile[]
+     * @return Tile[] the current tile
      */
     public Tile[] getTile() {
         return this.tile;
     }
-
-    
-    /** 
-     * This method, when called, updates the tile.
-     * @param tile
-     */
-    public void setTile(Tile[] tile) {
-        this.tile = tile;
-    }
-
     
     /** 
      * This method gets the tile ID

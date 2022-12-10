@@ -59,6 +59,13 @@ public class Board extends JPanel implements Runnable{
     int playerSpeed = 4;
 
 
+    /**
+     * This is the constructor for the Board which sets the default values of the Board object.
+     * <p>
+     * It sets the screen size, background color, and layout.
+     * <p>
+     * It also sets the key listener, double buffer, and allows it to be focusable.
+     */
     public Board(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.gray);
@@ -67,23 +74,47 @@ public class Board extends JPanel implements Runnable{
         this.setFocusable(true);
         this.setLayout(new GridLayout (2, 1));
 
-        // bridges the text file and actual plotgrid at the start
+        // This bridges the text file and actual plotgrid at the start
         this.menu.getMyFarm().setFarmField( tileMan.updateTileGrid(menu));
     }
 
+    
+    /** 
+     * This method gets the Infobar object for the stats bar (menu)
+     * @return InfoBar the menu displayed at the top of the game
+     */
     public InfoBar getMenu () {
         return this.menu;
     }
 
+    
+    /** 
+     * This method gets the InfoBar object for the tool bar (toolbar)
+     * @return InfoBar
+     */
     public InfoBar getToolbar () {
         return this.toolbar;
     }
 
+    /**
+     * This method starts the game thread by creating a Thread object and then using the start() method.
+     */
     public void startGameThread(){
         gameThread = new Thread(this);
         gameThread.start();
     }
     
+    /**
+     * This method is from the Runnable interface, which is implemented to our Board.
+     * <p>
+     * It contains the game loop for our game, which allows it to keep it running.
+     * <p>
+     * It also does the painting of components or sprites on the board.
+     * <p>
+     * This works by calculating the Frames Per Second to be displayed on the board which is synchronized to real time.
+     * <p>
+     * The time measured in this method is in nanoseconds, which explains the large numbers used for the times.
+     */
     @Override
     public void run(){
         double drawInterval = 1000000000/FPS;
@@ -93,10 +124,16 @@ public class Board extends JPanel implements Runnable{
         long timer = 0;
         int drawCount = 0;
 
+        /**
+         * While the gameThread is not null, it will continue animating and updating the main game.
+         */
         while (gameThread != null){
 
             currentTime = System.nanoTime();
 
+            /*
+             * This calculates the change in time to be used for the interval for the drawing of the sprites.
+             */
             d += (currentTime - lastTime) / drawInterval;
             timer += (currentTime - lastTime);
             lastTime = currentTime;
@@ -108,6 +145,9 @@ public class Board extends JPanel implements Runnable{
                 drawCount++;
             }
 
+            /*
+             * This displays the FPS every second and resets the timer and draw
+             */
             if (timer >= 1000000000){
                 System.out.println("FPS: " + drawCount);
                 timer = 0;
@@ -120,6 +160,11 @@ public class Board extends JPanel implements Runnable{
         }
     }
 
+    /**
+     * This method is the update method that is called in the run() method.
+     * <p>
+     * It is called every nanosecond of the game, so it is constantly updating the components on the screen.
+     */
     public void update(){
         // update player sprite and menu/info bar above the grid
         this.menu.update();
@@ -146,37 +191,71 @@ public class Board extends JPanel implements Runnable{
         tileMan.updateTileCopy(menu.getMyFarm().getFarmField());
     }
 
+    
+    /** 
+     * This method is part of the Swing GUI system, which basically paints the sprites shown on the screen.
+     * <p>
+     * It is not called directly, rather it is used in the run() method via the repaint() method
+     * @param g
+     */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
+        //Convert the Graphics to Graphics2D to allow use of the draw() methods succeeding it
         Graphics2D g2 = (Graphics2D)g;
 
         tileMan.draw(g2, this.success);
 
         player.draw(g2);
 
+        // Destroy the Graphics2D object
         g2.dispose();
     }
+    
+    /** 
+     * This method gets the tile size (16 * 3 = 48)
+     * @return int The current tile size, which is 48 pixels
+     */
     public int getTileSize() {
         return this.tileSize;
     }
 
 
+    
+    /** 
+     * This method gets the max number of rows, which is 7 (5 for the plot land, 2 for the tree borders)
+     * @return int Max number of rows containing the sprites
+     */
     public int getMaxScreenRow() {
         return this.maxScreenRow;
     }
 
 
+    
+    /** 
+     * This method gets the max number of rows, which is 12 (10 for the plot land, 2 for the tree borders)
+     * @return int Max number of columns containing the sprites
+     */
     public int getMaxScreenCol() {
         return this.maxScreenCol;
     }
 
 
+    
+    /** 
+     * This method gets the screen width, which is calculated by 48 (tileSize) * 12 (screen cols) = 576 pixels
+     * @return int The screen width in pixels
+     */
     public int getScreenWidth() {
         return this.screenWidth;
     }
 
 
+    
+    /** 
+     * This method gets the screen height, which is calculated by 48 (tileSize) * 7 (screen row) = 336 pixels
+     * @return int The screen height in pixels
+     */
     public int getScreenHeight() {
         return this.screenHeight;
     }

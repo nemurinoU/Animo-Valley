@@ -1,6 +1,5 @@
 package main;
 
-import logic.ActionHandler;
 import player.Sprite;
 import logic.Coordinates;
 
@@ -8,6 +7,10 @@ public class Collision {
     Board board;
     private int x, y;
     
+    /**
+     * This constructor accepts a board and uses its coordinates to test for collisions
+     * @param board The board that contains the needed objects and methods
+     */
     public Collision(Board board){
         this.board = board;
     }
@@ -15,6 +18,7 @@ public class Collision {
     
     /** 
      * This method constantly checks for collisions on the map.
+     * <p>
      * It works by initializing the boxes around the tree
      * @param s The sprites that collide with each other
      */
@@ -29,8 +33,10 @@ public class Collision {
         int topRow = topY / board.getTileSize();
         int botRow = botY / board.getTileSize();
 
+        //Creating the two tiles that will collide (player and tree)
         int tile1, tile2;
 
+        //If the player's direction is equal to the string,
         switch (s.getDirection()){
             case "up":
                 topRow = ((s.getY() - s.getSpeed()) / board.getTileSize());
@@ -38,7 +44,7 @@ public class Collision {
                 tile2 = board.tileMan.getTileID()[rightCol][topRow];
                 if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
                 board.tileMan.getTile()[tile2].getHasCollision() == true){
-                    s.setCollisionOn(true);// = true;
+                    s.setCollisionOn(true);
                 }
                 System.out.println("Tile " + leftCol + ", " + topRow);
                 this.x = leftCol;
@@ -86,7 +92,7 @@ public class Collision {
     
     /** 
      * This method returns the current coordinates
-     * @return Coordinates
+     * @return Coordinates the coordinates of the sprite
      */
     public Coordinates getCoords () {
         return new Coordinates (this.x, this.y);
@@ -95,7 +101,7 @@ public class Collision {
     
     /** 
      * This method returns the current x variable
-     * @return int
+     * @return int The X value of the collision
      */
     public int getX(){
         return this.x;
@@ -104,7 +110,7 @@ public class Collision {
     
     /** 
      * This method, when called, updates the x variable
-     * @param x
+     * @param x The new X value
      */
     public void setX(int x){
         this.x = x;
@@ -113,7 +119,7 @@ public class Collision {
     
     /** 
      * This method returns the current y variable
-     * @return int
+     * @return int The Y value of the collision
      */
     public int getY(){
         return this.y;
@@ -122,7 +128,7 @@ public class Collision {
     
     /** 
      * This method, when called, updates the y variable
-     * @param y
+     * @param y The new Y value
      */
     public void setY(int y){
         this.y = y;

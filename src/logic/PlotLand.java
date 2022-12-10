@@ -44,10 +44,20 @@ public class PlotLand {
         this.plantedCrop = null;
     }
 
+    
+    /** 
+     * This method gets the current coordinates
+     * @return Coordinates current coordinates
+     */
     public Coordinates getCoords () {
         return this.coords;
     }
 
+    
+    /** 
+     * This method checks if the crop on the plot is harvestable
+     * @return boolean Value (true/false) on whether the crop is harvestable or not
+     */
     public boolean isHarvestable() {
         if (this.getCrop() != null)
             return this.getCrop().getIsHarvestable();
@@ -55,6 +65,11 @@ public class PlotLand {
         return false;
     }
 
+    
+    /** 
+     * This method checks whether or not the crop on the plot is withered
+     * @return boolean Value (true/false) of plant if withered or not
+     */
     public boolean isWithered () {
         if (this.getCrop() != null)
             return this.getCrop().getIsWithered();
@@ -62,6 +77,11 @@ public class PlotLand {
         return false;
     }
 
+    
+    /** 
+     * This method returns the public ID of the crop
+     * @return int The current crop ID + 2
+     */
     public int getPublicID () {
         if (this.getCrop() != null)
             return this.getCrop().getCropID() + 2;
@@ -78,10 +98,20 @@ public class PlotLand {
     	return this.plantedCrop;
     }
     
+    
+    /** 
+     * This method gets the current x coordinate of the plot
+     * @return int X component of coordinate
+     */
     public int getX() {
         return this.coords.getX();
     }
 
+    
+    /** 
+     * This method gets the current y coordinate of the plot
+     * @return int Y component of coordinate
+     */
     public int getY() {
         return this.coords.getY();
     }

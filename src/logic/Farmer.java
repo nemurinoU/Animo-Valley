@@ -39,8 +39,8 @@ public class Farmer {
 	 *
 	 */
 	public Farmer(){
-		this.coins = 10000.0;
-		this.xp = 10000.0;
+		this.coins = 100.0;
+		this.xp = 0.0;
 		this.farmerType = 0;
 		this.farmerTitle = "<Farmer>";
 		this.lvl = 0;
@@ -48,7 +48,7 @@ public class Farmer {
 	
 	public Farmer(String name){
 		this.name = name;
-		this.coins = 1000000.0;
+		this.coins = 100.0;
 		this.xp = 0.0;
 		this.farmerType = 0;
 		this.farmerTitle = "<Farmer>";

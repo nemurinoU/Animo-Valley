@@ -3,6 +3,15 @@ package tile;
 import java.awt.image.BufferedImage;
 public class Tile {
 
+    /**
+     * > image is the BufferedImage object we will modify
+     * > hasCollision is boolean of whether tile has collision or not
+     * > isUnplowed is boolean of whether tile is unplowed or not
+     * > isPlowed is boolean of whether tile is plowed or not
+     * > hasRock is boolean of whether tile contains a rock or not
+     * > isSeeded is boolean of whether tile has been seeded or not
+     * > isDry is boolean of whether tile has been watered or not
+     */
     private BufferedImage image;
     private boolean hasCollision;
     private boolean isUnplowed;
@@ -11,6 +20,9 @@ public class Tile {
     private boolean isSeeded;
     private boolean isDry;
 
+    /**
+     * This constructor sets all the default values of the Tile object
+     */
     public Tile(){
         this.hasCollision = false;
         this.isUnplowed = false;

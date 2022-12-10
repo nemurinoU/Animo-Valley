@@ -2,7 +2,7 @@ package logic;
 
 import java.util.ArrayList;
 
-public class PlotGrid {
+public class PlotGrid{
     private ArrayList<PlotLand> plotGrid;
 
     public PlotGrid () {

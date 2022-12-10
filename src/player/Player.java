@@ -8,7 +8,17 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
-
+/***
+ * <h1>Player</h1>
+ * <p>
+ * This class is used to create a Player object that the player of the game can control.
+ * <p>
+ * It extends the Sprite class which contains the needed methods for the Player sprite.
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-12-01
+ */
 public class Player extends Sprite{
 
     Board board;
@@ -17,15 +27,16 @@ public class Player extends Sprite{
 
     /**
      * This constructor sets the default attributes to be used in other classes
-     * @param board
-     * @param keyH
-     * @param colz
+     * @param board The board that shall be updated
+     * @param keyH The keyHandler that allows us to use keys for the interactions
+     * @param colz The collision checker which constantly checks for collision
      */
     public Player(Board board, KeyHandler keyH, Collision colz){
         this.board = board;
         this.keyH = keyH;
         this.colz = colz;
 
+        //Create a rectangle inside of the sprite with dimensions for the collision
         setSpriteArea(new Rectangle(8, 16, 32, 32));
 
         defaultValues();
@@ -154,6 +165,7 @@ public class Player extends Sprite{
      */
     public void draw(Graphics2D g2){
 
+        //Set BufferedImage to null first
         BufferedImage image = null;
 
         switch (getDirection()){
@@ -179,6 +191,7 @@ public class Player extends Sprite{
                 break;
         }
 
+        //Draw the player sprite using this method, which is called constantly
         g2.drawImage(image, getX(), getY(), board.getTileSize(), board.getTileSize(), null);
     }
 }

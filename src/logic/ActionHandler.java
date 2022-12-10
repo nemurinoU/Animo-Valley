@@ -18,12 +18,12 @@ import main.InfoBar;
  * @since   2022-11-07 
  */
 public class ActionHandler {
-    KeyHandler kh;
-    Coordinates currentXY;
-    MyFarm farm;
-    int currentSeed;
-    ArrayList<Crop> tempCrops;
-    Crop tempCrop;
+    private KeyHandler kh;
+    private Coordinates currentXY;
+    public MyFarm farm;
+    private int currentSeed;
+    private ArrayList<Crop> tempCrops;
+    private Crop tempCrop;
 
 	/**
      * This constructor method creates a new instance of ActionHandler
@@ -83,7 +83,7 @@ public class ActionHandler {
 	 *
      */
     public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
-        int nSeedCode;
+        //int nSeedCode;
 
         switch (nCode){
         case 2: // farmer uses shovel @ plotGrid (0,0)

@@ -9,11 +9,25 @@ public class KeyHandler implements KeyListener{
     private boolean plowPressed, waterPressed, fertilizerPressed, pickaxePressed, shovelPressed, harvestPressed;
     private boolean seedPressed, nextSeed, prevSeed, isHeld;
 
+    
+    /** 
+     * This is a built-in method from the KeyListener interface. 
+     * <p>
+     * This method is called when a character is typed (which is never)
+     * @param e the KeyEvent object
+     */
     @Override
     public void keyTyped(KeyEvent e){
         
     }
 
+    
+    /** 
+     * This is a built-in method from the KeyListener interface. 
+     * <p>
+     * This method is called when the user presses a key
+     * @param e the KeyEvent object
+     */
     @Override
     public void keyPressed(KeyEvent e){
         
@@ -74,6 +88,13 @@ public class KeyHandler implements KeyListener{
         
     }
 
+    
+    /** 
+     * This is a built-in method from the KeyListener interface. 
+     * <p>
+     * This method is called when the user releases a key
+     * @param e the KeyEvent object
+     */
     @Override
     public void keyReleased(KeyEvent e){
         int code = e.getKeyCode();
@@ -134,63 +155,123 @@ public class KeyHandler implements KeyListener{
 
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getIsHeld () {
         return this.isHeld;
     }
 
+    
+    /** 
+     * @param isHeld
+     */
     public void setIsHeld (boolean isHeld) {
         this.isHeld = isHeld;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getNextSeed() {
         return this.nextSeed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getPrevSeed() {
         return this.prevSeed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getUpPressed() {
         return this.upPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getDownPressed() {
         return this.downPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getLeftPressed() {
         return this.leftPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getRightPressed() {
         return this.rightPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getPlowPressed() {
         return this.plowPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getWaterPressed() {
         return this.waterPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getFertilizerPressed() {
         return this.fertilizerPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getPickaxePressed() {
         return this.pickaxePressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getShovelPressed() {
         return this.shovelPressed;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getSeedPressed() {
         return this.seedPressed;
     }
 	
-	public boolean getHarvestPressed() {
+	
+    /** 
+     * @return boolean
+     */
+    public boolean getHarvestPressed() {
 		return this.harvestPressed;
 	}
 
