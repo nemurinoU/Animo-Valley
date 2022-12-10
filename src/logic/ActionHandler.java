@@ -130,56 +130,7 @@ public class ActionHandler {
             return success;
     }
 	
-	/**
-    * This method handles the logic when a farmer interacts with a plot with a plant
-	*
-    * @param nCode			user selection code
-	* @param tempPlot		the plot being interacted with
-	* @param farmer			the player object interacting
-	* @param currentDay		the current day in the game world
-	*
-    */
-    public void plotIsCroppedLogic (int nCode, PlotLand tempPlot, Farmer farmer, int currentDay) {
-        Crop tempCrop;
-        int readyInDays;
-        tempCrop = tempPlot.getCrop();
-
-        switch (nCode){
-        case 1: // farmer waters plant @ plotGrid (0,0)
-                farmer.waterPlant(tempPlot);
-                break;
-
-        case 2: // farmer fertilizes plant @ plotGrid (0,0)
-                farmer.fertilizePlant (tempPlot);
-                break;
-
-        case 3: // farmer uses shovel @ plotGrid (0,0)
-                farmer.digOut(tempPlot);
-                break;
-
-        case 4: // harvesting the plant :)))
-                if (tempPlot.getCrop().getIsHarvestable())
-                    farmer.harvestCrop(tempPlot);
-                else{
-                    if (tempPlot.getCrop().getIsWithered())
-                        alertMessage ("Crop is dead. Please use shovel...");
-                    else{
-                        readyInDays = tempCrop.getHarvestTime() - (currentDay  - tempCrop.getDayPlanted());
-                        alertMessage ("Crop not ready yet... Ready in " + readyInDays + " days");
-                        
-                    }
-                        
-                }       
-                        
-                break;
-        case 0: // back 
-                break;
-        default:
-            errorMessage ("Invalid command!");
-            break;
-        }
-    }
-
+	
 	/**
     * This method handles the logic when a user is prompted with Y/N questions
 	*
