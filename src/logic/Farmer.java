@@ -61,7 +61,7 @@ public class Farmer {
     * @param plot		the tile in question to be interacted with
     */
 	public boolean digOut (PlotLand plot) {
-		if (this.getCoins() - 7 < 5) return false;
+		if (this.getCoins() - 7 < 0) return false;
 		
 		plot.setIsOccupied (false);
 		plot.setIsPlowed (false);
@@ -83,7 +83,7 @@ public class Farmer {
     * @param plot		the tile in question to be interacted with
     */
 	public boolean mineRock (PlotLand plot) {
-		if (this.getCoins() - 50 < 5) return false;
+		if (this.getCoins() - 50 < 0) return false;
 
 		plot.setIsOccupied (false);
 		plot.setHasRock (false);
@@ -117,7 +117,7 @@ public class Farmer {
     * @param plot		the tile in question to be interacted with
     */
 	public boolean fertilizePlant (PlotLand plot) {
-		if (this.getCoins() - 10 < 5) return false;
+		if (this.getCoins() - 10 < 0) return false;
 
 		// increment the amt of times fertilized a crop
 		// inside a plot
@@ -156,7 +156,7 @@ public class Farmer {
 	* @param currentDay	what the current game day is for growing reference
     */
 	public boolean plantCrop (PlotLand plot, Crop seedling, int currentDay) {
-		if (this.getCoins() - seedling.getSeedCost () < 5) return false;
+		if (this.getCoins() - seedling.getSeedCost () < 0) return false;
 		//activate the crop so that it's not a dictionary type anymore
 		seedling.activateCrop (currentDay);
 

@@ -1,4 +1,5 @@
 package logic;
+import java.util.ArrayList;
 
 /***
  * <h1>MyFarm</h1>
@@ -45,6 +46,28 @@ public class MyFarm {
 
     public logic.Farmer getFarmer () {
         return this.farmer;
+    }
+
+    public boolean gameOver () {
+        // this function checks for the gameOver condition:
+        // 1) Not enough money to plant a new seed
+        // 2) No active growing plants
+
+        ArrayList<PlotLand> temp;
+        boolean rCode = true;
+
+        temp = this.farmField.getPlotGrid();
+
+        if (this.farmer.getCoins() >= 5)
+            rCode = false; // game goes on
+        else { // if not enough money, check 2nd condition
+            for (int i = 0; i < temp.size(); i++) {
+                if (temp.get(i).getCrop() != null && // if the plot has a crop (not null)
+                    !temp.get(i).getCrop().getIsWithered()) rCode = false;
+            }
+        }
+        
+        return rCode;
     }
 
 }

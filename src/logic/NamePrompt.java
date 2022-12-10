@@ -34,12 +34,15 @@ public class NamePrompt extends JOptionPane {
 
     public void askName () {
         String options[] = {"OK"};
+        int result;
 
         do {
-            JOptionPane.showOptionDialog (null, promptPanel, "Who are you?", JOptionPane.NO_OPTION, 
+            result = JOptionPane.showOptionDialog (null, promptPanel, "Who are you?", JOptionPane.NO_OPTION, 
             JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
 
-        } while (this.farmerNameField.getText().isEmpty() || this.farmNameField.getText().isEmpty()); 
+            if (result == JOptionPane.CLOSED_OPTION) System.exit(0);
+
+        } while (this.farmerNameField.getText().isEmpty() || this.farmNameField.getText().isEmpty());
     }
 
     public String getFarmName () {
