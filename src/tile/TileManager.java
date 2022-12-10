@@ -304,7 +304,8 @@ public class TileManager {
 			}
             //If tile is dry and has seed, water it
             else if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
-                if (kh.getWaterPressed() == true){
+                if (kh.getWaterPressed() == true && kh.getIsHeld()){
+                    kh.setIsHeld(false);
                     tileID[colz.getX()][colz.getY()] = 6;
                 }
                 //Else if tile is shoveled
