@@ -21,8 +21,8 @@ public class Tile {
 
     
     /** 
-     * This method returns the image
-     * @return BufferedImage The current image
+     * This method returns a BufferedImage object that will be painted on the screen.
+     * @return BufferedImage the current image
      */
     public BufferedImage getImage() {
         return this.image;
@@ -30,8 +30,8 @@ public class Tile {
 
     
     /** 
-     * This method updates the image
-     * @param image The new image
+     * This method sets the BufferedImage object, which is used for assigning an image to its respective index in an array.
+     * @param image the new image
      */
     public void setImage(BufferedImage image) {
         this.image = image;

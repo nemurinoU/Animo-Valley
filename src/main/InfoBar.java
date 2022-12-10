@@ -4,7 +4,6 @@ import java.awt.*;
 
 import javax.imageio.ImageIO;
 
-import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
@@ -15,7 +14,16 @@ import logic.RegisterFarmer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/***
+ * <h1>Board</h1>
+ * <p>
+ * This class is used to display the InfoBar shown above the main Game Board.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-28
+ */
 public class InfoBar extends JPanel {
     private logic.MyFarm myfarm;
     private JPanel statsPan, feedBack;
@@ -24,6 +32,11 @@ public class InfoBar extends JPanel {
     private BufferedImage pickImg, fertilizerImg, shovelImg, hoeImg, wateringCanImg, seedBagImg;
     private JPanel toolPan;
 
+    /**
+     * This is the constructor that accepts the farmName and farmerName as parameters for the top InfoBar
+     * @param farmName
+     * @param farmerName
+     */
     public InfoBar(String farmName, String farmerName) {
         Border compound, raisedbevel, loweredbevel;
         Border line = BorderFactory.createLineBorder(Color.decode("#d29226"));
@@ -57,6 +70,10 @@ public class InfoBar extends JPanel {
         showFeedback();
     }
 
+    /**
+     * This constructor is used for the InfoBar below the main game board.
+     * It accepts no parameters.
+     */
     public InfoBar(){
         this.setBackground(Color.decode("#B59F84"));
 
@@ -67,10 +84,20 @@ public class InfoBar extends JPanel {
         showToolCommands();
     }
 
+    
+    /** 
+     * This method gets the game world or MyFarm class
+     * @return MyFarm The game world instance
+     */
     public logic.MyFarm getMyFarm () {
         return this.myfarm;
     }
 
+    
+    /** 
+     * This method is used to get the button.
+     * @return JButton The "Register Farmer" button
+     */
     public JButton getFarmerBtn () {
         return this.regFarmerBtn;
     }
@@ -106,6 +133,9 @@ public class InfoBar extends JPanel {
         this.add(btnPan);
     }
 
+    /**
+     * 
+     */
     public void showFeedback() {
         this.feedBack.setLayout(new GridLayout(2, 1));
 
@@ -117,6 +147,11 @@ public class InfoBar extends JPanel {
         feedBack.repaint();
     }
 
+    
+    /** 
+     * @param seed
+     * @param msg
+     */
     public void updateFeedback (String seed, String msg) {
         this.feedBack.removeAll();
 
@@ -128,6 +163,10 @@ public class InfoBar extends JPanel {
         feedBack.repaint();
     }
 
+    
+    /** 
+     * @param seed
+     */
     public void updateFeedback (String seed) {
         Component c = this.feedBack.getComponent(0);
 
@@ -167,7 +206,8 @@ public class InfoBar extends JPanel {
     }
 
     public void showToolCommands(){
-        this.toolPan.setLayout(new GridLayout(7, 2));
+        this.toolPan.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         //getIcons();
         try {
             pickImg = ImageIO.read(getClass().getResourceAsStream("res/Pick.png"));
@@ -179,31 +219,81 @@ public class InfoBar extends JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        //JLabel pick = );
-        toolPan.add(new JLabel(new ImageIcon(hoeImg)));
-        toolPan.add(new JLabel("[1] Hoe "));
-        toolPan.add(new JLabel(new ImageIcon(wateringCanImg)));
-        toolPan.add(new JLabel("[2] Watering Can    "));
-        toolPan.add(new JLabel(new ImageIcon(fertilizerImg)));
-        toolPan.add(new JLabel("[3] Fertilizer  "));
-        toolPan.add(new JLabel(new ImageIcon(pickImg)));
-        toolPan.add(new JLabel("[4] Pickaxe "));
-        toolPan.add(new JLabel(new ImageIcon(shovelImg)));
-        toolPan.add(new JLabel("[5] Shovel  "));
-        toolPan.add(new JLabel(new ImageIcon(seedBagImg)));
-        toolPan.add(new JLabel("[0] Seed Bag  "));
-        toolPan.add(new JLabel("   [-] Select previous seed   "));
-        toolPan.add(new JLabel("[+] Select next seed"));
 
-        //JLabel
-        //toolPan.add(new JLabel("test"));
+        // Hoe
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 0;
+        toolPan.add(new JLabel(new ImageIcon(hoeImg)), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 1;
+        c.gridy = 1;
+        toolPan.add(new JLabel("   [1]"), c);
+
+        //Watering Can
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 0;
+        toolPan.add(new JLabel(new ImageIcon(wateringCanImg)), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 2;
+        c.gridy = 1;
+        toolPan.add(new JLabel("   [2]"), c);
+
+        //Fertilizer
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 3;
+        c.gridy = 0;
+        toolPan.add(new JLabel(new ImageIcon(fertilizerImg)), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 3;
+        c.gridy = 1;
+        toolPan.add(new JLabel("   [3]"), c);
+
+        //Pickaxe
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 4;
+        c.gridy = 0;
+        toolPan.add(new JLabel(new ImageIcon(pickImg)), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 4;
+        c.gridy = 1;
+        toolPan.add(new JLabel("  [4]"), c);
+        
+
+        //Shovel
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 5;
+        c.gridy = 0;
+        toolPan.add(new JLabel(new ImageIcon(shovelImg)), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 5;
+        c.gridy = 1;
+        toolPan.add(new JLabel("  [5]"), c);
+
+        //Seeds
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 6;
+        c.gridy = 0;
+        toolPan.add(new JLabel(new ImageIcon(seedBagImg)), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 6;
+        c.gridy = 1;
+        toolPan.add(new JLabel("   [0]"), c);
+        //Seed commands
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 7;
+        c.gridy = 0;
+        toolPan.add(new JLabel("   [-] Select previous seed   "), c);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 7;
+        c.gridy = 1;
+        toolPan.add(new JLabel("   [+] Select next seed"), c);
     }
 
     public void update() {
         showStats();
         revalidate();
         repaint();
-        //getIcons();
     }
 }
