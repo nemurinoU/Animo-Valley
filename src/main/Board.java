@@ -6,11 +6,6 @@ import logic.*;
 
 import java.awt.*;
 import javax.swing.*;
-import java.util.ArrayList;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
 
 /***
  * <h1>Board</h1>
@@ -74,7 +69,6 @@ public class Board extends JPanel implements Runnable{
 
         // bridges the text file and actual plotgrid at the start
         this.menu.getMyFarm().setFarmField( tileMan.updateTileGrid(menu));
-        //this.toolbar.showToolCommands();
     }
 
     public InfoBar getMenu () {
@@ -163,25 +157,6 @@ public class Board extends JPanel implements Runnable{
 
         g2.dispose();
     }
-
-    public int getFPS() {
-        return this.FPS;
-    }
-
-    public void setFPS(int FPS) {
-        this.FPS = FPS;
-    }
-
-    public int getOriginalTileSize() {
-        return this.originalTileSize;
-    }
-
-
-    public int getScaleSize() {
-        return this.scaleSize;
-    }
-
-
     public int getTileSize() {
         return this.tileSize;
     }

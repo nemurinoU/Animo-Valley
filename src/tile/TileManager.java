@@ -43,7 +43,12 @@ public class TileManager {
         loadMap("farm_map.txt");
     }
 
-    // This inputs the textfile input into the PlotGrid class
+    
+    /** 
+     * This method inputs the .txt file input into the PlotGrid.java class
+     * @param menu The InfoBar to be updated when this method is called
+     * @return PlotGrid It returns the updated PlotGrid
+     */
     public logic.PlotGrid updateTileGrid (main.InfoBar menu) {
         logic.PlotGrid tempGrid = menu.getMyFarm().getFarmField();
         logic.PlotLand tempPlot = new PlotLand(false, false, false, 0, 0);
@@ -74,6 +79,7 @@ public class TileManager {
 
     
     /** 
+     * This method gets a PlotGrid
      * @return PlotGrid
      */
     public logic.PlotGrid getTileCopy () {
@@ -228,12 +234,6 @@ public class TileManager {
             }
 
         }
-
-        //Plow tile
-        // AHHH GETS
-        // I actually don't need to put in the LOGIC here, I can just create a kh object in the logic
-        // portion of the MVC :))
-        // plow tile
         /*
          * 1 plow
          * 2 water
@@ -282,21 +282,7 @@ public class TileManager {
                 }  
             }
 		}
-		/***        
-        //If tile is dry and has seed, water it
-        if (tile[tileID[colz.getX()][colz.getY()]].getIsSeeded()){
-            if (kh.getWaterPressed() == true){
-                tileID[colz.getX()][colz.getY()] = 6;
-            }
-        }
-
-        //If tile is wet, plant seed
-        if (tile[tileID[colz.getX()][colz.getY()]].getIsDry() == false){
-            if (kh.getSeedPressed() == true){
-                tileID[colz.getX()][colz.getY()] = 6;
-            }
-        }
-		***/
+		
     }
 
     
