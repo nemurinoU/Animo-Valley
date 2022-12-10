@@ -419,6 +419,8 @@ public class ActionHandler {
                                 if (tempPlot.getCrop().getIsWithered()) {
                                     alertMessage ("Crop is dead. Please use shovel...");
                                     tempMsgFinal = "Crop is dead. Please use shovel...";
+
+                                    menu.updateFeedback(cropInfo, tempMsgFinal);
                                 }
                                 else{
                                     int readyInDays;
