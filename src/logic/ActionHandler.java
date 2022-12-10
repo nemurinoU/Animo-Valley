@@ -365,6 +365,8 @@ public class ActionHandler {
                            else {
                                 tempMsgs.add ("~~~ Watering can used! ~~~");
                                 tempMsgs.add ("Gained xp: 0.5");
+                                tempMsgs.add ("Water Needs: " + tempPlot.getCrop().getTimesWatered() + "/" + tempPlot.getCrop().getWaterNeed() + "(" +
+                                tempPlot.getCrop().getWaterBonus() + ")");
 
                                 tempMsgFinal = concatMsg (tempMsgs);
                            }
@@ -376,7 +378,15 @@ public class ActionHandler {
                             success = farmer.fertilizePlant (tempPlot);
                             
                             if (!success) tempMsgFinal = "~~~ Not Enough Money! ~~~";
-                            tempMsgFinal = "~~~ Fertilizer used! ~~~";
+                            else {
+                                tempMsgs.add( "~~~ Fertilizer used! ~~~");
+                                tempMsgs.add ("Gained xp: 4");
+                                tempMsgs.add ("Fert Needs: " + tempPlot.getCrop().getTimesFertilized() + "/" + tempPlot.getCrop().getFertilizerNeed() + "(" +
+                                    tempPlot.getCrop().getFertilizerBonus() + ")");
+
+                                tempMsgFinal = concatMsg(tempMsgs);
+                            }
+                            
                             
                             menu.updateFeedback(cropInfo, tempMsgFinal);
                         }
