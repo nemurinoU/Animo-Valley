@@ -1,4 +1,4 @@
-package logic;
+package Model;
 
 import java.awt.*;
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class RegisterFarmer extends JDialog {
      * The farmer parameter is called because the statistics of the farmer will be modified using the registerFarmer() method
      * @param farmer The farmer object
      */
-    public RegisterFarmer(logic.Farmer farmer) {
+    public RegisterFarmer(Model.Farmer farmer) {
         this.pack();
         this.setModal(true);
         this.setAlwaysOnTop(true);
@@ -38,7 +38,7 @@ public class RegisterFarmer extends JDialog {
      * This method deals with the farmer registration
      * @param farmer It accepts a farmer or the player
      */
-    public void registerFarmer(logic.Farmer farmer) {
+    public void registerFarmer(Model.Farmer farmer) {
         String[] farmerTier = { "Farmer", "Registered Farmer", "Distinguished Farmer", "Legendary Farmer" };
         int[] tierFees = { 200, 300, 400 }, tierLvl = { 0, 5, 10, 15 };
         int farmerType;

@@ -1,4 +1,4 @@
-package main;
+package View;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import logic.RegisterFarmer;
+import Model.RegisterFarmer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,7 +27,7 @@ public class InfoBar extends JPanel {
     /**
      * myFarm is the current farm instance
      */
-    private logic.MyFarm myfarm;
+    private Model.MyFarm myfarm;
     /**
      * statsPan is the panel for the statistics
      * feedBack is the panel for the feedback (center panel)
@@ -77,7 +77,7 @@ public class InfoBar extends JPanel {
         this.statsPan = new JPanel();
         this.feedBack = new JPanel();
 
-        this.myfarm = new logic.MyFarm(farmName, farmerName);
+        this.myfarm = new Model.MyFarm(farmName, farmerName);
 
         this.add(statsPan);
         this.add(feedBack);
@@ -107,7 +107,7 @@ public class InfoBar extends JPanel {
      * This method gets the game world or MyFarm class
      * @return MyFarm The game world instance
      */
-    public logic.MyFarm getMyFarm () {
+    public Model.MyFarm getMyFarm () {
         return this.myfarm;
     }
 
@@ -208,7 +208,7 @@ public class InfoBar extends JPanel {
         this.myfarm.getFarmer().updateLvl();
         this.statsPan.setLayout(new GridLayout(6, 1));
 
-        logic.Farmer tempFarmer = this.myfarm.getFarmer();
+        Model.Farmer tempFarmer = this.myfarm.getFarmer();
         if (tempFarmer.getFarmerType() == 3) regFarmerBtn.setEnabled(false);
 
         statsPan.removeAll();

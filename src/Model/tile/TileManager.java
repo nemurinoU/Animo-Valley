@@ -1,20 +1,19 @@
-package tile;
+package Model.tile;
 
 import javax.imageio.ImageIO;
 
-import logic.Collision;
-import logic.Coordinates;
-import logic.PlotLand;
-import logic.PlotGrid;
-import logic.Farmer;
+import Model.Collision;
+import Model.Coordinates;
+import Model.Farmer;
+import Model.KeyHandler;
+import Model.PlotGrid;
+import Model.PlotLand;
+import View.Board;
 
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import main.Board;
-import main.KeyHandler;
 /***
  * <p>
  * This class contains the tiles to be drawn on the screen and handles the logic for plowing and other tool commands.
@@ -65,16 +64,16 @@ public class TileManager {
      * @param menu The InfoBar to be updated when this method is called
      * @return PlotGrid It returns the updated PlotGrid
      */
-    public logic.PlotGrid updateTileGrid (main.InfoBar menu) {
-        logic.PlotGrid tempGrid = menu.getMyFarm().getFarmField();
-        logic.PlotLand tempPlot = new PlotLand(false, false, false, 0, 0);
+    public Model.PlotGrid updateTileGrid (View.InfoBar menu) {
+        Model.PlotGrid tempGrid = menu.getMyFarm().getFarmField();
+        Model.PlotLand tempPlot = new PlotLand(false, false, false, 0, 0);
 
         for (int i = 1; i <= 5; i++) {
             for (int j = 1; j <= 10; j++) {
                 if (this.tileID[j][i] == 3) 
-                    tempPlot = new logic.PlotLand(false, true, false, j, i);
+                    tempPlot = new Model.PlotLand(false, true, false, j, i);
                 else if (this.tileID[j][i] == 0) 
-                    tempPlot = new logic.PlotLand(false, false, false, j, i);
+                    tempPlot = new Model.PlotLand(false, false, false, j, i);
                 
                 tempGrid.addPlot (tempPlot);
             }
@@ -89,7 +88,7 @@ public class TileManager {
      * This method updates the tiles for every instance
      * @param updatedCopy The updated copy of the tile
      */
-    public void updateTileCopy (logic.PlotGrid updatedCopy) {
+    public void updateTileCopy (Model.PlotGrid updatedCopy) {
         this.tileCopy = updatedCopy;
     } 
 
@@ -98,7 +97,7 @@ public class TileManager {
      * This method gets a PlotGrid
      * @return PlotGrid the copy of the tiles to be modified
      */
-    public logic.PlotGrid getTileCopy () {
+    public Model.PlotGrid getTileCopy () {
         return this.tileCopy;
     }
 

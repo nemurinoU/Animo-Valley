@@ -1,11 +1,16 @@
-package main;
-
-import player.*;
-import tile.TileManager;
-import logic.*;
+package View;
 
 import java.awt.*;
 import javax.swing.*;
+
+import Model.ActionHandler;
+import Model.Collision;
+import Model.Display;
+import Model.KeyHandler;
+import Model.NamePrompt;
+import Model.PlotGrid;
+import Model.player.*;
+import Model.tile.TileManager;
 
 /***
  * <p>

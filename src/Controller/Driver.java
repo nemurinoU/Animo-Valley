@@ -1,8 +1,10 @@
-package main;
+package Controller;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JOptionPane;
+
+import View.*;
 
 /***
  * <p>

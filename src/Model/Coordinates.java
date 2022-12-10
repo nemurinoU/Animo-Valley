@@ -1,4 +1,4 @@
-package logic;
+package Model;
 /***
  * <p>
  * This class is used to create the coordinates using x and y axis (x, y).

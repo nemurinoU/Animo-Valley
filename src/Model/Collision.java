@@ -1,7 +1,7 @@
-package logic;
+package Model;
 
-import main.Board;
-import player.Sprite;
+import Model.player.Sprite;
+import View.Board;
 /***
  * <p>
  * This class is used to check for collision between two different sprites.

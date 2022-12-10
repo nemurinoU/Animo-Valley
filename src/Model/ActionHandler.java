@@ -1,8 +1,8 @@
-package logic;
+package Model;
 
 import java.util.ArrayList;
-import main.KeyHandler;
-import main.InfoBar;
+
+import View.InfoBar;
 
 /**
  * <p>
@@ -45,7 +45,7 @@ public class ActionHandler {
 	 * @param farmer		the player object interacting
 	 *
      */
-    public void plotIsRawLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer) {
+    public void plotIsRawLogic (int nCode, PlotLand tempPlot, Model.Farmer farmer) {
         
         switch (nCode){
         case 1: //farmer plows tile (0, 0)
@@ -82,7 +82,7 @@ public class ActionHandler {
 	 * @param cropBook		holds a "database" of crops programmed in the game
 	 *
      */
-    public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, logic.Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
+    public void plotIsPlowedLogic (int nCode, PlotLand tempPlot, Model.Farmer farmer, int currentDay, ArrayList<Crop> cropBook){
         //int nSeedCode;
 
         switch (nCode){

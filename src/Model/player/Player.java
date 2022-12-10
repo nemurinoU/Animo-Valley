@@ -1,7 +1,4 @@
-package player;
-
-import main.Board;
-import main.KeyHandler;
+package Model.player;
 
 import java.awt.*;
 
@@ -9,7 +6,9 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
-import logic.Collision;
+import Model.Collision;
+import Model.KeyHandler;
+import View.Board;
 /***
  * <p>
  * This class is used to create a Player object that the player of the game can control.

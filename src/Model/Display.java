@@ -1,4 +1,4 @@
-package logic;
+package Model;
 
 import java.util.ArrayList;
 /***
@@ -84,8 +84,8 @@ public class Display{
 	 * [X] withered
 	 * @param tempGrid The temporary PlotGrid object to be displayed
 	 */
-    public void displayGrid(logic.PlotGrid tempGrid) {
-		ArrayList<logic.PlotLand> plotGrid = tempGrid.getPlotGrid();
+    public void displayGrid(Model.PlotGrid tempGrid) {
+		ArrayList<Model.PlotLand> plotGrid = tempGrid.getPlotGrid();
 
 		for (int i = 0; i < plotGrid.size(); i++) {
 			if (i % 10 == 0) System.out.print("\n");

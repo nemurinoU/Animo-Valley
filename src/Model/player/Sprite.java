@@ -1,4 +1,4 @@
-package player;
+package Model.player;
 
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;

@@ -1,4 +1,4 @@
-package logic;
+package Model;
 import java.util.ArrayList;
 
 /***
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @since   2022-11-07 
  */
 public class MyFarm {
-    private logic.Farmer farmer;
+    private Model.Farmer farmer;
     
     private String farmName;
     private int currentDay = 0;
@@ -19,7 +19,7 @@ public class MyFarm {
 
     public MyFarm (String farmName, String farmerName){
         this.farmName = farmName;
-        this.farmer = new logic.Farmer(farmerName);
+        this.farmer = new Model.Farmer(farmerName);
         this.farmField = new PlotGrid ();
     }
 
@@ -43,7 +43,7 @@ public class MyFarm {
         return this.farmName;
     }
 
-    public logic.Farmer getFarmer () {
+    public Model.Farmer getFarmer () {
         return this.farmer;
     }
 

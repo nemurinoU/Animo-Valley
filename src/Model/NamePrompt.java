@@ -1,4 +1,4 @@
-package logic;
+package Model;
 
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
