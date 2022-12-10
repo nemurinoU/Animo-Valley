@@ -4,6 +4,15 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JOptionPane;
 
+/***
+ * <p>
+ * This class is the driver class containing the main method.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-28
+ */
 public class Driver {
     
     public static void main(String[] args){

@@ -1,8 +1,17 @@
-package main;
+package logic;
 
+import main.Board;
 import player.Sprite;
-import logic.Coordinates;
-
+/***
+ * <h1>Collision</h1>
+ * <p>
+ * This class is used to check for collision between two different sprites.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-12-10
+ */
 public class Collision {
     Board board;
     private int x, y;
@@ -40,10 +49,10 @@ public class Collision {
         switch (s.getDirection()){
             case "up":
                 topRow = ((s.getY() - s.getSpeed()) / board.getTileSize());
-                tile1 = board.tileMan.getTileID()[leftCol][topRow];
-                tile2 = board.tileMan.getTileID()[rightCol][topRow];
-                if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
-                board.tileMan.getTile()[tile2].getHasCollision() == true){
+                tile1 = board.getTileMan().getTileID()[leftCol][topRow];
+                tile2 = board.getTileMan().getTileID()[rightCol][topRow];
+                if (board.getTileMan().getTile()[tile1].getHasCollision() == true || 
+                board.getTileMan().getTile()[tile2].getHasCollision() == true){
                     s.setCollisionOn(true);
                 }
                 System.out.println("Tile " + leftCol + ", " + topRow);
@@ -52,10 +61,10 @@ public class Collision {
                 break;
             case "down":
                 botRow = ((s.getY() + s.getSpeed()) / board.getTileSize()) + 1;
-                tile1 = board.tileMan.getTileID()[leftCol][botRow];
-                tile2 = board.tileMan.getTileID()[rightCol][botRow];
-                if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
-                board.tileMan.getTile()[tile2].getHasCollision() == true){
+                tile1 = board.getTileMan().getTileID()[leftCol][botRow];
+                tile2 = board.getTileMan().getTileID()[rightCol][botRow];
+                if (board.getTileMan().getTile()[tile1].getHasCollision() == true || 
+                board.getTileMan().getTile()[tile2].getHasCollision() == true){
                     s.setCollisionOn(true);// = true;
                 }
                 System.out.println("Tile " + leftCol + ", " + botRow);
@@ -64,10 +73,10 @@ public class Collision {
                 break;
             case "left":
                 leftCol = (s.getX() - s.getSpeed()) / board.getTileSize();
-                tile1 = board.tileMan.getTileID()[leftCol][topRow];
-                tile2 = board.tileMan.getTileID()[leftCol][botRow];
-                if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
-                board.tileMan.getTile()[tile2].getHasCollision() == true){
+                tile1 = board.getTileMan().getTileID()[leftCol][topRow];
+                tile2 = board.getTileMan().getTileID()[leftCol][botRow];
+                if (board.getTileMan().getTile()[tile1].getHasCollision() == true || 
+                board.getTileMan().getTile()[tile2].getHasCollision() == true){
                     s.setCollisionOn(true);// = true;
                 }
                 System.out.println("Tile " + leftCol + ", " + botRow);
@@ -76,10 +85,10 @@ public class Collision {
                 break;
             case "right":
                 rightCol = ((s.getX() + s.getSpeed()) / board.getTileSize()) + 1;
-                tile1 = board.tileMan.getTileID()[rightCol][topRow];
-                tile2 = board.tileMan.getTileID()[rightCol][botRow];
-                if (board.tileMan.getTile()[tile1].getHasCollision() == true || 
-                board.tileMan.getTile()[tile2].getHasCollision() == true){
+                tile1 = board.getTileMan().getTileID()[rightCol][topRow];
+                tile2 = board.getTileMan().getTileID()[rightCol][botRow];
+                if (board.getTileMan().getTile()[tile1].getHasCollision() == true || 
+                board.getTileMan().getTile()[tile2].getHasCollision() == true){
                     s.setCollisionOn(true); //= true;
                 }
                 System.out.println("Tile " + rightCol + ", " + botRow);

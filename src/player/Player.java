@@ -2,14 +2,15 @@ package player;
 
 import main.Board;
 import main.KeyHandler;
-import main.Collision;
+
 import java.awt.*;
 
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+
+import logic.Collision;
 /***
- * <h1>Player</h1>
  * <p>
  * This class is used to create a Player object that the player of the game can control.
  * <p>

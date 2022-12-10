@@ -8,7 +8,6 @@ import java.awt.*;
 import javax.swing.*;
 
 /***
- * <h1>Board</h1>
  * <p>
  * This class is used to emulate the entire game screen.
  * </p>
@@ -18,39 +17,45 @@ import javax.swing.*;
  * @since   2022-11-28
  */
 public class Board extends JPanel implements Runnable{
-    /**
-	* Private Variable Instantiation
-	* > FPS is the frames per section, how many times are stuff rendered
-    * > originalTileSize is the base size of individual tile graphics
-    * > scaleSize scales up the base tiles
-    * > tileSize is the new scaled up tile size
-    * > maxScreenRow tells us how many rows of tiles are there in the window maximum
-    * > maxScreenCol tells us how many columns of tiles are there in the window
-    * > screenWidth is defined by the tileSize times the number of columns
-    * > screenHeight is tileSize times the number of rows
-	*/
+    /** FPS is the frames per section, how many times are stuff rendered */
     int FPS = 60;
+    /** originalTileSize is the base size of individual tile graphics */
     private final int originalTileSize = 16;
+    /** scaleSize scales up the base tiles */
     private final int scaleSize = 3;
 
+    /** tileSize is the new scaled up tile size */
     private final int tileSize = originalTileSize * scaleSize;
+    /** maxScreenRow tells us how many rows of tiles are there in the window maximum */
     private final int maxScreenRow = 7;
+    /** maxScreenCol tells us how many columns of tiles are there in the window */
     private final int maxScreenCol = 12;
+    /** screenWidth is defined by the tileSize times the number of columns */
     private final int screenWidth = tileSize * maxScreenCol;
+    /** screenHeight is tileSize times the number of rows */
     private final int screenHeight = tileSize * maxScreenRow;
+    /** success is the boolean var for successful activity */
     private boolean success;
 
+    /** keyH is the KeyHandler object */
     KeyHandler keyH = new KeyHandler();
+    /** gameThread is the Thread object for the game */
     Thread gameThread;
+    /** collision is the Collision object which checks for collision */
     Collision collision = new Collision(this);
+    /** player is the Player sprite */
     Player player = new Player(this, keyH, collision);
+    /** actH is the ActionHandler which contains all the logic */
     ActionHandler actH = new ActionHandler(keyH);
 
+    /** namePrompt is the NamePrompt object at the start of the game */
     NamePrompt namePrompt = new NamePrompt ();
+    /** menu is the panel containing the statistics of the game */
     InfoBar menu = new InfoBar(namePrompt.getFarmName(), namePrompt.getFarmerName());
+    /** toolbar is the tool bar commands shown at the bottom of the screen */
     InfoBar toolbar = new InfoBar();
-    //InfoBar toolbar = new Toolbar();
     
+    /** tileMan is the TileManager which contains the logic for the game map */
     TileManager tileMan = new TileManager(this, keyH, collision);
 
     //Player settings
@@ -250,14 +255,20 @@ public class Board extends JPanel implements Runnable{
         return this.screenWidth;
     }
 
-
-    
     /** 
      * This method gets the screen height, which is calculated by 48 (tileSize) * 7 (screen row) = 336 pixels
      * @return int The screen height in pixels
      */
     public int getScreenHeight() {
         return this.screenHeight;
+    }
+
+    /** 
+     * This method gets the tile manager to be used in other classes.
+     * @return TileManager the current tile manager
+     */
+    public TileManager getTileMan(){
+        return this.tileMan;
     }
 
 }

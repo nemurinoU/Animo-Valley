@@ -22,7 +22,7 @@ public class RegisterFarmer extends JDialog {
     
     /** 
      * This method deals with the farmer registration
-     * @param farmer
+     * @param farmer It accepts a farmer or the player
      */
     public void registerFarmer(logic.Farmer farmer) {
         String[] farmerTier = { "Farmer", "Registered Farmer", "Distinguished Farmer", "Legendary Farmer" };
@@ -63,6 +63,9 @@ public class RegisterFarmer extends JDialog {
                     }
                 });
 
+                /**
+                 * Creating the layout for the register farmer pop up
+                 */
                 tempP.setLayout(new GridLayout(5, 1));
 
                 tempP.add(new JLabel("Current Tier: " + farmerTier[farmerType]));

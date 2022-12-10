@@ -32,6 +32,9 @@ public class NamePrompt extends JOptionPane {
         // dont let the user enter empty string
     }
 
+    /**
+     * This method asks for the name of the farmer
+     */
     public void askName () {
         String options[] = {"OK"};
         int result;
@@ -45,10 +48,20 @@ public class NamePrompt extends JOptionPane {
         } while (this.farmerNameField.getText().isEmpty() || this.farmNameField.getText().isEmpty());
     }
 
+    
+    /** 
+     * This method gets the farm name
+     * @return String the farm's name
+     */
     public String getFarmName () {
         return this.farmNameField.getText();
     }
 
+    
+    /**
+     * This method gets the farmer name 
+     * @return String the farmer's name
+     */
     public String getFarmerName () {
         return this.farmerNameField.getText();
     }

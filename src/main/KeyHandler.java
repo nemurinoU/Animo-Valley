@@ -2,7 +2,15 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
+/***
+ * <p>
+ * This class handles all the key inputs
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-29
+ */
 public class KeyHandler implements KeyListener{
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 

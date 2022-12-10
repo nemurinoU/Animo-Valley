@@ -2,7 +2,7 @@ package logic;
 /***
  * <h1>Coordinates</h1>
  * <p>
- * This class is used to creaete the coordinates using x and y axis (x, y).
+ * This class is used to create the coordinates using x and y axis (x, y).
  * <p>
  * This class is used for getting and setting the coordinates of the tile.
  * </p>

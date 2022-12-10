@@ -15,7 +15,6 @@ import logic.RegisterFarmer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /***
- * <h1>Board</h1>
  * <p>
  * This class is used to display the InfoBar shown above the main Game Board.
  * </p>
@@ -25,17 +24,35 @@ import java.awt.event.ActionListener;
  * @since   2022-11-28
  */
 public class InfoBar extends JPanel {
+    /**
+     * myFarm is the current farm instance
+     */
     private logic.MyFarm myfarm;
+    /**
+     * statsPan is the panel for the statistics
+     * feedBack is the panel for the feedback (center panel)
+     */
     private JPanel statsPan, feedBack;
+    /** regFarmerBtn is the button to register the farmer */
     private JButton regFarmerBtn;
-    //Toolbar stuff below
+    /**
+     * pickImg is the image of pickaxe
+     * fertilizerImg is the image of the fertilizer bag
+     * shovelImg is the image of the shovel
+     * hoeImg is the image of the hoe
+     * wateringCanImg is the image of the watering can
+     * seedBagImg is the image of the seed bag
+     */
     private BufferedImage pickImg, fertilizerImg, shovelImg, hoeImg, wateringCanImg, seedBagImg;
+    /**
+     * toolPan is the panel for the toolbar (bottom of game)
+     */
     private JPanel toolPan;
 
     /**
      * This is the constructor that accepts the farmName and farmerName as parameters for the top InfoBar
-     * @param farmName
-     * @param farmerName
+     * @param farmName The farm's name
+     * @param farmerName The farmer's name
      */
     public InfoBar(String farmName, String farmerName) {
         Border compound, raisedbevel, loweredbevel;
@@ -72,6 +89,7 @@ public class InfoBar extends JPanel {
 
     /**
      * This constructor is used for the InfoBar below the main game board.
+     * <p>
      * It accepts no parameters.
      */
     public InfoBar(){

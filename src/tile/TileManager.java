@@ -2,6 +2,7 @@ package tile;
 
 import javax.imageio.ImageIO;
 
+import logic.Collision;
 import logic.Coordinates;
 import logic.PlotLand;
 import logic.PlotGrid;
@@ -14,9 +15,26 @@ import java.io.InputStreamReader;
 
 import main.Board;
 import main.KeyHandler;
-import main.Collision;
-
+/***
+ * <h1>TileManager</h1>
+ * <p>
+ * This class contains the tiles to be drawn on the screen and handles the logic for plowing and other tool commands.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-28
+ */
 public class TileManager {
+    /**
+     * > board is the Board object
+     * > kh is the KeyHandler
+     * > colz is the Collision object or collision checker
+     * > farmer is the Farmer object or the player (not the sprite)
+     * > tile is an array of Tiles
+     * > tileID is a 2D array for the row and columns
+     * > tileCopy is the PlotGrid object
+     */
     Board board;
     KeyHandler kh;
     Collision colz;
