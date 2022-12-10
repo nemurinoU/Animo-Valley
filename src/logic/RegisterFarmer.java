@@ -19,6 +19,11 @@ public class RegisterFarmer extends JDialog {
         this.registerFarmer(farmer);
     }
 
+    
+    /** 
+     * This method deals with the farmer registration
+     * @param farmer
+     */
     public void registerFarmer(logic.Farmer farmer) {
         String[] farmerTier = { "Farmer", "Registered Farmer", "Distinguished Farmer", "Legendary Farmer" };
         int[] tierFees = { 200, 300, 400 }, tierLvl = { 0, 5, 10, 15 };
