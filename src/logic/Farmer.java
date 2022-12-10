@@ -164,7 +164,11 @@ public class Farmer {
 		this.setCoins (this.getCoins() - (seedling.getSeedCost () - this.getSeedCostReduction ( this.getFarmerType ()) ) );
 		
 		//put seedling inside plot, occupied is now true
-		plot.setCrop((seedling));
+		try {
+			plot.setCrop(seedling.clone());
+		} catch (Exception e) {
+			System.out.println (e);
+		}
 		plot.setIsOccupied (true);
 
 		return true;
