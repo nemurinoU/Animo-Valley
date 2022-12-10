@@ -2,7 +2,6 @@ package logic;
 import java.util.ArrayList;
 
 /***
- * <h1>MyFarm</h1>
  * <p>
  * This class describes a the game world. It contains an instance of the Farmer and PlotGrid class.[
  * </p>

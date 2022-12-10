@@ -1,6 +1,5 @@
 package logic;
 /***
- * <h1>Coordinates</h1>
  * <p>
  * This class is used to create the coordinates using x and y axis (x, y).
  * <p>

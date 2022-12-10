@@ -3,7 +3,6 @@ package logic;
 import main.Board;
 import player.Sprite;
 /***
- * <h1>Collision</h1>
  * <p>
  * This class is used to check for collision between two different sprites.
  * </p>

@@ -2,7 +2,6 @@ package logic;
 
 import java.util.ArrayList;
 /***
- * <h1>Display</h1>
  * <p>
  * This class is used to display the statistics of the farmer.
  * It also displays the main menu options that the user can select from.

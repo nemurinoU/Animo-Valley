@@ -4,7 +4,6 @@ import java.util.Random;
 import java.util.ArrayList;
 
 /***
- * <h1>Farmer</h1>
  * <p>
  * This class emulates the player, its attributes, and responsibilities.
  * It interacts with classes such as MyFarm, Crop, PlotLand.
@@ -31,12 +30,8 @@ public class Farmer {
 				farmerType;
 
 	/* CONSTRUCTOR */
-	/***
-	 * This constructors makes a new Farmer/player object. It starts off
-	 * with the default values for a new player.
-	 *
-	 * @param name		what the player should be called
-	 *
+	/**
+	 * This constructor makes a new Farmer object without the name
 	 */
 	public Farmer(){
 		this.coins = 100.0;
@@ -45,7 +40,13 @@ public class Farmer {
 		this.farmerTitle = "<Farmer>";
 		this.lvl = 0;
 	}
-	
+	/***
+	 * This constructors makes a new Farmer/player object. It starts off
+	 * with the default values for a new player.
+	 *
+	 * @param name		what the player should be called
+	 *
+	 */
 	public Farmer(String name){
 		this.name = name;
 		this.coins = 100.0;

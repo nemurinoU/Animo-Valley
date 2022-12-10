@@ -1,5 +1,15 @@
 package logic;
-
+/***
+ * <p>
+ * This class is used to create a Crop object
+ * <p>
+ * It also implements clonable, which allows it be cloned multiple times.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-12-10
+ */
 abstract class Crop implements Cloneable{
     private String  cropName;
 

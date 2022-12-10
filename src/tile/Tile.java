@@ -1,6 +1,15 @@
 package tile;
 
 import java.awt.image.BufferedImage;
+/***
+ * <p>
+ * This class contains the tiles to be drawn on the screen and handles the logic for plowing and other tool commands.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-28
+ */
 public class Tile {
 
     /**

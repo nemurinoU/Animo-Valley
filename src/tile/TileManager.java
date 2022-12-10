@@ -16,7 +16,6 @@ import java.io.InputStreamReader;
 import main.Board;
 import main.KeyHandler;
 /***
- * <h1>TileManager</h1>
  * <p>
  * This class contains the tiles to be drawn on the screen and handles the logic for plowing and other tool commands.
  * </p>
@@ -228,6 +227,7 @@ public class TileManager {
     /** 
      * This is the draw() method, which allows us to "draw" tiles on the farm. 
      * @param g2 It accepts a Graphics2D object to modify the map
+     * @param success It is used to check whether or not the action was successful
      */
     public void draw(Graphics2D g2, boolean success){
 

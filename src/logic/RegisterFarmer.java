@@ -5,10 +5,24 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/***
+ * <p>
+ * This class allows the user to register the farmer.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-12-10
+ */
 public class RegisterFarmer extends JDialog {
     final int tileSize = 96;
 
+    /**
+     * This constructor allows the creation of the RegisterFarmer object
+     * <p>
+     * The farmer parameter is called because the statistics of the farmer will be modified using the registerFarmer() method
+     * @param farmer The farmer object
+     */
     public RegisterFarmer(logic.Farmer farmer) {
         this.pack();
         this.setModal(true);

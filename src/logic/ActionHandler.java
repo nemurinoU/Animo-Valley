@@ -5,7 +5,6 @@ import main.KeyHandler;
 import main.InfoBar;
 
 /**
- * <h1> ActionHandler </h1>
  * <p>
  * This class stores a variety of methods to process various actions in the program flow.
  * Less of an object for a concept, more of a class for logic subroutines.
@@ -104,11 +103,11 @@ public class ActionHandler {
 	/**
      * This method handles the logic when a farmer plants a seed into a plot
 	 *
-     * @param nCode		    user selection code
-	 * @param tempPlot		the plot being interacted with
-	 * @param farmer			the player object interacting
-	 * @param currentDay		the current day in the game world
-	 * @param cropBook		holds a "database" of crops programmed in the game
+	 * @param tempPlot the plot being interacted with
+	 * @param farmer the player object interacting
+	 * @param currentDay the current day in the game world
+     * @param crop the crop object
+     * @param tempMsgs the ArrayList containing the messages to be displayed
 	 *
      */
     public boolean seedChoiceLogic (PlotLand tempPlot, Farmer farmer, int currentDay, Crop crop, ArrayList<String> tempMsgs) {

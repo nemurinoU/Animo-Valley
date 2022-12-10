@@ -6,7 +6,15 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.Box;
-
+/***
+ * <p>
+ * This class is used to create the name prompt shown at the beginning of the game.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-12-10
+ */
 public class NamePrompt extends JOptionPane {
     JTextField farmerNameField;
     JTextField farmNameField;
@@ -14,6 +22,9 @@ public class NamePrompt extends JOptionPane {
 
     String farmerName, farmName;
 
+    /**
+     * This constructor sets the default values of the name prompt
+     */
     public NamePrompt () {
         this.farmerNameField = new JTextField (15);
         this.farmNameField = new JTextField (20);

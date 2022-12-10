@@ -1,8 +1,16 @@
 package logic;
 
 import java.util.ArrayList;
-
-public class PlotGrid{
+/***
+ * <p>
+ * This class creates a PlotGrid object.
+ * </p>
+ *
+ * @author  Francis Martinez, Richard Pecson Jr.
+ * @version a0.0.8
+ * @since   2022-11-07
+ */
+public class PlotGrid {
     private ArrayList<PlotLand> plotGrid;
 
     public PlotGrid () {

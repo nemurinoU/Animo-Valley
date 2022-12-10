@@ -14,8 +14,9 @@ import java.awt.Rectangle;
 public class Sprite {
 
     private int x, y, speed;
-    /**  */
+    /** These are the images of the animation sprite */
     private BufferedImage up0, up1, up2, down0, down1, down2, left0, left1, left2, right0, right1, right2;
+    /** This is a string indicating the direction the player is facing */
     private String direction;
     
     private int counter;

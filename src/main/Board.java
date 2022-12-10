@@ -59,8 +59,11 @@ public class Board extends JPanel implements Runnable{
     TileManager tileMan = new TileManager(this, keyH, collision);
 
     //Player settings
+    /** This is the starting x value of the player */
     int playerX = 200;
+    /** This is the starting y value of the player */
     int playerY = 200;
+    /** This is the speed value of the player */
     int playerSpeed = 4;
 
 

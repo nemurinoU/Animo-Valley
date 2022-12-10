@@ -1,8 +1,6 @@
 package logic;
 
 /***
- * <h1>PlotLand</h1>
- * 
  * <p>
  * This class describes a singular plot of land and has various attributes depending
  * on what the plot is being used for. Multiple instances of this class aggregate into
